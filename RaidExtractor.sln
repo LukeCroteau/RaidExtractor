@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaidExtractor", "RaidExtractor\RaidExtractor.csproj", "{8CCC5A8B-AD9A-41DD-81A8-B153987ED5D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD4CDE12-8AF0-4A86-9F00-212B0C4A68BE}"
+	ProjectSection(SolutionItems) = preProject
+		license.md = license.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CCC5A8B-AD9A-41DD-81A8-B153987ED5D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CCC5A8B-AD9A-41DD-81A8-B153987ED5D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CCC5A8B-AD9A-41DD-81A8-B153987ED5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CCC5A8B-AD9A-41DD-81A8-B153987ED5D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF6F839D-B24F-4B9A-990C-809E0F9533DC}
+	EndGlobalSection
+EndGlobal
