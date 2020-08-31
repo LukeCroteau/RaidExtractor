@@ -109,6 +109,8 @@ namespace RaidExtractor
                         bonus["kind"] = artifactBonusStruct.KindId.ToString();
                         bonus["isAbsolute"] = bonusValueStruct.IsAbsolute;
                         bonus["value"] = Math.Round(bonusValueStruct.Value / (double)uint.MaxValue, 2);
+                        bonus["enhancement"] = Math.Round(artifactBonusStruct.PowerUpValue / (double)uint.MaxValue, 2);
+                        bonus["level"] = artifactBonusStruct.Level;
                     }
                 }
 
