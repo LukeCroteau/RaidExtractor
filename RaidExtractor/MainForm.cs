@@ -24,13 +24,13 @@ namespace RaidExtractor
             InitializeComponent();
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
+        private AccountDump GetDump()
         {
             var process = Process.GetProcessesByName("Raid").FirstOrDefault();
             if (process == null)
             {
                 MessageBox.Show("Raid needs to be running before running RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return null;
             }
 
             var handle = NativeWrapper.OpenProcess(ProcessAccessFlags.Read, true, process.Id);
@@ -40,7 +40,7 @@ namespace RaidExtractor
                 if (gameAssembly == null)
                 {
                     MessageBox.Show("Unable to locate GameAssembly.dll in memory", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return null;
                 }
 
                 var klass = IntPtr.Zero;
@@ -72,7 +72,7 @@ namespace RaidExtractor
                 var pointers = new IntPtr[artifactCount+1];
                 NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, pointers);
 
-                var artifacts = new JArray();
+                var artifacts = new List<Artifact>();
                 var artifactStruct = new ArtifactStruct();
                 var artifactBonusStruct = new ArtifactBonusStruct();
                 var bonusValueStruct = new BonusValueStruct();
@@ -82,52 +82,59 @@ namespace RaidExtractor
                     NativeWrapper.ReadProcessMemory(handle, artifactStruct.PrimaryBonus, ref artifactBonusStruct);
                     NativeWrapper.ReadProcessMemory(handle, artifactBonusStruct.Value, ref bonusValueStruct);
 
-                    var artifact = new JObject();
-                    artifacts.Add(artifact);
+                    var artifact = new Artifact
+                    {
+                        Id = artifactStruct.Id,
+                        SellPrice = artifactStruct.SellPrice,
+                        Price = artifactStruct.Price,
+                        Level = artifactStruct.Level,
+                        IsActivated = artifactStruct.IsActivated,
+                        Kind = artifactStruct.KindId.ToString(),
+                        Rank = artifactStruct.RankId.ToString(),
+                        Rarity = artifactStruct.RarityId.ToString(),
+                        SetKind = artifactStruct.SetKindId.ToString(),
+                        IsSeen = artifactStruct.IsSeen,
+                        FailedUpgrades = artifactStruct.FailedUpgrades
+                    };
 
-                    artifact["id"] = artifactStruct.Id;
-                    artifact["sellPrice"] = artifactStruct.SellPrice;
-                    artifact["price"] = artifactStruct.Price;
-                    artifact["level"] = artifactStruct.Level;
-                    artifact["isActivated"] = artifactStruct.IsActivated;
-                    artifact["kind"] = artifactStruct.KindId.ToString();
-                    artifact["rank"] = artifactStruct.RankId.ToString();
-                    artifact["rarity"] = artifactStruct.RarityId.ToString();
-                    artifact["setKind"] = artifactStruct.SetKindId.ToString();
                     if (artifactStruct.RequiredFraction != HeroFraction.Unknown)
-                        artifact["requiredFraction"] = artifactStruct.RequiredFraction.ToString();
-                    artifact["isSeen"] = artifactStruct.IsSeen;
-                    artifact["failedUpgrades"] = artifactStruct.FailedUpgrades;
+                        artifact.RequiredFraction = artifactStruct.RequiredFraction.ToString();
 
-                    artifact.Add("primaryBonus", new JObject());
-                    artifact["primaryBonus"]["kind"] = artifactBonusStruct.KindId.ToString();
-                    artifact["primaryBonus"]["isAbsolute"] = bonusValueStruct.IsAbsolute;
-                    artifact["primaryBonus"]["value"] = Math.Round(bonusValueStruct.Value / (double)uint.MaxValue, 2);
+                    artifact.PrimaryBonus = new ArtifactBonus
+                    {
+                        Kind = artifactBonusStruct.KindId.ToString(),
+                        IsAbsolute = bonusValueStruct.IsAbsolute,
+                        Value = (float)Math.Round(bonusValueStruct.Value / (double)uint.MaxValue, 2),
+                    };
 
                     var bonusesPointer = artifactStruct.SecondaryBonuses;
                     var bonusCount = 0;
                     NativeWrapper.ReadProcessMemory(handle, bonusesPointer + 0x18, ref bonusCount);
                     NativeWrapper.ReadProcessMemory(handle, bonusesPointer + 0x10, ref bonusesPointer);
 
-                    artifact.Add("secondaryBonuses", new JArray());
+                    artifact.SecondaryBonuses = new List<ArtifactBonus>();
 
                     var bonuses = new IntPtr[bonusCount];
                     if (bonusCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, bonusesPointer + 0x20, bonuses, 0, bonuses.Length);
 
                     foreach (var bonusPointer in bonuses)
                     {
-                        var bonus = new JObject();
-                        ((JArray)artifact["secondaryBonuses"]).Add(bonus);
-
                         NativeWrapper.ReadProcessMemory(handle, bonusPointer, ref artifactBonusStruct);
                         NativeWrapper.ReadProcessMemory(handle, artifactBonusStruct.Value, ref bonusValueStruct);
 
-                        bonus["kind"] = artifactBonusStruct.KindId.ToString();
-                        bonus["isAbsolute"] = bonusValueStruct.IsAbsolute;
-                        bonus["value"] = Math.Round(bonusValueStruct.Value / (double)uint.MaxValue, 2);
-                        bonus["enhancement"] = Math.Round(artifactBonusStruct.PowerUpValue / (double)uint.MaxValue, 2);
-                        bonus["level"] = artifactBonusStruct.Level;
+                        var bonus = new ArtifactBonus
+                        {
+                            Kind = artifactBonusStruct.KindId.ToString(),
+                            IsAbsolute = bonusValueStruct.IsAbsolute,
+                            Value = (float)Math.Round(bonusValueStruct.Value / (double)uint.MaxValue, 2),
+                            Enhancement = (float)Math.Round(artifactBonusStruct.PowerUpValue / (double)uint.MaxValue, 2),
+                            Level = artifactBonusStruct.Level
+                        };
+
+                        artifact.SecondaryBonuses.Add(bonus);
                     }
+
+                    artifacts.Add(artifact);
                 }
 
                 var heroesDataPointer = heroesWrapper;
@@ -139,8 +146,8 @@ namespace RaidExtractor
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer);
 
                 var heroStruct = new HeroStruct();
-                var heroesById = new Dictionary<int, JObject>();
-                var heroes = new JArray();
+                var heroesById = new Dictionary<int, Hero>();
+                var heroes = new List<Hero>();
                 for (var i = 0; i < count; i++)
                 {
                     // Array of Dictionary-entry structs which are 0x18 in size (but we only need hero pointer)
@@ -148,15 +155,18 @@ namespace RaidExtractor
                     NativeWrapper.ReadProcessMemory(handle, heroPointer, ref heroPointer);
                     NativeWrapper.ReadProcessMemory(handle, heroPointer, ref heroStruct);
 
-                    var hero = new JObject();
-                    hero["id"] = heroStruct.Id;
-                    hero["typeId"] = heroStruct.TypeId;
-                    hero["grade"] = heroStruct.Grade.ToString();
-                    hero["level"] = heroStruct.Level;
-                    hero["experience"] = heroStruct.Experience;
-                    hero["fullExperience"] = heroStruct.FullExperience;
-                    hero["locked"] = heroStruct.Locked;
-                    hero["inStorage"] = heroStruct.InStorage;
+                    var hero = new Hero
+                    {
+                        Id = heroStruct.Id,
+                        TypeId = heroStruct.TypeId,
+                        Grade = heroStruct.Grade.ToString(),
+                        Level = heroStruct.Level,
+                        Experience = heroStruct.Experience,
+                        FullExperience = heroStruct.FullExperience,
+                        Locked = heroStruct.Locked,
+                        InStorage = heroStruct.InStorage
+                    };
+
                     heroes.Add(hero);
 
                     heroesById[heroStruct.Id] = hero;
@@ -182,7 +192,7 @@ namespace RaidExtractor
                     NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactCount);
                     NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactsPointer);
 
-                    var arts = new JArray();
+                    var arts = new List<int>();
                     for (var a = 0; a < artifactCount; a++)
                     {
                         var artifactId = 0;
@@ -190,20 +200,29 @@ namespace RaidExtractor
                         arts.Add(artifactId);
                     }
 
-                    heroesById[heroId]["artifacts"] = arts;
+                    heroesById[heroId].Artifacts = arts;
                 }
 
-                if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
-
-                var result = new JObject();
-                result["artifacts"] = artifacts;
-                result["heroes"] = heroes;
-                File.WriteAllText(SaveJSONDialog.FileName, result.ToString(Formatting.Indented));
+                return new AccountDump
+                {
+                    Artifacts = artifacts,
+                    Heroes = heroes
+                };
             }
             finally
             {
                 NativeWrapper.CloseHandle(handle);
             }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            var result = GetDump();
+
+            if (result == null) return;
+            if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
+
+            File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Formatting.Indented));
         }
     }
 }
