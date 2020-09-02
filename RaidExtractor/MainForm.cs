@@ -56,9 +56,11 @@ namespace RaidExtractor
                 var userWrapper = appModel;
                 NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x140, ref userWrapper);
 
-                var artifactsPointer = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x38, ref artifactsPointer);
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x48, ref artifactsPointer);
+                var heroesWrapper = userWrapper;
+                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper);
+
+                var artifactsPointer = heroesWrapper;
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer);
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactsPointer);
 
                 var artifactCount = 0;
@@ -67,7 +69,7 @@ namespace RaidExtractor
                 var arrayPointer = artifactsPointer;
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer);
 
-                var pointers = new IntPtr[artifactCount];
+                var pointers = new IntPtr[artifactCount+1];
                 NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, pointers);
 
                 var artifacts = new JArray();
@@ -128,9 +130,75 @@ namespace RaidExtractor
                     }
                 }
 
+                var heroesDataPointer = heroesWrapper;
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x38, ref heroesDataPointer);
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer);
+
+                var count = 0;
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x20, ref count);
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer);
+
+                var heroStruct = new HeroStruct();
+                var heroesById = new Dictionary<int, JObject>();
+                var heroes = new JArray();
+                for (var i = 0; i < count; i++)
+                {
+                    // Array of Dictionary-entry structs which are 0x18 in size (but we only need hero pointer)
+                    var heroPointer = heroesDataPointer + 0x30 + 0x18 * i;
+                    NativeWrapper.ReadProcessMemory(handle, heroPointer, ref heroPointer);
+                    NativeWrapper.ReadProcessMemory(handle, heroPointer, ref heroStruct);
+
+                    var hero = new JObject();
+                    hero["id"] = heroStruct.Id;
+                    hero["typeId"] = heroStruct.TypeId;
+                    hero["grade"] = heroStruct.Grade.ToString();
+                    hero["level"] = heroStruct.Level;
+                    hero["experience"] = heroStruct.Experience;
+                    hero["fullExperience"] = heroStruct.FullExperience;
+                    hero["locked"] = heroStruct.Locked;
+                    hero["inStorage"] = heroStruct.InStorage;
+                    heroes.Add(hero);
+
+                    heroesById[heroStruct.Id] = hero;
+                }
+                
+                var artifactsByHeroIdPtr = heroesWrapper;
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x40, ref artifactsByHeroIdPtr);
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x28, ref artifactsByHeroIdPtr);
+
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x20, ref count);
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x18, ref artifactsByHeroIdPtr);
+
+                for (var i = 0; i < count; i++)
+                {
+                    artifactsPointer = artifactsByHeroIdPtr + 0x30 + 0x18 * i;
+
+                    var heroId = 0;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer - 8, ref heroId);
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer, ref artifactsPointer);
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref artifactsPointer);
+
+                    artifactCount = 0;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactCount);
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactsPointer);
+
+                    var arts = new JArray();
+                    for (var a = 0; a < artifactCount; a++)
+                    {
+                        var artifactId = 0;
+                        NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x2C + 0x10 * a, ref artifactId);
+                        arts.Add(artifactId);
+                    }
+
+                    heroesById[heroId]["artifacts"] = arts;
+                }
+
                 if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
 
-                File.WriteAllText(SaveJSONDialog.FileName, artifacts.ToString(Formatting.Indented));
+                var result = new JObject();
+                result["artifacts"] = artifacts;
+                result["heroes"] = heroes;
+                File.WriteAllText(SaveJSONDialog.FileName, result.ToString(Formatting.Indented));
             }
             finally
             {

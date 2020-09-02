@@ -61,6 +61,10 @@
     <Compile Include="Native\BonusValueStruct.cs" />
     <Compile Include="Native\ArtifactStruct.cs" />
     <Compile Include="Native\HeroFraction.cs" />
+    <Compile Include="Native\HeroGrade.cs" />
+    <Compile Include="Native\HeroRarity.cs" />
+    <Compile Include="Native\HeroRole.cs" />
+    <Compile Include="Native\HeroStruct.cs" />
     <Compile Include="Native\StatKindId.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
