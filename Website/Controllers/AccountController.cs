@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Website.Models;
+using Website.Repositories;
 
 namespace Website.Controllers
 {
@@ -12,16 +13,23 @@ namespace Website.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly IAccountDumpRepository _accountDumpRepository;
+
+        public AccountController(IAccountDumpRepository accountDumpRepository)
+        {
+            _accountDumpRepository = accountDumpRepository;
+        }
+
         [HttpPost]
         public string Upload(AccountDump accountDump)
         {
-            return string.Empty;
+            return _accountDumpRepository.Store(accountDump);
         }
 
         [HttpGet]
         public AccountDump Get(string id)
         {
-            return new AccountDump();
+            return _accountDumpRepository.Get(id);
         }
     }
 }

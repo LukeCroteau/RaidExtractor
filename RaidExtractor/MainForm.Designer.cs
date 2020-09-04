@@ -30,6 +30,7 @@
         {
             this.SaveButton = new System.Windows.Forms.Button();
             this.SaveJSONDialog = new System.Windows.Forms.SaveFileDialog();
+            this.UploadButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -49,11 +50,22 @@
             this.SaveJSONDialog.Filter = "JSON files|*.json";
             this.SaveJSONDialog.Title = "Save JSON";
             // 
+            // UploadButton
+            // 
+            this.UploadButton.Location = new System.Drawing.Point(93, 12);
+            this.UploadButton.Name = "UploadButton";
+            this.UploadButton.Size = new System.Drawing.Size(75, 23);
+            this.UploadButton.TabIndex = 1;
+            this.UploadButton.Text = "Upload JSON";
+            this.UploadButton.UseVisualStyleBackColor = true;
+            this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(208, 48);
+            this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.SaveButton);
             this.Name = "MainForm";
             this.Text = "Raid Extractor";
@@ -65,5 +77,6 @@
 
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.SaveFileDialog SaveJSONDialog;
+        private System.Windows.Forms.Button UploadButton;
     }
 }

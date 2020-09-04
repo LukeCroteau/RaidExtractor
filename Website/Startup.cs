@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Website.Repositories;
 
 namespace Website
 {
@@ -26,6 +27,7 @@ namespace Website
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddSingleton<IAccountDumpRepository, AccountDumpRepository>();
             services.AddSwaggerDocument();
         }
 

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -223,6 +224,18 @@ namespace RaidExtractor
             if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
 
             File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Formatting.Indented));
+        }
+
+        private async void UploadButton_Click(object sender, EventArgs e)
+        {
+            var result = GetDump();
+            if (result == null) return;
+
+            var client = new AccountClient(new HttpClient());
+            client.BaseUrl = AppSettings.Default.BaseUrl;
+
+            var key = await client.UploadAsync(result);
+            Process.Start(AppSettings.Default.BaseUrl + "/" + key);
         }
     }
 }
