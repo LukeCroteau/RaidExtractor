@@ -7,9 +7,11 @@ This initial version is just a preview to see if people are interested in it bef
 * .NET Framework 4.8
 
 ## Future versions
-* Export heroes
 * Artifact optimizer website
 * Account showcase website (e.g. look at what I have)
 
 ## Feedback
 Use Issues if you would like to provide feedback or request features. 
+
+## Known Issues
+* Health/Attack/Defense calculations may be off by a few points
