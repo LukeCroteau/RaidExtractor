@@ -17,7 +17,7 @@ namespace RaidExtractor
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.7.0.0 (NJsonSchema v10.1.24.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class AccountClient 
     {
-        private string _baseUrl = "http://localhost:7418";
+        private string _baseUrl = "http://localhost:5000";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
@@ -391,6 +391,51 @@ namespace RaidExtractor
     
         [Newtonsoft.Json.JsonProperty("artifacts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<int> Artifacts { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("fraction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Fraction { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("rarity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Rarity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Role { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("element", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Element { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("awakenLevel", Required = Newtonsoft.Json.Required.Always)]
+        public int AwakenLevel { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("health", Required = Newtonsoft.Json.Required.Always)]
+        public float Health { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("accuracy", Required = Newtonsoft.Json.Required.Always)]
+        public float Accuracy { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("attack", Required = Newtonsoft.Json.Required.Always)]
+        public float Attack { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("defense", Required = Newtonsoft.Json.Required.Always)]
+        public float Defense { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("criticalChance", Required = Newtonsoft.Json.Required.Always)]
+        public float CriticalChance { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("criticalDamage", Required = Newtonsoft.Json.Required.Always)]
+        public float CriticalDamage { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("criticalHeal", Required = Newtonsoft.Json.Required.Always)]
+        public float CriticalHeal { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("resistance", Required = Newtonsoft.Json.Required.Always)]
+        public float Resistance { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("speed", Required = Newtonsoft.Json.Required.Always)]
+        public float Speed { get; set; }
     
     
     }

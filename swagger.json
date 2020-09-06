@@ -5,7 +5,7 @@
     "title": "My Title",
     "version": "1.0.0"
   },
-  "host": "localhost:7418",
+  "host": "localhost:5000",
   "schemes": [
     "http"
   ],
@@ -192,7 +192,17 @@
         "experience",
         "fullExperience",
         "locked",
-        "inStorage"
+        "inStorage",
+        "awakenLevel",
+        "health",
+        "accuracy",
+        "attack",
+        "defense",
+        "criticalChance",
+        "criticalDamage",
+        "criticalHeal",
+        "resistance",
+        "speed"
       ],
       "properties": {
         "id": {
@@ -230,6 +240,61 @@
             "type": "integer",
             "format": "int32"
           }
+        },
+        "fraction": {
+          "type": "string"
+        },
+        "rarity": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "element": {
+          "type": "string"
+        },
+        "awakenLevel": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "health": {
+          "type": "number",
+          "format": "float"
+        },
+        "accuracy": {
+          "type": "number",
+          "format": "float"
+        },
+        "attack": {
+          "type": "number",
+          "format": "float"
+        },
+        "defense": {
+          "type": "number",
+          "format": "float"
+        },
+        "criticalChance": {
+          "type": "number",
+          "format": "float"
+        },
+        "criticalDamage": {
+          "type": "number",
+          "format": "float"
+        },
+        "criticalHeal": {
+          "type": "number",
+          "format": "float"
+        },
+        "resistance": {
+          "type": "number",
+          "format": "float"
+        },
+        "speed": {
+          "type": "number",
+          "format": "float"
         }
       }
     }

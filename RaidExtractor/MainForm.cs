@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using ProcessMemoryUtilities.Managed;
 using ProcessMemoryUtilities.Native;
 using RaidExtractor.Native;
@@ -20,9 +14,15 @@ namespace RaidExtractor
 {
     public partial class MainForm : Form
     {
+        private Dictionary<int, HeroType> _heroTypeById;
+        private StatMultiplier[] _multipliers;
+                
         public MainForm()
         {
             InitializeComponent();
+
+            _heroTypeById = JsonConvert.DeserializeObject<HeroType[]>(File.ReadAllText("hero_types.json")).ToDictionary(t => t.Id);
+            _multipliers = JsonConvert.DeserializeObject<StatMultiplier[]>(File.ReadAllText("multipliers.json"));
         }
 
         private AccountDump GetDump()
@@ -167,6 +167,33 @@ namespace RaidExtractor
                         Locked = heroStruct.Locked,
                         InStorage = heroStruct.InStorage
                     };
+
+                    if (_heroTypeById.TryGetValue(hero.TypeId, out var heroType))
+                    {
+                        hero.Name = heroType.Name;
+                        hero.Fraction = heroType.Fraction;
+                        hero.Element = heroType.Element;
+                        hero.Rarity = heroType.Rarity;
+                        hero.Role = heroType.Role;
+                        hero.AwakenLevel = heroType.AwakeLevel;
+                        hero.Accuracy = heroType.Accuracy;
+                        hero.Attack = heroType.Attack;
+                        hero.Defense = heroType.Defense;
+                        hero.Health = heroType.Health;
+                        hero.Speed = heroType.Speed;
+                        hero.Resistance = heroType.Resistance;
+                        hero.CriticalChance = heroType.CriticalChance;
+                        hero.CriticalDamage = heroType.CriticalDamage;
+                        hero.CriticalHeal = heroType.CriticalHeal;
+                    }
+
+                    var multiplier = _multipliers.FirstOrDefault(m => m.Stars == hero.Grade && m.Level == hero.Level);
+                    if (multiplier != null)
+                    {
+                        hero.Attack *= multiplier.Multiplier;
+                        hero.Defense *= multiplier.Multiplier;
+                        hero.Health *= multiplier.Multiplier * 15;
+                    }
 
                     heroes.Add(hero);
 

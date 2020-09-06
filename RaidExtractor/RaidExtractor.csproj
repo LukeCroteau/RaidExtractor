@@ -71,6 +71,8 @@
     <Compile Include="Native\HeroRarity.cs" />
     <Compile Include="Native\HeroRole.cs" />
     <Compile Include="Native\HeroStruct.cs" />
+    <Compile Include="Native\HeroType.cs" />
+    <Compile Include="Native\Multiplier.cs" />
     <Compile Include="Native\StatKindId.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +83,12 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="hero_types.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="multipliers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

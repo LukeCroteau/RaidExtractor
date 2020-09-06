@@ -24,7 +24,7 @@ export class AccountClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl ? baseUrl : "http://localhost:7418";
+        this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
     }
 
     upload(accountDump: AccountDump): Observable<string> {
@@ -344,6 +344,21 @@ export class Hero implements IHero {
     locked!: boolean;
     inStorage!: boolean;
     artifacts?: number[] | undefined;
+    fraction?: string | undefined;
+    rarity?: string | undefined;
+    role?: string | undefined;
+    element?: string | undefined;
+    awakenLevel!: number;
+    name?: string | undefined;
+    health!: number;
+    accuracy!: number;
+    attack!: number;
+    defense!: number;
+    criticalChance!: number;
+    criticalDamage!: number;
+    criticalHeal!: number;
+    resistance!: number;
+    speed!: number;
 
     constructor(data?: IHero) {
         if (data) {
@@ -369,6 +384,21 @@ export class Hero implements IHero {
                 for (let item of _data["artifacts"])
                     this.artifacts!.push(item);
             }
+            this.fraction = _data["fraction"];
+            this.rarity = _data["rarity"];
+            this.role = _data["role"];
+            this.element = _data["element"];
+            this.awakenLevel = _data["awakenLevel"];
+            this.name = _data["name"];
+            this.health = _data["health"];
+            this.accuracy = _data["accuracy"];
+            this.attack = _data["attack"];
+            this.defense = _data["defense"];
+            this.criticalChance = _data["criticalChance"];
+            this.criticalDamage = _data["criticalDamage"];
+            this.criticalHeal = _data["criticalHeal"];
+            this.resistance = _data["resistance"];
+            this.speed = _data["speed"];
         }
     }
 
@@ -394,6 +424,21 @@ export class Hero implements IHero {
             for (let item of this.artifacts)
                 data["artifacts"].push(item);
         }
+        data["fraction"] = this.fraction;
+        data["rarity"] = this.rarity;
+        data["role"] = this.role;
+        data["element"] = this.element;
+        data["awakenLevel"] = this.awakenLevel;
+        data["name"] = this.name;
+        data["health"] = this.health;
+        data["accuracy"] = this.accuracy;
+        data["attack"] = this.attack;
+        data["defense"] = this.defense;
+        data["criticalChance"] = this.criticalChance;
+        data["criticalDamage"] = this.criticalDamage;
+        data["criticalHeal"] = this.criticalHeal;
+        data["resistance"] = this.resistance;
+        data["speed"] = this.speed;
         return data; 
     }
 }
@@ -408,6 +453,21 @@ export interface IHero {
     locked: boolean;
     inStorage: boolean;
     artifacts?: number[] | undefined;
+    fraction?: string | undefined;
+    rarity?: string | undefined;
+    role?: string | undefined;
+    element?: string | undefined;
+    awakenLevel: number;
+    name?: string | undefined;
+    health: number;
+    accuracy: number;
+    attack: number;
+    defense: number;
+    criticalChance: number;
+    criticalDamage: number;
+    criticalHeal: number;
+    resistance: number;
+    speed: number;
 }
 
 export class ApiException extends Error {
