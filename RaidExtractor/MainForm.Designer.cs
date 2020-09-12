@@ -54,9 +54,9 @@
             // 
             this.UploadButton.Location = new System.Drawing.Point(93, 12);
             this.UploadButton.Name = "UploadButton";
-            this.UploadButton.Size = new System.Drawing.Size(75, 23);
+            this.UploadButton.Size = new System.Drawing.Size(103, 23);
             this.UploadButton.TabIndex = 1;
-            this.UploadButton.Text = "Upload JSON";
+            this.UploadButton.Text = "View on Website";
             this.UploadButton.UseVisualStyleBackColor = true;
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
@@ -67,6 +67,7 @@
             this.ClientSize = new System.Drawing.Size(208, 48);
             this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.SaveButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.Text = "Raid Extractor";
             this.ResumeLayout(false);
