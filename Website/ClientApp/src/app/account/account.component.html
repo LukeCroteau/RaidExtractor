@@ -1,0 +1,71 @@
+<div *ngIf="account">
+  <table>
+    <thead>
+    <tr>
+      <th>Type</th>
+      <th>Set</th>
+      <th>Atk</th>
+      <th>Atk%</th>
+      <th>Def</th>
+      <th>Def%</th>
+      <th>HP</th>
+      <th>HP%</th>
+      <th>Acc</th>
+      <th>Res</th>
+      <th>Spd</th>
+      <th>C. Rate</th>
+      <th>C. Dmg</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let artifact of account.artifacts">
+      <td>{{ getArtifactType(artifact) }}</td>
+      <td>{{ getArtifactSet(artifact) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Attack', true) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Attack', false) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Defence', true) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Defence', false) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Health', true) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Health', false) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Accuracy', true) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Resistance', true) }}</td>
+      <td>{{ getArtifactStat(artifact, 'Speed', true) }}</td>
+      <td>{{ getArtifactStat(artifact, 'CriticalChance', false) }}</td>
+      <td>{{ getArtifactStat(artifact, 'CriticalDamage', false) }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Hp</th>
+        <th>Atk</th>
+        <th>Def</th>
+        <th>Acc</th>
+        <th>Res</th>
+        <th>Spd</th>
+        <th>C.Rate</th>
+        <th>C.Dmg</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hero of account.heroes">
+        <td>{{ hero.name }}</td>
+        <td>{{ getHeroType(hero) }}</td>
+        <td>{{ getHeroStat(hero, 'Health') }}</td>
+        <td>{{ getHeroStat(hero, 'Attack') }}</td>
+        <td>{{ getHeroStat(hero, 'Defence') }}</td>
+        <td>{{ getHeroStat(hero, 'Accuracy') }}</td>
+        <td>{{ getHeroStat(hero, 'Resistance') }}</td>
+        <td>{{ getHeroStat(hero, 'Speed') }}</td>
+        <td>{{ getHeroStat(hero, 'CriticalChance') }}</td>
+        <td>{{ getHeroStat(hero, 'CriticalDamage') }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!account">
+  Loading account information...
+</div>

@@ -24,7 +24,7 @@ export class AccountClient {
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
-        this.baseUrl = baseUrl ? baseUrl : "http://localhost:5000";
+        this.baseUrl = baseUrl ? baseUrl : "";
     }
 
     upload(accountDump: AccountDump): Observable<string> {

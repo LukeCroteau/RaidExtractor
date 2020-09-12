@@ -262,7 +262,7 @@ namespace RaidExtractor
             client.BaseUrl = AppSettings.Default.BaseUrl;
 
             var key = await client.UploadAsync(result);
-            Process.Start(AppSettings.Default.BaseUrl + "/" + key);
+            Process.Start(AppSettings.Default.BaseUrl + "/account/" + key);
         }
     }
 }

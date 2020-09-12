@@ -58,7 +58,6 @@
             this.UploadButton.TabIndex = 1;
             this.UploadButton.Text = "Upload JSON";
             this.UploadButton.UseVisualStyleBackColor = true;
-            this.UploadButton.Visible = false;
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
             // MainForm
