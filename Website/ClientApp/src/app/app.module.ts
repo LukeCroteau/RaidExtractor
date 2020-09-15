@@ -10,6 +10,13 @@ import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { AccountService } from './shared/account.service';
 import { ExpiredComponent } from './expired/expired.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -27,7 +34,13 @@ import { ExpiredComponent } from './expired/expired.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'expired', component: ExpiredComponent, pathMatch: 'full' },
       { path: 'account/:key', component: AccountComponent }
-    ])
+    ]),
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatButtonModule
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]

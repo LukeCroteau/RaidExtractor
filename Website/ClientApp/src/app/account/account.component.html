@@ -1,72 +1,135 @@
-<div *ngIf="account">
-  <button (click)="test()">push me and touch me</button>
-  <table>
-    <thead>
-    <tr>
-      <th>Type</th>
-      <th>Set</th>
-      <th>Atk</th>
-      <th>Atk%</th>
-      <th>Def</th>
-      <th>Def%</th>
-      <th>HP</th>
-      <th>HP%</th>
-      <th>Acc</th>
-      <th>Res</th>
-      <th>Spd</th>
-      <th>C. Rate</th>
-      <th>C. Dmg</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let artifact of account.artifacts">
-      <td>{{ getArtifactType(artifact) }}</td>
-      <td>{{ getArtifactSet(artifact) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Attack', true) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Attack', false) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Defence', true) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Defence', false) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Health', true) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Health', false) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Accuracy', true) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Resistance', true) }}</td>
-      <td>{{ getArtifactStat(artifact, 'Speed', true) }}</td>
-      <td>{{ getArtifactStat(artifact, 'CriticalChance', false) }}</td>
-      <td>{{ getArtifactStat(artifact, 'CriticalDamage', false) }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Hp</th>
-        <th>Atk</th>
-        <th>Def</th>
-        <th>Acc</th>
-        <th>Res</th>
-        <th>Spd</th>
-        <th>C.Rate</th>
-        <th>C.Dmg</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let hero of account.heroes">
-        <td>{{ hero.name }}</td>
-        <td>{{ getHeroType(hero) }}</td>
-        <td>{{ getHeroStat(hero, 'Health') }}</td>
-        <td>{{ getHeroStat(hero, 'Attack') }}</td>
-        <td>{{ getHeroStat(hero, 'Defence') }}</td>
-        <td>{{ getHeroStat(hero, 'Accuracy') }}</td>
-        <td>{{ getHeroStat(hero, 'Resistance') }}</td>
-        <td>{{ getHeroStat(hero, 'Speed') }}</td>
-        <td>{{ getHeroStat(hero, 'CriticalChance') }}</td>
-        <td>{{ getHeroStat(hero, 'CriticalDamage') }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<mat-tab-group *ngIf="account">
+  <mat-tab label="Artifacts" class="mat-elevation-z8">
+    <mat-table [dataSource]="account.artifacts">
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactType(artifact)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="set">
+        <mat-header-cell *matHeaderCellDef> Set </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactSet(artifact)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hpAbs">
+        <mat-header-cell *matHeaderCellDef> HP </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Health', true)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hpPerc">
+        <mat-header-cell *matHeaderCellDef> HP % </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Health', false)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="atkAbs">
+        <mat-header-cell *matHeaderCellDef> Atk </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Attack', true)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="atkPerc">
+        <mat-header-cell *matHeaderCellDef> Atk % </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Attack', false)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="defAbs">
+        <mat-header-cell *matHeaderCellDef> Def </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Defence', true)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="defPerc">
+        <mat-header-cell *matHeaderCellDef> Def % </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Defence', false)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="spdAbs">
+        <mat-header-cell *matHeaderCellDef> Spd </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Speed', true)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cRatePerc">
+        <mat-header-cell *matHeaderCellDef> C. Rate </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'CriticalChance', false)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cDmgPerc">
+        <mat-header-cell *matHeaderCellDef> C. Dmg </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'CriticalDamage', false)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="resAbs">
+        <mat-header-cell *matHeaderCellDef> Resist </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Resistance', true)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="accAbs">
+        <mat-header-cell *matHeaderCellDef> Acc </mat-header-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Accuracy', true)}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['set', 'type', 'hpAbs', 'hpPerc', 'atkAbs', 'atkPerc', 'defAbs', 'defPerc', 'spdAbs', 'cRatePerc', 'cDmgPerc', 'resAbs', 'accAbs']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['set', 'type', 'hpAbs', 'hpPerc', 'atkAbs', 'atkPerc', 'defAbs', 'defPerc', 'spdAbs', 'cRatePerc', 'cDmgPerc', 'resAbs', 'accAbs'];"></mat-row>
+    </mat-table>
+  </mat-tab>
+  <mat-tab label="Current">
+    <mat-table [dataSource]="account.heroes">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{hero.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroType(hero)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hp">
+        <mat-header-cell *matHeaderCellDef> HP </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Health')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="atk">
+        <mat-header-cell *matHeaderCellDef> Atk </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Attack')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="def">
+        <mat-header-cell *matHeaderCellDef> Def </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Defence')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="spd">
+        <mat-header-cell *matHeaderCellDef> Spd </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Speed')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cRate">
+        <mat-header-cell *matHeaderCellDef> C. Rate </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'CriticalChance')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cDmg">
+        <mat-header-cell *matHeaderCellDef> C. Dmg </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'CriticalDamage')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="res">
+        <mat-header-cell *matHeaderCellDef> Resist </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Resistance')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acc">
+        <mat-header-cell *matHeaderCellDef> Acc </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Accuracy')}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['name', 'type', 'hp', 'atk', 'def', 'spd', 'cRate', 'cDmg', 'res', 'acc']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'type', 'hp', 'atk', 'def', 'spd', 'cRate', 'cDmg', 'res', 'acc'];"></mat-row>
+    </mat-table>
+  </mat-tab>
+  <mat-tab label="Optimize">
+    <button (click)="test()">doesn't do much (yet), tries to find 'some' artifact setup for first hero and prints outcome to webbrowser-developer-console (if you don't know what that means this does nothing for you)</button>
+  </mat-tab>
+</mat-tab-group>
 <div *ngIf="!account">
   Loading account information...
 </div>

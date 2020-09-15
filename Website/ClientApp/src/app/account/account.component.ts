@@ -10,6 +10,7 @@ import { IArtifactBonus } from '../shared/clients';
 @Component({
   selector: 'account-dump',
   templateUrl: './account.component.html',
+  styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
   constructor(
@@ -27,6 +28,7 @@ export class AccountComponent implements OnInit {
       if ('key' in params) {
         this.accountService.get(params['key']).subscribe(dump => {
           if (!dump) {
+            this.router.navigate(['/expired']);
             return;
           }
 
