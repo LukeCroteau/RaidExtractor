@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Website.Repositories;
+using Website.Services;
 
 namespace Website
 {
@@ -28,6 +29,7 @@ namespace Website
             });
 
             services.AddSingleton<IAccountDumpRepository, AccountDumpRepository>();
+            services.AddSingleton<IHostedService, CleanupService>();
             services.AddSwaggerDocument();
         }
 
