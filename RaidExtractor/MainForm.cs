@@ -61,20 +61,20 @@ namespace RaidExtractor
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
 
                 var userWrapper = appModel;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x140, ref userWrapper);
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x148, ref userWrapper); // AppModel._userWrapper
 
                 var heroesWrapper = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper);
+                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper); // UserWrapper.Heroes
 
                 var artifactsPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer);
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactsPointer);
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactsPointer); // UserArtifactData.Artifacts
 
                 var artifactCount = 0;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount);
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
 
                 var arrayPointer = artifactsPointer;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer);
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer); // List<Artifact>._array
 
                 var pointers = new IntPtr[artifactCount+1];
                 NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, pointers);
@@ -145,12 +145,12 @@ namespace RaidExtractor
                 }
 
                 var heroesDataPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x38, ref heroesDataPointer);
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer);
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x38, ref heroesDataPointer); // HeroesWrapperReadOnly.HeroData
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer); // UserHeroData.HeroById
 
                 var count = 0;
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x20, ref count);
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer);
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x20, ref count); // Dictionary<int, Hero>.Count
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer); // Dictionary<int, Hero>.entries
 
                 var heroStruct = new HeroStruct();
                 var heroesById = new Dictionary<int, Hero>();
@@ -207,8 +207,8 @@ namespace RaidExtractor
                 }
                 
                 var artifactsByHeroIdPtr = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x40, ref artifactsByHeroIdPtr);
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x28, ref artifactsByHeroIdPtr);
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x40, ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x28, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
 
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x20, ref count);
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x18, ref artifactsByHeroIdPtr);
