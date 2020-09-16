@@ -4,7 +4,7 @@
     {
         Health = 1,
         Attack = 2,
-        Defence = 3,
+        Defense = 3,
         Speed = 4,
         Resistance = 5,
         Accuracy = 6,

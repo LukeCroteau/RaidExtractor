@@ -34,6 +34,12 @@ namespace RaidExtractor
                 return null;
             }
 
+            if (!process.MainModule.FileName.Contains("\\222\\"))
+            {
+                MessageBox.Show("Raid has been updated and needs a newer version of RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
             var handle = NativeWrapper.OpenProcess(ProcessAccessFlags.Read, true, process.Id);
             try
             {
@@ -43,9 +49,9 @@ namespace RaidExtractor
                     MessageBox.Show("Unable to locate GameAssembly.dll in memory", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
-
+                //
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 0x2FD67D0, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 0x2FD51B0, ref klass);
 
                 var appModel = klass;
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
