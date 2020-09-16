@@ -33,12 +33,12 @@
 
       <ng-container matColumnDef="defAbs">
         <mat-header-cell *matHeaderCellDef> Def </mat-header-cell>
-        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Defence', true)}} </mat-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Defense', true)}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="defPerc">
         <mat-header-cell *matHeaderCellDef> Def % </mat-header-cell>
-        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Defence', false)}} </mat-cell>
+        <mat-cell *matCellDef="let artifact"> {{getArtifactStat(artifact, 'Defense', false)}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="spdAbs">
@@ -94,7 +94,7 @@
 
       <ng-container matColumnDef="def">
         <mat-header-cell *matHeaderCellDef> Def </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Defence')}} </mat-cell>
+        <mat-cell *matCellDef="let hero"> {{getHeroStat(hero, 'Defense')}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="spd">
@@ -128,6 +128,7 @@
   </mat-tab>
   <mat-tab label="Optimize">
     <button (click)="test()">doesn't do much (yet), tries to find 'some' artifact setup for first hero and prints outcome to webbrowser-developer-console (if you don't know what that means this does nothing for you)</button>
+    <p>Working on improving this, should be within a week (hopefully)</p>
   </mat-tab>
 </mat-tab-group>
 <div *ngIf="!account">

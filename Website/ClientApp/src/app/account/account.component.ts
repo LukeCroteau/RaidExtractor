@@ -218,7 +218,7 @@ export class AccountComponent implements OnInit {
   statPropertyMap = {
     'Health': 'health',
     'Attack': 'attack',
-    'Defence': 'defense',
+    'Defense': 'defense',
     'Accuracy': 'accuracy',
     'Resistance': 'resistance',
     'Speed': 'speed',
@@ -294,7 +294,7 @@ export class AccountComponent implements OnInit {
 
     const artifactsByKind = {};
     for (let kind in this.artifactsByKind) {
-      const arr = [];
+      const arr: { artifact: Artifact, bonuses: number[], score: number }[] = [];
       for (let artifact of this.artifactsByKind[kind]) {
         if (artifact.requiredFraction && artifact.requiredFraction !== hero.fraction) {
           continue;
@@ -309,12 +309,12 @@ export class AccountComponent implements OnInit {
           score: score
         });
       }
-      if (arr.length == 0) {
+      if (arr.length === 0) {
         arr.push({
           artifact: null,
-          bonuses: [0,0,0,0,0,0,0,0],
+          bonuses: [0, 0, 0, 0, 0, 0, 0, 0],
           score: 0
-        })
+        });
       }
       artifactsByKind[kind] = arr.sort((a, b) => b.score - a.score);
     }
@@ -332,7 +332,7 @@ export class AccountComponent implements OnInit {
       for (const bonus of this.setMap[set].bonuses) {
         setByKind[set].bonuses[0] += this.calcBonusValue(bonus, hero.health, 'Health');
         setByKind[set].bonuses[1] += this.calcBonusValue(bonus, hero.attack, 'Attack');
-        setByKind[set].bonuses[2] += this.calcBonusValue(bonus, hero.defense, 'Defence');
+        setByKind[set].bonuses[2] += this.calcBonusValue(bonus, hero.defense, 'Defense');
         setByKind[set].bonuses[3] += this.calcBonusValue(bonus, hero.accuracy, 'Accuracy');
         setByKind[set].bonuses[4] += this.calcBonusValue(bonus, hero.resistance, 'Resistance');
         setByKind[set].bonuses[5] += this.calcBonusValue(bonus, hero.speed, 'Speed');
@@ -340,7 +340,7 @@ export class AccountComponent implements OnInit {
         setByKind[set].bonuses[7] += this.calcBonusValue(bonus, 100, 'CriticalDamage');
       }
       for(let i = 0; i < setByKind[set].bonuses.length; i ++) setByKind[set].score += setByKind[set].bonuses[i] * weights[i];
-      setByKind[set].maxScore = setByKind[set].score * (setByKind[set].set == 2 ? 3 : 1);
+      setByKind[set].maxScore = setByKind[set].score * (setByKind[set].set === 2 ? 3 : 1);
 
       bestSetScore = Math.max(bestSetScore, setByKind[set].score);
     }
@@ -419,10 +419,10 @@ export class AccountComponent implements OnInit {
   }
 
   getBonuses(hero: Hero, artifact: Artifact): number[] {
-    const result = [];
+    const result: number[] = [];
     result.push(this.getBonusValue(artifact, hero.health, 'Health'));
     result.push(this.getBonusValue(artifact, hero.attack, 'Attack'));
-    result.push(this.getBonusValue(artifact, hero.defense, 'Defence'));
+    result.push(this.getBonusValue(artifact, hero.defense, 'Defense'));
     result.push(this.getBonusValue(artifact, hero.accuracy, 'Accuracy'));
     result.push(this.getBonusValue(artifact, hero.resistance, 'Resistance'));
     result.push(this.getBonusValue(artifact, hero.speed, 'Speed'));
