@@ -10,7 +10,7 @@ export class ArtifactOptimizerSettings {
     public softCap?: StatValue[],
     public hardCap?: StatValue[]
   ) {
-    softCap = softCap || [new StatValue('CriticalChance', 100)];
-    hardCap = hardCap || [];
+    this.softCap = softCap || [new StatValue('CriticalChance', 100)];
+    this.hardCap = hardCap || [];
   }
 }
