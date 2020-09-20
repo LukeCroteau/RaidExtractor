@@ -73,7 +73,11 @@ export class RaidAccount {
   }
 
   getArtifactType(artifact: Artifact): string {
-    return `${Raid.kind[artifact.kind]}-${Raid.rank[artifact.rank]}${Raid.rarity[artifact.rarity]}`;
+    let result = `${Raid.kind[artifact.kind]}-${Raid.rank[artifact.rank]}${Raid.rarity[artifact.rarity]}`;
+    if (artifact.requiredFraction) {
+      result += `-${Raid.fraction[artifact.requiredFraction]}`;
+    }
+    return result;
   }
 
   getArtifactSet(artifact: Artifact): string {

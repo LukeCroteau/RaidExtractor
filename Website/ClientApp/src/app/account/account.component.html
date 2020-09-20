@@ -71,7 +71,7 @@
     </mat-table>
   </mat-tab>
   <mat-tab label="Current">
-    <mat-table [dataSource]="account.heroes">
+    <mat-table [dataSource]="heroes">
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
         <mat-cell *matCellDef="let hero"> {{hero.name}} </mat-cell>

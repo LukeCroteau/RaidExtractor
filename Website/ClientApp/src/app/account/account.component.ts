@@ -24,6 +24,7 @@ export class AccountComponent implements OnInit {
   }
 
   account: RaidAccount;
+  heroes: Hero[] = [];
 
   hero: Hero;
   artifactByKind: { [kind: string]: Artifact } = { };
@@ -38,6 +39,15 @@ export class AccountComponent implements OnInit {
           }
 
           this.account = dump;
+          this.heroes = dump.heroes.sort((a, b) => {
+            let c = a.name.localeCompare(b.name);
+            if (c !== 0) return c;
+            c = b.grade.localeCompare(a.grade);
+            if (c !== 0) return c;
+            c = b.awakenLevel - a.awakenLevel;
+            if (c !== 0) return c;
+            return b.level - a.level;
+          });
         });
       } else {
         this.router.navigate(['/']);
