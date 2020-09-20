@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AccountService } from '../shared/account.service';
-import { AccountDump } from '../shared/clients';
-import { Artifact } from '../shared/clients';
 import { RaidAccount } from '../shared/raid-account';
+import { Hero } from '../shared/clients';
+import { MatDialog } from '@angular/material/dialog';
+import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
+import { ArtifactDialogComponent } from '../artifact-dialog/artifact-dialog.component';
+import { Artifact } from '../shared/clients';
+import { IHero } from '../shared/clients';
 
 @Component({
   selector: 'account-dump',
@@ -14,10 +18,15 @@ export class AccountComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private accountService: AccountService
-  ) { }
+    private accountService: AccountService,
+    private dialog: MatDialog
+  ) {
+  }
 
   account: RaidAccount;
+
+  hero: Hero;
+  artifactByKind: { [kind: string]: Artifact } = { };
 
   ngOnInit(): void {
     this.route.params.subscribe((params: ParamMap) => {
@@ -36,6 +45,50 @@ export class AccountComponent implements OnInit {
     });
   }
 
+  selectHero() {
+    const dialogRef = this.dialog.open(HeroDialogComponent,
+      {
+        data: this.account,
+        width: '800px'
+      });
+    dialogRef.afterClosed().subscribe(hero => {
+      if (!hero) {
+        return;
+      }
+
+      this.hero = new Hero(<IHero>{ ...hero });
+      this.hero.artifacts = [];
+      this.artifactByKind = {};
+    });
+  }
+
+  selectArtifact(kind: string) {
+    const dialogRef = this.dialog.open(ArtifactDialogComponent,
+      {
+        data: {
+          account: this.account,
+          hero: this.hero,
+          artifacts: this.account.artifactsByKind[kind],
+        },
+        width: '800px'
+      });
+    dialogRef.afterClosed().subscribe(artifact => {
+      const artifactByKind = this.artifactByKind;
+      this.artifactByKind[kind] = artifact || artifactByKind[kind];
+
+      this.hero.artifacts = [];
+      for (let k in artifactByKind) {
+        if (Object.prototype.hasOwnProperty.call(artifactByKind, k)) {
+          const artifact = this.artifactByKind[k];
+          if (!artifact) {
+            continue;
+          }
+
+          this.hero.artifacts.push(artifact.id);
+        }
+      }
+    });
+  }
 
   //test() {
   //  const hero = this.account.heroes[0];

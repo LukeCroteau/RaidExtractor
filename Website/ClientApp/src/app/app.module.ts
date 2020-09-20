@@ -14,9 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatTableModule} from '@angular/material/table';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatButtonModule} from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { HeroDialogComponent } from './hero-dialog/hero-dialog.component';
+import { ArtifactDialogComponent } from './artifact-dialog/artifact-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,13 @@ import {MatButtonModule} from '@angular/material/button';
     NavMenuComponent,
     HomeComponent,
     AccountComponent,
-    ExpiredComponent
+    ExpiredComponent,
+    HeroDialogComponent,
+    ArtifactDialogComponent
+  ],
+  entryComponents: [
+    HeroDialogComponent,
+    ArtifactDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +53,12 @@ import {MatButtonModule} from '@angular/material/button';
     MatToolbarModule,
     MatTabsModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]

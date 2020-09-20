@@ -7,12 +7,14 @@ import { ArtifactBonus } from './clients';
 export class RaidAccount {
   artifacts: Artifact[];
   heroes: Hero[];
+  team: Hero[];
   artifactsByKind: { [kind: string]: Artifact[] } = {};
   artifactsById: { [id: number]: Artifact } = {};
 
   constructor(dump: AccountDump) {
     this.artifacts = dump.artifacts;
     this.heroes = dump.heroes;
+    this.team = [];
 
     for (let artifact of this.artifacts) {
       let arr = this.artifactsByKind[artifact.kind];
@@ -70,10 +72,14 @@ export class RaidAccount {
   }
 
   getArtifactSet(artifact: Artifact): string {
+    if (!artifact) return '';
     return Raid.sets[artifact.setKind].name;
   }
 
   getBonusValue(artifact: Artifact, baseValue: number, stat: string): number {
+    if (!artifact) {
+      return 0;
+    }
     let bonus = 0;
     bonus += this.calcBonusValue(artifact.primaryBonus, baseValue, stat);
 
@@ -118,5 +124,23 @@ export class RaidAccount {
     return `${Math.round(value)}%`;
   }
 
+  artifactToHtml(artifact: Artifact) {
+    let result = `<b>${this.statToString(artifact.primaryBonus.value, artifact.primaryBonus.isAbsolute)}&nbsp;${Raid.statAbbr[artifact.primaryBonus.kind]}</b>`;
+    for (let i = 0; i < artifact.secondaryBonuses.length; i ++) {
+      if (i === 0) result += '&nbsp;-&nbsp;';
+      if (i !== 0) result += '&nbsp;/&nbsp;';
+      result += `${this.statToString(artifact.secondaryBonuses[i].value, artifact.secondaryBonuses[i].isAbsolute)}&nbsp;${Raid.statAbbr[artifact.secondaryBonuses[i].kind]}`;
+    }
+    return result;
+  }
 
+
+  grades(hero: Hero): { isAwakened: boolean }[] {
+    const result: { isAwakened: boolean }[] = [];
+    const grade = parseInt(hero.grade.replace('Stars', ''));
+    for (let i = 0; i < grade; i ++) {
+      result.push({ isAwakened: i < hero.awakenLevel });
+    }
+    return result;
+  }
 }

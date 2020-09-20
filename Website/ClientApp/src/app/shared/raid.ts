@@ -11,8 +11,8 @@ export abstract class Raid {
     'AttackSpeed': { 'name': 'Speed', 'set': 2, 'bonuses': [Raid.percBonus('Speed', 0.12)] },
     'CriticalChance': { 'name': 'Critical Rate', 'set': 2, 'bonuses': [Raid.percBonus('CriticalChance', 0.15)] },
     'CriticalDamage': { 'name': 'Critical Damage', 'set': 2, 'bonuses': [Raid.percBonus('CriticalDamage', 0.15)] },
-    'Accuracy': { 'name': 'Accuracy', 'set': 2, 'bonuses': [Raid.percBonus('Accuracy', 40)] },
-    'Resistance': { 'name': 'Resistance', 'set': 2, 'bonuses': [Raid.percBonus('Resistance', 40)] },
+    'Accuracy': { 'name': 'Accuracy', 'set': 2, 'bonuses': [Raid.absBonus('Accuracy', 40)] },
+    'Resistance': { 'name': 'Resistance', 'set': 2, 'bonuses': [Raid.absBonus('Resistance', 40)] },
     'LifeDrain': { 'name': 'Lifesteal', 'set': 4, 'bonuses': [] },
     'DamageIncreaseOnHpDecrease': { 'name': 'Fury', 'set': 4, 'bonuses': [] },
     'SleepChance': { 'name': 'Daze', 'set': 4, 'bonuses': [] },
@@ -113,6 +113,17 @@ export abstract class Raid {
     'Speed': 'speed',
     'CriticalChance': 'criticalChance',
     'CriticalDamage': 'criticalDamage'
+  }
+
+  static statAbbr = {
+    'Health': 'HP',
+    'Attack': 'Atk',
+    'Defense': 'Def',
+    'Accuracy': 'Acc',
+    'Resistance': 'Res',
+    'Speed': 'Spd',
+    'CriticalChance': 'C.Rate',
+    'CriticalDamage': 'C.Dmg'
   }
 
   static kind = {

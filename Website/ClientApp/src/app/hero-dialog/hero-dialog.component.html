@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>Select a hero</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-table [dataSource]="account.heroes">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let hero"> {{hero.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let hero"> {{account.getHeroType(hero)}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <mat-header-cell *matHeaderCellDef> level </mat-header-cell>
+      <mat-cell *matCellDef="let hero"> {{hero.level}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="grade">
+      <mat-header-cell *matHeaderCellDef> grade </mat-header-cell>
+      <mat-cell *matCellDef="let hero" style="padding-right: 16px">
+        <mat-icon *ngFor="let grade of account.grades(hero)"> {{ grade.isAwakened ? 'star' : 'star_outline' }}</mat-icon>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="button">
+      <mat-header-cell *matHeaderCellDef> &nbsp; </mat-header-cell>
+      <mat-cell *matCellDef="let hero"> <button mat-raised-button (click)="select(hero)">select</button> </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'type', 'level', 'grade', 'button']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'type', 'level', 'grade', 'button'];"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

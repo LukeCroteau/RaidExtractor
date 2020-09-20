@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>Select a hero</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-table [dataSource]="artifacts">
+    <ng-container matColumnDef="set">
+      <mat-header-cell *matHeaderCellDef> Set </mat-header-cell>
+      <mat-cell *matCellDef="let artifact"> {{account.getArtifactSet(artifact)}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let artifact"> {{account.getArtifactType(artifact)}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bonuses">
+      <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+      <mat-cell *matCellDef="let artifact"> <span [innerHTML]="account.artifactToHtml(artifact)"></span> </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="button">
+      <mat-header-cell *matHeaderCellDef> &nbsp; </mat-header-cell>
+      <mat-cell *matCellDef="let artifact"> <button mat-raised-button (click)="select(artifact)">select</button> </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['set', 'type', 'bonuses', 'button']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['set', 'type', 'bonuses', 'button'];"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
