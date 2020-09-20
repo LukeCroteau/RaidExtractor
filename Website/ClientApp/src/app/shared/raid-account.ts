@@ -13,6 +13,11 @@ export class RaidAccount {
 
   constructor(dump: AccountDump) {
     this.artifacts = dump.artifacts;
+    for (let artifact of this.artifacts) {
+      if (artifact.setKind === "38") artifact.setKind = "AccuracyAndSpeed";
+      if (artifact.setKind === "37") artifact.setKind = "HpAndDefence";
+    }
+
     this.heroes = dump.heroes;
     this.team = [];
 
