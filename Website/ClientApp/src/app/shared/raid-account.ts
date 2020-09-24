@@ -104,7 +104,7 @@ export class RaidAccount {
     if (bonus.isAbsolute) {
       return bonus.value;
     } else {
-      return baseValue * bonus.value;
+      return Math.round(baseValue * bonus.value);
     }
   }
 
