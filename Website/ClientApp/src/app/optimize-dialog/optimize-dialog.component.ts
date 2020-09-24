@@ -14,8 +14,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './optimize-dialog.component.html'
 })
 export class OptimizeDialogComponent {
+  sets: { name: string, setKind: string }[] = [];
+
   filter = 'all';
   maxToSixteen = false;
+  preferredSet = '';
 
   minimumHealth = new FormControl();
   maximumHealth = new FormControl();
@@ -65,6 +68,12 @@ export class OptimizeDialogComponent {
       hero: Hero,
     }
   ) {
+    for (let setKind in Raid.sets) {
+      if (!Raid.sets.hasOwnProperty(setKind)) {
+        continue;
+      }
+      this.sets.push({ name: Raid.sets[setKind].name, setKind: setKind });
+    }
   }
 
   optimize() {
@@ -220,13 +229,21 @@ export class OptimizeDialogComponent {
       this.weightHealth, this.weightAttack, this.weightDefense, this.weightSpeed, this.weightCriticalChance,
       this.weightCriticalDamage, this.weightResistance, this.weightAccuracy
     ];
+    let totalWeight = 0;
     const result: StatValue[] = [];
     for (let i = 0; i < maxValues.length; i ++) {
       if (maxValues[i] === 0) continue;
       const weight = weights[i] / maxValues[i];
       if (weight === 0) continue;
+      totalWeight += weights[i];
       result.push(new StatValue(['Health','Attack','Defense','Speed','CriticalChance','CriticalDamage','Resistance','Accuracy'][i], weight));
     }
+
+    if (this.preferredSet) {
+      // By making the base weight for a set so high, it's very unlikely it won't try to fill with the set (unless not possible)
+      result.push(new StatValue(this.preferredSet, totalWeight * 9 * 2));
+    }
+
     return result;
   }
 

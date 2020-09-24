@@ -61,7 +61,14 @@ export class ArtifactOptimizerWorker {
         bonuses[7] = settings.account.calcBonusValue(bonus, settings.hero.accuracy, 'Accuracy');
       }
 
-      let score = 0;
+      let baseScore = 0;
+      for (let weight of settings.weights) {
+        if (weight.kind === setKind) {
+          baseScore = weight.value;
+        }
+      }
+
+      let score = baseScore;
       for (let stat = 0; stat < numberOfStats; stat ++) score += bonuses[stat] * this.weights[stat];
 
       let maxScore = score;
@@ -74,7 +81,7 @@ export class ArtifactOptimizerWorker {
         setKind: setKind,
         setSize: Raid.sets[setKind].setSize,
         bonuses: bonuses,
-        baseScore: 0, 
+        baseScore: baseScore, 
         score: score,
         maxScore: maxScore,
       };
@@ -293,7 +300,7 @@ export class ArtifactOptimizerWorker {
       }
     }
 
-    const combination = {
+    const combination: IArtifactCombination = {
       artifacts: artifacts,
       bonuses: bonuses,
       score: score,

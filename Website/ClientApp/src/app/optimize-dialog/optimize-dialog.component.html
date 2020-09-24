@@ -8,9 +8,19 @@
         <mat-option value="not-equipped">Not equipped</mat-option>
       </mat-select>
     </mat-form-field>
-    <br />
+    &nbsp;
+    &nbsp;
     <mat-checkbox [(value)]="maxToSixteen">Max main stat to level 16</mat-checkbox>
-    <br/>
+    &nbsp;
+    &nbsp;
+    <mat-form-field>
+      <mat-label>Preferred set</mat-label>
+      <mat-select [(value)]="preferredSet">
+        <mat-option value="">No preference</mat-option>
+        <mat-option *ngFor="let set of sets" [value]="set.setKind">{{ set.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
     <table>
       <tr>
         <td>
@@ -198,6 +208,7 @@
       </tr>
     </table>
     <small>* Soft-cap means the stat can go higher but values above soft-cap won't be seen as improvements</small>
+    <br />
     <small>- = No priority, + = Low priority, ++ = Normal priority, +++ = High priority</small>
   </form>
 </mat-dialog-content>
