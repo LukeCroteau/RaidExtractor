@@ -1,4 +1,3 @@
-{{ activeTab }}<br/>
 <mat-tab-group *ngIf="account" [(selectedIndex)]="activeTab">
   <mat-tab label="Artifacts" class="mat-elevation-z8">
     <mat-table *ngIf="activeTab === 0" [dataSource]="account.artifacts">
