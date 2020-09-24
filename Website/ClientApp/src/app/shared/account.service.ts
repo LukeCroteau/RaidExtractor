@@ -24,6 +24,9 @@ export class AccountService {
     }
 
     return this.client.get(key).pipe(map(account => {
+      if (!account) {
+        return null;
+      }
       localStorage.setItem(key, JSON.stringify(account));
       return new RaidAccount(account);
     }));
