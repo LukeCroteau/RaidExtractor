@@ -193,13 +193,7 @@ export class OptimizeDialogComponent {
     result.push(this.toStatValue('Resistance', this.data.hero.resistance, resistance));
     result.push(this.toStatValue('Accuracy', this.data.hero.accuracy, accuracy));
 
-    result = result.filter(r => !!r);
-    for (let stat of result) {
-      if (stat.kind.startsWith('Crit')) {
-        stat.value /= 100;
-      }
-    }
-    return result;
+    return result.filter(r => !!r);
   }
 
   toStatValue(stat: string, base: number, value: FormControl): StatValue | undefined {
