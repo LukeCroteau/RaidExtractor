@@ -8,6 +8,8 @@ import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
 import { ArtifactDialogComponent } from '../artifact-dialog/artifact-dialog.component';
 import { Artifact } from '../shared/clients';
 import { IHero } from '../shared/clients';
+import { ArtifactOptimizerWorker } from '../shared/artifact-optimizer-worker';
+import { OptimizeDialogComponent } from '../optimize-dialog/optimize-dialog.component';
 
 @Component({
   selector: 'account-dump',
@@ -22,6 +24,8 @@ export class AccountComponent implements OnInit {
     private dialog: MatDialog
   ) {
   }
+
+  activeTab: number = 0;
 
   account: RaidAccount;
   heroes: Hero[] = [];
@@ -69,6 +73,46 @@ export class AccountComponent implements OnInit {
       this.hero = new Hero(<IHero>{ ...hero });
       this.hero.artifacts = [];
       this.artifactByKind = {};
+    });
+  }
+
+  optimizer: ArtifactOptimizerWorker;
+
+  pauseOptimizer() {
+    if (this.optimizer) {
+      this.optimizer.stop();
+    }
+  }
+
+  resumeOptimizer() {
+    if (this.optimizer) {
+      this.optimizer.start();
+    }
+  }
+
+  clearOptimizer() {
+    if (this.optimizer) {
+      this.optimizer.stop();
+      this.optimizer = null;
+    }
+  }
+
+  optimizeHero() {
+    const dialogRef = this.dialog.open(OptimizeDialogComponent,
+      {
+        data: {
+          account: this.account,
+          hero: this.hero
+        },
+        width: '800px'
+      });
+    dialogRef.afterClosed().subscribe(settings => {
+      if (!settings) {
+        return;
+      }
+
+      this.optimizer = new ArtifactOptimizerWorker(settings);
+      this.optimizer.start();
     });
   }
 

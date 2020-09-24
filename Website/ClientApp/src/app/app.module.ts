@@ -12,6 +12,10 @@ import { AccountService } from './shared/account.service';
 import { ExpiredComponent } from './expired/expired.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
@@ -24,6 +28,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { HeroDialogComponent } from './hero-dialog/hero-dialog.component';
 import { ArtifactDialogComponent } from './artifact-dialog/artifact-dialog.component';
+import { OptimizeDialogComponent } from './optimize-dialog/optimize-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,11 +38,13 @@ import { ArtifactDialogComponent } from './artifact-dialog/artifact-dialog.compo
     AccountComponent,
     ExpiredComponent,
     HeroDialogComponent,
-    ArtifactDialogComponent
+    ArtifactDialogComponent,
+    OptimizeDialogComponent
   ],
-  entryComponents: [
+entryComponents: [
     HeroDialogComponent,
-    ArtifactDialogComponent
+    ArtifactDialogComponent,
+    OptimizeDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -58,7 +65,11 @@ import { ArtifactDialogComponent } from './artifact-dialog/artifact-dialog.compo
     ReactiveFormsModule,
     MatSelectModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatSliderModule,
+    MatSnackBarModule
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]

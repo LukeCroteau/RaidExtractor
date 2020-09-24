@@ -1,10 +1,8 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Hero } from '../shared/clients';
-import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
 import { Artifact } from '../shared/clients';
 import { RaidAccount } from '../shared/raid-account';
-import { Raid } from '../shared/raid';
 
 @Component({
   selector: 'app-artifact-dialog',
@@ -15,7 +13,7 @@ export class ArtifactDialogComponent {
   account: RaidAccount;
 
   constructor(
-    private dialogRef: MatDialogRef<HeroDialogComponent>,
+    private dialogRef: MatDialogRef<ArtifactDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: {
       account: RaidAccount,
       artifacts: Artifact[],
@@ -30,12 +28,15 @@ export class ArtifactDialogComponent {
       if (c !== 0) return c;
       c = (a.primaryBonus.isAbsolute ? 1 : 0) - (b.primaryBonus.isAbsolute ? 1 : 0);
       if (c !== 0) return c;
-      c = a.primaryBonus.value - b.primaryBonus.value;
+      c = b.primaryBonus.value - a.primaryBonus.value;
       if (c !== 0) return c;
       c = a.rank.localeCompare(b.rank);
       if (c !== 0) return c;
       c = a.rarity.localeCompare(b.rarity);
       return c;
+    }).filter(a => {
+      if (!a.requiredFraction) return true;
+      return a.requiredFraction === data.hero.fraction;
     });
   }
 

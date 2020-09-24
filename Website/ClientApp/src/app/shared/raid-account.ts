@@ -31,7 +31,7 @@ export class RaidAccount {
   }
 
   getHeroStat(hero: Hero, stat: string): number {
-    const sets = {};
+    const sets: { [setKind: string]: number } = {};
     
     const baseValue = stat.startsWith('Crit') ? 100 : hero[Raid.statProperty[stat]];
     let value = hero[Raid.statProperty[stat]];
@@ -46,18 +46,14 @@ export class RaidAccount {
       }
 
       value += this.getBonusValue(artifact, baseValue, stat);
-      if (artifact.setKind in sets) {
-        sets[artifact.setKind] ++;
-      } else {
-        sets[artifact.setKind] = 1;
-      }
+      sets[artifact.setKind] = (sets[artifact.setKind] || 0) + 1;
     }
 
     for (const set in sets) {
       if (Object.prototype.hasOwnProperty.call(sets, set)) {
         let count = sets[set];
-        while (Raid.sets[set].set <= count) {
-          count -= Raid.sets[set].set;
+        while (Raid.sets[set].setSize <= count) {
+          count -= Raid.sets[set].setSize;
           for (const bonus of Raid.sets[set].bonuses) {
             value += this.calcBonusValue(bonus, baseValue, stat);
           }

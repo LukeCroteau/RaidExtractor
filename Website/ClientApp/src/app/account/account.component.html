@@ -1,6 +1,7 @@
-<mat-tab-group *ngIf="account">
+{{ activeTab }}<br/>
+<mat-tab-group *ngIf="account" [(selectedIndex)]="activeTab">
   <mat-tab label="Artifacts" class="mat-elevation-z8">
-    <mat-table [dataSource]="account.artifacts">
+    <mat-table *ngIf="activeTab === 0" [dataSource]="account.artifacts">
       <ng-container matColumnDef="type">
         <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
         <mat-cell *matCellDef="let artifact"> {{account.getArtifactType(artifact)}} </mat-cell>
@@ -71,7 +72,7 @@
     </mat-table>
   </mat-tab>
   <mat-tab label="Current">
-    <mat-table [dataSource]="heroes">
+    <mat-table *ngIf="activeTab === 1" [dataSource]="heroes">
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
         <mat-cell *matCellDef="let hero"> {{hero.name}} </mat-cell>
@@ -127,9 +128,28 @@
     </mat-table>
   </mat-tab>
   <mat-tab label="Build">
-    <br/>
-    <button mat-raised-button (click)="selectHero()">Select hero</button>
-    <br/>
+    <br />
+    <button mat-raised-button *ngIf="!optimizer" (click)="selectHero()">Select hero</button>
+    <br />
+    <button mat-raised-button *ngIf="hero && !optimizer" (click)="optimizeHero()">Optimize</button>
+    <button mat-raised-button *ngIf="optimizer && optimizer.isRunning" (click)="pauseOptimizer()">Pause</button>
+    <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="resumeOptimizer()">Resume</button>
+    <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="clearOptimizer()">Clear</button>
+    <br />
+    <table *ngIf="optimizer">
+      <tr *ngFor="let combination of optimizer.bestCombinations">
+        <td>{{ combination.score }}</td>
+        <td>{{ hero.health + combination.bonuses[0] }} HP</td>
+        <td>{{ hero.attack + combination.bonuses[1] }} ATK</td>
+        <td>{{ hero.defense + combination.bonuses[2] }} DEF</td>
+        <td>{{ hero.speed + combination.bonuses[3] }} SPD</td>
+        <td>{{ hero.criticalChance + combination.bonuses[4] }} C.Rate</td>
+        <td>{{ hero.criticalDamage + combination.bonuses[5] }} C.Dmg</td>
+        <td>{{ hero.resistance + combination.bonuses[6] }} Res</td>
+        <td>{{ hero.accuracy + combination.bonuses[7] }} ACC</td>
+      </tr>
+    </table>
+
     <table *ngIf="hero">
       <thead>
         <tr>

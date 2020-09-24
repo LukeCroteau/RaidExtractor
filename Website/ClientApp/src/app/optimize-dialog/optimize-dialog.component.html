@@ -1,0 +1,207 @@
+<h2 mat-dialog-title>Optimizer settings</h2>
+<mat-dialog-content class="mat-typography">
+  <form>
+    <mat-form-field>
+      <mat-label>Artifact selection</mat-label>
+      <mat-select [(value)]="filter">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="not-equipped">Not equipped</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br />
+    <mat-checkbox [(value)]="maxToSixteen">Max main stat to level 16</mat-checkbox>
+    <br/>
+    <table>
+      <tr>
+        <td>
+          Health
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumHealth" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumHealth" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capHealth" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightHealth"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Attack
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumAttack" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumAttack" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capAttack" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightAttack"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Defense
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumDefense" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumDefense" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capDefense" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightDefense"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Speed
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumSpeed" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumSpeed" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capSpeed" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightSpeed"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          C.Rate
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumCriticalChance" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumCriticalChance" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capCriticalChance" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightCriticalChance"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          C.Damage
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumCriticalDamage" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumCriticalDamage" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capCriticalDamage" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightCriticalDamage"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding-right: 8px">
+          Resistance
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumResistance" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumResistance" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capResistance" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightResistance"></mat-slider>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Accuracy
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="minimum" [formControl]="minimumAccuracy" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="maximum" [formControl]="maximumAccuracy" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field>
+            <input matInput type="number" placeholder="soft-cap *" [formControl]="capAccuracy" />
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightAccuracy"></mat-slider>
+        </td>
+      </tr>
+    </table>
+    <small>* Soft-cap means the stat can go higher but values above soft-cap won't be seen as improvements</small>
+    <small>- = No priority, + = Low priority, ++ = Normal priority, +++ = High priority</small>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="optimize()">Optimize</button>
+</mat-dialog-actions>
