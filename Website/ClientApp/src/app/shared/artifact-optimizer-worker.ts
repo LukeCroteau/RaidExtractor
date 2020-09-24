@@ -23,7 +23,7 @@ interface IArtifactSetScore {
   maxScore: number;
 }
 
-interface IArtifactCombination {
+export interface IArtifactCombination {
   score: number;
   bonuses: number[];
   artifacts: Artifact[];

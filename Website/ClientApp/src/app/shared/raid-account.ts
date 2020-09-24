@@ -130,6 +130,9 @@ export class RaidAccount {
   }
 
   artifactToHtml(artifact: Artifact) {
+    if (!artifact) {
+      return '';
+    }
     let result = `<b>${this.statToString(artifact.primaryBonus.value, artifact.primaryBonus.isAbsolute)}&nbsp;${Raid.statAbbr[artifact.primaryBonus.kind]}</b>`;
     for (let i = 0; i < artifact.secondaryBonuses.length; i ++) {
       if (i === 0) result += '&nbsp;-&nbsp;';
@@ -139,6 +142,16 @@ export class RaidAccount {
     return result;
   }
 
+  artifactToHtmlMultiline(artifact: Artifact) {
+    if (!artifact) {
+      return '';
+    }
+    let result = `<b>${this.statToString(artifact.primaryBonus.value, artifact.primaryBonus.isAbsolute)}&nbsp;${Raid.statAbbr[artifact.primaryBonus.kind]}</b><br/>`;
+    for (let i = 0; i < artifact.secondaryBonuses.length; i ++) {
+      result += `${this.statToString(artifact.secondaryBonuses[i].value, artifact.secondaryBonuses[i].isAbsolute)}&nbsp;${Raid.statAbbr[artifact.secondaryBonuses[i].kind]}<br/>`;
+    }
+    return result;
+  }
 
   grades(hero: Hero): { isAwakened: boolean }[] {
     const result: { isAwakened: boolean }[] = [];

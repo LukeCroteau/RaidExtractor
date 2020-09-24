@@ -147,6 +147,7 @@
         <td>{{ hero.criticalDamage + combination.bonuses[5] }} C.Dmg</td>
         <td>{{ hero.resistance + combination.bonuses[6] }} Res</td>
         <td>{{ hero.accuracy + combination.bonuses[7] }} ACC</td>
+        <td><button mat-raised-button (click)="selectCombination(combination)">select</button></td>
       </tr>
     </table>
 
@@ -195,17 +196,30 @@
         <tr>
           <td>Set</td>
           <td></td>
-          <td><span *ngIf="artifactByKind['Weapon']" [innerHTML]="account.getArtifactSet(artifactByKind['Weapon'])"></span></td>
-          <td><span *ngIf="artifactByKind['Helmet']" [innerHTML]="account.getArtifactSet(artifactByKind['Helmet'])"></span></td>
-          <td><span *ngIf="artifactByKind['Shield']" [innerHTML]="account.getArtifactSet(artifactByKind['Shield'])"></span></td>
-          <td><span *ngIf="artifactByKind['Gloves']" [innerHTML]="account.getArtifactSet(artifactByKind['Gloves'])"></span></td>
-          <td><span *ngIf="artifactByKind['Chest']" [innerHTML]="account.getArtifactSet(artifactByKind['Chest'])"></span></td>
-          <td><span *ngIf="artifactByKind['Boots']" [innerHTML]="account.getArtifactSet(artifactByKind['Boots'])"></span></td>
-          <td><span *ngIf="artifactByKind['Ring']" [innerHTML]="account.getArtifactSet(artifactByKind['Ring'])"></span></td>
-          <td><span *ngIf="artifactByKind['Cloak']" [innerHTML]="account.getArtifactSet(artifactByKind['Cloak'])"></span></td>
-          <td><span *ngIf="artifactByKind['Banner']" [innerHTML]="account.getArtifactSet(artifactByKind['Banner'])"></span></td>
-          <td></td>
-        </tr>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Weapon'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Helmet'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Shield'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Gloves'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Chest'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Boots'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Ring'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Cloak'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Banner'])"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Weapon'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Helmet'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Shield'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Gloves'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Chest'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Boots'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Ring'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Cloak'])"></td>
+        <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Banner'])"></td>
+        <td>&nbsp;</td>
+      </tr>
         <tr>
           <td>Health</td>
           <td>{{ hero.health }}</td>
