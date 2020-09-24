@@ -299,11 +299,6 @@ export class ArtifactOptimizerWorker {
       score: score,
     };
 
-    if (this.bestCombinations.length === 0) {
-      this.bestCombinations.push(combination);
-      return true;
-    }
-
     for (let i = 0; i < this.bestCombinations.length; i ++) {
       if (score < this.bestCombinations[i].score) {
         continue;
@@ -313,7 +308,11 @@ export class ArtifactOptimizerWorker {
       if (this.bestCombinations.length > this.maxCombinations) {
         this.bestCombinations.length = this.maxCombinations;
       }
-      break;
+      return true;
+    }
+
+    if (this.bestCombinations.length < this.maxCombinations) {
+      this.bestCombinations.push(combination);
     }
     return true;
   }
