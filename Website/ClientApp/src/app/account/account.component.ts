@@ -147,8 +147,10 @@ export class AccountComponent implements OnInit {
 
   selectCombination(combination: IArtifactCombination) {
     this.artifactByKind = {};
+    this.hero.artifacts = [];
     for (let artifact of combination.artifacts) {
-      this.artifactByKind[artifact.kind] = artifact;
+      this.artifactByKind[artifact.kind] = this.account.artifactsById[artifact.id];
+      this.hero.artifacts.push(artifact.id);
     }
   }
 }
