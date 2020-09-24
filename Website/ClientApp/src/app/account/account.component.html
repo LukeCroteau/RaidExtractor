@@ -134,21 +134,32 @@
     <button mat-raised-button *ngIf="optimizer && optimizer.isRunning" (click)="pauseOptimizer()">Pause</button>
     <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="resumeOptimizer()">Resume</button>
     <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="clearOptimizer()">Clear</button>
-    <br />
-    <table *ngIf="optimizer">
-      <tr *ngFor="let combination of optimizer.bestCombinations">
-        <td>{{ combination.score }}</td>
-        <td>{{ hero.health + combination.bonuses[0] }} HP</td>
-        <td>{{ hero.attack + combination.bonuses[1] }} ATK</td>
-        <td>{{ hero.defense + combination.bonuses[2] }} DEF</td>
-        <td>{{ hero.speed + combination.bonuses[3] }} SPD</td>
-        <td>{{ hero.criticalChance + combination.bonuses[4] }} C.Rate</td>
-        <td>{{ hero.criticalDamage + combination.bonuses[5] }} C.Dmg</td>
-        <td>{{ hero.resistance + combination.bonuses[6] }} Res</td>
-        <td>{{ hero.accuracy + combination.bonuses[7] }} ACC</td>
-        <td><button mat-raised-button (click)="selectCombination(combination)">select</button></td>
-      </tr>
-    </table>
+  <br />
+  <span *ngIf="optimizer && optimizer.isRunning">{{ optimizer.possibilities }} possible artifact combinations, tried {{ optimizer.calculated }} combinations ({{ optimizer.iterationsPerSecond }} combinations per second)</span>
+  <table *ngIf="optimizer">
+    <tr>
+      <th>HP</th>
+      <th>ATK</th>
+      <th>DEF</th>
+      <th>SPD</th>
+      <th>C.Rate</th>
+      <th>C.Dmg</th>
+      <th>Res</th>
+      <th>ACC</th>
+      <th>&nbsp;</th>
+    </tr>
+    <tr *ngFor="let combination of optimizer.bestCombinations">
+      <td>{{ hero.health + combination.bonuses[0] }}</td>
+      <td>{{ hero.attack + combination.bonuses[1] }}</td>
+      <td>{{ hero.defense + combination.bonuses[2] }}</td>
+      <td>{{ hero.speed + combination.bonuses[3] }}</td>
+      <td>{{ hero.criticalChance + combination.bonuses[4] }}</td>
+      <td>{{ hero.criticalDamage + combination.bonuses[5] }}</td>
+      <td>{{ hero.resistance + combination.bonuses[6] }}</td>
+      <td>{{ hero.accuracy + combination.bonuses[7] }}</td>
+      <td><button mat-raised-button (click)="selectCombination(combination)">select</button></td>
+    </tr>
+  </table>
 
   <table *ngIf="hero">
     <thead>

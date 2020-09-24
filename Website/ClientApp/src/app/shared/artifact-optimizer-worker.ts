@@ -177,16 +177,20 @@ export class ArtifactOptimizerWorker {
   private softCaps: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
   private hardCaps: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
 
+  possibilities: number;
+  calculated: number = 0;
+  iterationsPerSecond: number = 0;
+
   start() {
     if (this.isRunning) {
       return;
     }
 
-    let possibilities = 1;
+    this.possibilities = 1;
     for (let i = 0; i < numberOfStats; i ++) {
-      possibilities *= this.artifactsBySlot[i].length - this.slotIndexes[i];
+      this.possibilities *= this.artifactsBySlot[i].length - this.slotIndexes[i];
     }
-    console.log(`Brute forcing ${possibilities} possible artifact combinations...`);
+    console.log(`Brute forcing ${this.possibilities} possible artifact combinations...`);
 
     this.isRunning = true;
     this.timer = interval(5).subscribe(() => {
@@ -241,14 +245,13 @@ export class ArtifactOptimizerWorker {
       }
 
       let isValid = true;
-      for (let b = 0; b < numberOfStats; b ++) {
+      for (let b = 0; b < numberOfStats; b ++) { 
         if (bonuses[b] < this.minValues[b] || (this.hardCaps[b] !== -1 && bonuses[b] > this.hardCaps[b])) {
           isValid = false;
           break;
         }
 
-        if (this.softCaps[b] !== -1 && bonuses[b] > this.softCaps[b]) bonuses[b] = this.softCaps[b];
-        score += bonuses[b] * this.weights[b];
+        score += ((this.softCaps[b] !== -1 && bonuses[b] > this.softCaps[b]) ? this.softCaps[b] : bonuses[b]) * this.weights[b];
       }
 
       if (isValid) {
@@ -259,6 +262,8 @@ export class ArtifactOptimizerWorker {
     }
 
     console.log(`${this.iterations} took ${new Date().getTime() - startTime}ms, best score ${this.bestCombinations.length > 0 ? this.bestCombinations[0].score : 0}`);
+    this.calculated += this.iterations;
+    this.iterationsPerSecond = Math.round(this.iterations * (1000 / (new Date().getTime() - startTime)));
     this.iterations = Math.round(this.iterations * (50 / (new Date().getTime() - startTime)));
   }
 
