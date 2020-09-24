@@ -10,7 +10,7 @@
     </mat-form-field>
     &nbsp;
     &nbsp;
-    <mat-checkbox [(value)]="maxToSixteen">Max main stat to level 16</mat-checkbox>
+    <mat-checkbox [(ngModel)]="maxToSixteen" [ngModelOptions]="{standalone: true}">Max main stat to level 16</mat-checkbox>
     &nbsp;
     &nbsp;
     <mat-form-field>

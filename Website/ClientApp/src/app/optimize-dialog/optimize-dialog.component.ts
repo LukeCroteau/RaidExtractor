@@ -8,6 +8,7 @@ import { Artifact } from '../shared/clients';
 import { Raid } from '../shared/raid';
 import { StatValue } from '../shared/stat-value';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ArtifactBonus } from '../shared/clients';
 
 @Component({
   selector: 'app-optimize-dialog',
@@ -159,7 +160,9 @@ export class OptimizeDialogComponent {
         continue;
       }
 
+      // Make a copy of the artifact (and it's primary bonus, the new Artifact(artifact) is a shallow clone)
       let art = new Artifact(artifact);
+      art.primaryBonus = new ArtifactBonus(artifact.primaryBonus);
       if (this.maxToSixteen) {
         let rank = parseInt(Raid.rank[art.rank]);
         if (art.primaryBonus.isAbsolute) {
