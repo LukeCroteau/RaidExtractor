@@ -263,7 +263,10 @@ export class ArtifactOptimizerWorker {
 
     console.log(`${this.iterations} took ${new Date().getTime() - startTime}ms, best score ${this.bestCombinations.length > 0 ? this.bestCombinations[0].score : 0}`);
     this.calculated += this.iterations;
-    this.iterationsPerSecond = Math.round(this.iterations * (1000 / (new Date().getTime() - startTime)));
+    if (!this.iterationsPerSecond) {
+      this.iterationsPerSecond = Math.round(this.iterations * (1000 / (new Date().getTime() - startTime)));
+    }
+    this.iterationsPerSecond = Math.round(((this.iterationsPerSecond * 19) + Math.round(this.iterations * (1000 / (new Date().getTime() - startTime)))) / 20);
     this.iterations = Math.round(this.iterations * (50 / (new Date().getTime() - startTime)));
   }
 
@@ -274,11 +277,13 @@ export class ArtifactOptimizerWorker {
     artifactsWithScore: IArtifactWithScore[],
     bonuses: number[],
     score: number): boolean {
-    
-    let worstScore = this.bestCombinations.length > 0 ? this.bestCombinations[this.bestCombinations.length - 1].score : 0;
-    if (score < worstScore) {
-      // If the score + maximum set score is lower than the worst score, there will be no way to improve the combinations
-      return score + this.maxSetScore > worstScore;
+
+    if (this.bestCombinations.length === this.maxCombinations) {
+      const worstScore = this.bestCombinations[this.bestCombinations.length - 1].score;
+      if (score < worstScore) {
+        // If the score + maximum set score is lower than the worst score, there will be no way to improve the combinations
+        return score + this.maxSetScore > worstScore;
+      }
     }
 
     const artifacts: Artifact[] = [];
