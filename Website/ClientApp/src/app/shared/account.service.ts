@@ -15,7 +15,7 @@ export class AccountService {
   {}
 
   get(key: string): Observable<RaidAccount> {
-    const cached = localStorage.getItem(key);
+    const cached = sessionStorage.getItem(key);
     if (cached) {
       return Observable.create((observer:any) => {
         observer.next(new RaidAccount(new AccountDump(<IAccountDump>JSON.parse(cached))));
@@ -27,7 +27,11 @@ export class AccountService {
       if (!account) {
         return null;
       }
-      localStorage.setItem(key, JSON.stringify(account));
+      try {
+        sessionStorage.setItem(key, JSON.stringify(account));
+      } catch (e) {
+        console.log('Unable to cache result', e);
+      } 
       return new RaidAccount(account);
     }));
   }
