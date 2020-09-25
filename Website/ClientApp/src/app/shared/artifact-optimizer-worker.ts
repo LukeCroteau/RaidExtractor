@@ -32,6 +32,7 @@ export interface IArtifactCombination {
 export class ArtifactOptimizerWorker {
   iterations: number = 100;
   isRunning: boolean = false;
+  isDone: boolean = false;
 
   constructor(
     private settings: ArtifactOptimizerSettings
@@ -177,8 +178,7 @@ export class ArtifactOptimizerWorker {
 
   private timer: Subscription;
   private isCalculating: boolean;
-  private isDone: boolean;
-
+  
   private weights: number[] = [0,0,0,0,0,0,0,0];
   private minValues: number[] = [0,0,0,0,0,0,0,0];
   private softCaps: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
@@ -332,6 +332,7 @@ export class ArtifactOptimizerWorker {
     }
 
     this.isDone = true;
+    this.stop();
   }
 
   stop() {
