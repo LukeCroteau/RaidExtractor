@@ -234,7 +234,7 @@ namespace RaidExtractor
                         arts.Add(artifactId);
                     }
 
-                    heroesById[heroId].Artifacts = arts;
+                    if (heroesById.TryGetValue(heroId, out var hero)) hero.Artifacts = arts;
                 }
 
                 return new AccountDump

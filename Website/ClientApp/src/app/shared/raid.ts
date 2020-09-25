@@ -41,7 +41,7 @@ export abstract class Raid {
     'ShieldAndSpeed': { 'name': 'Divine Speed', 'setSize': 2, 'bonuses': [Raid.percBonus('Speed',0.12)] },
     'UnkillableAndSpdAndCrDmg': { 'name': '', 'setSize': 4, 'bonuses': [Raid.percBonus('Speed',0.18),Raid.percBonus('CriticalDamage',0.3)] },
     'BlockReflectDebuffAndHpAndDef': { 'name': '', 'setSize': 4, 'bonuses': [Raid.percBonus('Health',0.2),Raid.percBonus('Defense',0.2)] },
-    'HpAndDefence': { 'name': '', 'setSize': 2, 'bonuses': [Raid.percBonus('Health',0.1),Raid.percBonus('Defense',0.1)] },
+    'HpAndDefense': { 'name': '', 'setSize': 2, 'bonuses': [Raid.percBonus('Health',0.1),Raid.percBonus('Defense',0.1)] },
     'AccuracyAndSpeed': { 'name': '', 'setSize': 2, 'bonuses': [Raid.absBonus('Accuracy',40),Raid.percBonus('Speed',0.05)] },
     'IgnoreCooldown': { 'name': '', 'setSize': 4, 'bonuses': [] },
     'RemoveDebuff': { 'name': '', 'setSize': 4, 'bonuses': [] }

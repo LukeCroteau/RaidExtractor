@@ -39,7 +39,7 @@
         ShieldAndSpeed = 34,
         UnkillableAndSpdAndCrDmg = 35,
         BlockReflectDebuffAndHpAndDef = 36,
-        HpAndDefence = 37,
+        HpAndDefense = 37,
         AccuracyAndSpeed = 38,
         IgnoreCooldown = 1000,
         RemoveDebuff = 1001,

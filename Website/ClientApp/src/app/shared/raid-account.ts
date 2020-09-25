@@ -14,8 +14,9 @@ export class RaidAccount {
   constructor(dump: AccountDump) {
     this.artifacts = dump.artifacts;
     for (let artifact of this.artifacts) {
-      if (artifact.setKind === "38") artifact.setKind = "AccuracyAndSpeed";
-      if (artifact.setKind === "37") artifact.setKind = "HpAndDefence";
+      if (artifact.setKind === '38') artifact.setKind = 'AccuracyAndSpeed';
+      if (artifact.setKind === '37') artifact.setKind = 'HpAndDefense';
+      if (artifact.setKind) artifact.setKind = artifact.setKind.replace('Defence', 'Defense');
     }
 
     this.heroes = dump.heroes;
