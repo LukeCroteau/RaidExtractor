@@ -8,11 +8,9 @@
         <mat-option value="not-equipped">Not equipped</mat-option>
       </mat-select>
     </mat-form-field>
-    &nbsp;
-    &nbsp;
+    &nbsp;&nbsp;
     <mat-checkbox [(ngModel)]="maxToSixteen" [ngModelOptions]="{standalone: true}">Max main stat to level 16</mat-checkbox>
-    &nbsp;
-    &nbsp;
+    &nbsp;&nbsp;
     <mat-form-field>
       <mat-label>Preferred set</mat-label>
       <mat-select [(value)]="preferredSet">
@@ -20,6 +18,25 @@
         <mat-option *ngFor="let set of sets" [value]="set.setKind">{{ set.name }}</mat-option>
       </mat-select>
     </mat-form-field>
+    <br />
+    Optimize:<br />
+    <mat-checkbox [(ngModel)]="optimizeWeapon" [ngModelOptions]="{standalone: true}">Weapon</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeHelmet" [ngModelOptions]="{standalone: true}">Helmet</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeShield" [ngModelOptions]="{standalone: true}">Shield</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeGloves" [ngModelOptions]="{standalone: true}">Gloves</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeChest" [ngModelOptions]="{standalone: true}">Chest</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeBoots" [ngModelOptions]="{standalone: true}">Boots</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeRing" [ngModelOptions]="{standalone: true}">Ring</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeCloak" [ngModelOptions]="{standalone: true}">Amulet</mat-checkbox>
+    &nbsp;&nbsp;
+    <mat-checkbox [(ngModel)]="optimizeBanner" [ngModelOptions]="{standalone: true}">Banner</mat-checkbox>
     <br />
     <table>
       <tr>

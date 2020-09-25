@@ -61,6 +61,16 @@ export class OptimizeDialogComponent {
   capAccuracy = new FormControl();
   weightAccuracy = 1;
 
+  optimizeWeapon = true;
+  optimizeHelmet = true;
+  optimizeShield = true;
+  optimizeGloves = true;
+  optimizeChest = true;
+  optimizeBoots = true;
+  optimizeRing = true;
+  optimizeCloak = true;
+  optimizeBanner = true;
+
   constructor(
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<OptimizeDialogComponent>,
@@ -143,8 +153,9 @@ export class OptimizeDialogComponent {
       }
     }
 
+    const artifacts = [];
+    const equipped = this.data.hero.artifacts || [];
     const grade = parseInt(this.data.hero.grade.replace('Stars', ''));
-    const artifacts: Artifact[] = [];
     for (let artifact of this.data.account.artifacts) {
       if (exclude.indexOf(artifact.id) >= 0) {
         continue;
@@ -157,6 +168,11 @@ export class OptimizeDialogComponent {
         continue;
       }
       if (artifact.kind === 'Banner' && this.data.hero.awakenLevel < 6) {
+        continue;
+      }
+
+      let optimize = this[`optimize${artifact.kind}`];
+      if (!optimize && equipped.indexOf(artifact.id) === -1) {
         continue;
       }
 
