@@ -70,7 +70,7 @@
     <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="clearOptimizer()">Clear</button>
     <br />
     <span *ngIf="optimizer && optimizer.isRunning">{{ optimizer.possibilities }} possible artifact combinations, tried {{ optimizer.calculated }} combinations ({{ optimizer.iterationsPerSecond }} combinations per second)</span>
-    <table *ngIf="optimizer">
+    <table *ngIf="optimizer" style="width: 600px">
       <tr>
         <th>HP</th>
         <th>ATK</th>
