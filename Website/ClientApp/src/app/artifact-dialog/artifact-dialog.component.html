@@ -1,5 +1,30 @@
 <h2 mat-dialog-title>Select a hero</h2>
 <mat-dialog-content class="mat-typography">
+  <form>
+    <mat-form-field>
+      <mat-label>Show</mat-label>
+      <mat-select [(value)]="filter" (selectionChange)="refreshArtifacts()">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="not-equipped">Not equipped</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Order by</mat-label>
+      <mat-select [(value)]="orderBy" (selectionChange)="refreshArtifacts()">
+        <mat-option value="default">Default</mat-option>
+        <mat-option value="Health">Health</mat-option>
+        <mat-option value="Attack">Attack</mat-option>
+        <mat-option value="Defense">Defense</mat-option>
+        <mat-option value="Speed">Speed</mat-option>
+        <mat-option value="CriticalRate">C.Rate</mat-option>
+        <mat-option value="CriticalDamage">C.Dmg</mat-option>
+        <mat-option value="Resistance">Resistance</mat-option>
+        <mat-option value="Accuracy">Accuracy</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
   <mat-table [dataSource]="artifacts">
     <ng-container matColumnDef="set">
       <mat-header-cell *matHeaderCellDef> Set </mat-header-cell>
