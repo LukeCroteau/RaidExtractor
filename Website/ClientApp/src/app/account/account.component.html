@@ -1,6 +1,291 @@
 <mat-tab-group *ngIf="account" [(selectedIndex)]="activeTab">
+  <mat-tab label="Heroes">
+    <mat-table *ngIf="activeTab === 0" [dataSource]="heroes">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{hero.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroType(hero)}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hp">
+        <mat-header-cell *matHeaderCellDef> HP </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Health')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="atk">
+        <mat-header-cell *matHeaderCellDef> Atk </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Attack')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="def">
+        <mat-header-cell *matHeaderCellDef> Def </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Defense')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="spd">
+        <mat-header-cell *matHeaderCellDef> Spd </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Speed')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cRate">
+        <mat-header-cell *matHeaderCellDef> C. Rate </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'CriticalChance')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cDmg">
+        <mat-header-cell *matHeaderCellDef> C. Dmg </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'CriticalDamage')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="res">
+        <mat-header-cell *matHeaderCellDef> Resist </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Resistance')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acc">
+        <mat-header-cell *matHeaderCellDef> Acc </mat-header-cell>
+        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Accuracy')}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let hero"> <button mat-button (click)="editHero(hero)"><mat-icon>edit</mat-icon></button> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['edit', 'name', 'type', 'hp', 'atk', 'def', 'spd', 'cRate', 'cDmg', 'res', 'acc', 'edit']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['edit', 'name', 'type', 'hp', 'atk', 'def', 'spd', 'cRate', 'cDmg', 'res', 'acc', 'edit'];"></mat-row>
+    </mat-table>
+  </mat-tab>
+  <mat-tab label="Build">
+    <br />
+    <button mat-raised-button *ngIf="!optimizer" (click)="selectHero()">Select hero</button>
+    <br />
+    <button mat-raised-button *ngIf="hero && !optimizer" (click)="optimizeHero()">Optimize</button>
+    <button mat-raised-button *ngIf="optimizer && optimizer.isRunning" (click)="pauseOptimizer()">Pause</button>
+    <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning && !optimizer.isDone" (click)="resumeOptimizer()">Resume</button>
+    <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="clearOptimizer()">Clear</button>
+    <br />
+    <span *ngIf="optimizer && optimizer.isRunning">{{ optimizer.possibilities }} possible artifact combinations, tried {{ optimizer.calculated }} combinations ({{ optimizer.iterationsPerSecond }} combinations per second)</span>
+    <table *ngIf="optimizer">
+      <tr>
+        <th>HP</th>
+        <th>ATK</th>
+        <th>DEF</th>
+        <th>SPD</th>
+        <th>C.Rate</th>
+        <th>C.Dmg</th>
+        <th>Res</th>
+        <th>ACC</th>
+        <th>&nbsp;</th>
+      </tr>
+      <tr *ngFor="let combination of optimizer.bestCombinations">
+        <td>{{ hero.health + combination.bonuses[0] }}</td>
+        <td>{{ hero.attack + combination.bonuses[1] }}</td>
+        <td>{{ hero.defense + combination.bonuses[2] }}</td>
+        <td>{{ hero.speed + combination.bonuses[3] }}</td>
+        <td>{{ hero.criticalChance + combination.bonuses[4] }}</td>
+        <td>{{ hero.criticalDamage + combination.bonuses[5] }}</td>
+        <td>{{ hero.resistance + combination.bonuses[6] }}</td>
+        <td>{{ hero.accuracy + combination.bonuses[7] }}</td>
+        <td><button mat-raised-button (click)="selectCombination(combination)">select</button></td>
+      </tr>
+      <tr>
+        <td colspan="9">&nbsp;</td>
+      </tr>
+    </table>
+
+    <table *ngIf="hero">
+      <thead>
+        <tr>
+          <th>
+            {{ hero.name }}
+          </th>
+          <th>
+            Base
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Weapon')">Weapon</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Helmet')">Helmet</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Shield')">Shield</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Gloves')">Gloves</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Chest')">Chest</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Boots')">Boots</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Ring')">Ring</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Cloak')" [disabled]="hero.awakenLevel < 5">Amulet</button>
+          </th>
+          <th>
+            <button mat-button (click)="selectArtifact('Banner')" [disabled]="hero.awakenLevel !== 6">Banner</button>
+          </th>
+          <td>
+            Final
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Artifact</td>
+          <td>&nbsp;</td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Weapon'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Helmet'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Shield'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Gloves'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Chest'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Boots'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Ring'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Cloak'])"></td>
+          <td [innerHTML]="account.getArtifactSet(artifactByKind['Banner'])"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Weapon'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Helmet'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Shield'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Gloves'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Chest'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Boots'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Ring'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Cloak'])"></td>
+          <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Banner'])"></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>Health</td>
+          <td>{{ hero.health }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'], hero.health, 'Health') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.health, 'Health') }}</td>
+          <td>{{ account.getHeroStat(hero, 'Health') }}</td>
+        </tr>
+        <tr>
+          <td>Attack</td>
+          <td>{{ hero.attack }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.attack, 'Attack') }}</td>
+          <td>{{ account.getHeroStat(hero, 'Attack') }}</td>
+        </tr>
+        <tr>
+          <td>Defense</td>
+          <td>{{ hero.defense }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.defense, 'Defense') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.defense, 'Defense') }}</td>
+          <td>{{ account.getHeroStat(hero, 'Defense') }}</td>
+        </tr>
+        <tr>
+          <td>Speed</td>
+          <td>{{ hero.speed }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.speed, 'Speed') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.speed, 'Speed') }}</td>
+          <td>{{ account.getHeroStat(hero, 'Speed') }}</td>
+        </tr>
+        <tr>
+          <td>C. Rate</td>
+          <td>{{ hero.criticalChance }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], 100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], 100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], 100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], 100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'],  100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'],  100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'],   100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'],  100, 'CriticalChance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], 100, 'CriticalChance') }}</td>
+          <td>{{ account.getHeroStat(hero, 'CriticalChance') }}</td>
+        </tr>
+        <tr>
+          <td>C. Dmg</td>
+          <td>{{ hero.criticalDamage }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], 100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], 100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], 100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], 100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'],  100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'],  100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'],   100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'],  100, 'CriticalDamage') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], 100, 'CriticalDamage') }}</td>
+          <td>{{ account.getHeroStat(hero, 'CriticalDamage') }}</td>
+        </tr>
+        <tr>
+          <td>Resistance</td>
+          <td>{{ hero.resistance }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.resistance, 'Resistance') }}</td>
+          <td>{{ account.getHeroStat(hero, 'Resistance') }}</td>
+        </tr>
+        <tr>
+          <td>Accuracy</td>
+          <td>{{ hero.accuracy }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.accuracy, 'Accuracy') }}</td>
+          <td>{{ account.getHeroStat(hero, 'Accuracy') }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <small *ngIf="optimizer">* The values shown here are the current in-game values, the optimizer may show higher values if 'Max main stat to level 16' was selected.</small>
+  </mat-tab>
   <mat-tab label="Artifacts" class="mat-elevation-z8">
-    <mat-table *ngIf="activeTab === 0" [dataSource]="account.artifacts">
+    <mat-table *ngIf="activeTab === 2" [dataSource]="account.artifacts">
       <ng-container matColumnDef="type">
         <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
         <mat-cell *matCellDef="let artifact"> {{account.getArtifactType(artifact)}} </mat-cell>
@@ -69,283 +354,6 @@
       <mat-header-row *matHeaderRowDef="['set', 'type', 'hpAbs', 'hpPerc', 'atkAbs', 'atkPerc', 'defAbs', 'defPerc', 'spdAbs', 'cRatePerc', 'cDmgPerc', 'resAbs', 'accAbs']"></mat-header-row>
       <mat-row *matRowDef="let row; columns: ['set', 'type', 'hpAbs', 'hpPerc', 'atkAbs', 'atkPerc', 'defAbs', 'defPerc', 'spdAbs', 'cRatePerc', 'cDmgPerc', 'resAbs', 'accAbs'];"></mat-row>
     </mat-table>
-  </mat-tab>
-  <mat-tab label="Current">
-    <mat-table *ngIf="activeTab === 1" [dataSource]="heroes">
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{hero.name}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="type">
-        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroType(hero)}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="hp">
-        <mat-header-cell *matHeaderCellDef> HP </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Health')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="atk">
-        <mat-header-cell *matHeaderCellDef> Atk </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Attack')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="def">
-        <mat-header-cell *matHeaderCellDef> Def </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Defense')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="spd">
-        <mat-header-cell *matHeaderCellDef> Spd </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Speed')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="cRate">
-        <mat-header-cell *matHeaderCellDef> C. Rate </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'CriticalChance')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="cDmg">
-        <mat-header-cell *matHeaderCellDef> C. Dmg </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'CriticalDamage')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="res">
-        <mat-header-cell *matHeaderCellDef> Resist </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Resistance')}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="acc">
-        <mat-header-cell *matHeaderCellDef> Acc </mat-header-cell>
-        <mat-cell *matCellDef="let hero"> {{account.getHeroStat(hero, 'Accuracy')}} </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="['name', 'type', 'hp', 'atk', 'def', 'spd', 'cRate', 'cDmg', 'res', 'acc']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['name', 'type', 'hp', 'atk', 'def', 'spd', 'cRate', 'cDmg', 'res', 'acc'];"></mat-row>
-    </mat-table>
-  </mat-tab>
-  <mat-tab label="Build">
-    <br />
-    <button mat-raised-button *ngIf="!optimizer" (click)="selectHero()">Select hero</button>
-    <br />
-    <button mat-raised-button *ngIf="hero && !optimizer" (click)="optimizeHero()">Optimize</button>
-    <button mat-raised-button *ngIf="optimizer && optimizer.isRunning" (click)="pauseOptimizer()">Pause</button>
-    <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="resumeOptimizer()">Resume</button>
-    <button mat-raised-button *ngIf="optimizer && !optimizer.isRunning" (click)="clearOptimizer()">Clear</button>
-  <br />
-  <span *ngIf="optimizer && optimizer.isRunning">{{ optimizer.possibilities }} possible artifact combinations, tried {{ optimizer.calculated }} combinations ({{ optimizer.iterationsPerSecond }} combinations per second)</span>
-  <table *ngIf="optimizer">
-    <tr>
-      <th>HP</th>
-      <th>ATK</th>
-      <th>DEF</th>
-      <th>SPD</th>
-      <th>C.Rate</th>
-      <th>C.Dmg</th>
-      <th>Res</th>
-      <th>ACC</th>
-      <th>&nbsp;</th>
-    </tr>
-    <tr *ngFor="let combination of optimizer.bestCombinations">
-      <td>{{ hero.health + combination.bonuses[0] }}</td>
-      <td>{{ hero.attack + combination.bonuses[1] }}</td>
-      <td>{{ hero.defense + combination.bonuses[2] }}</td>
-      <td>{{ hero.speed + combination.bonuses[3] }}</td>
-      <td>{{ hero.criticalChance + combination.bonuses[4] }}</td>
-      <td>{{ hero.criticalDamage + combination.bonuses[5] }}</td>
-      <td>{{ hero.resistance + combination.bonuses[6] }}</td>
-      <td>{{ hero.accuracy + combination.bonuses[7] }}</td>
-      <td><button mat-raised-button (click)="selectCombination(combination)">select</button></td>
-    </tr>
-  </table>
-
-  <table *ngIf="hero">
-    <thead>
-    <tr>
-      <th>
-        {{ hero.name }}
-      </th>
-      <th>
-        Base
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Weapon')">Weapon</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Helmet')">Helmet</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Shield')">Shield</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Gloves')">Gloves</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Chest')">Chest</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Boots')">Boots</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Ring')">Ring</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Cloak')" [disabled]="hero.awakenLevel < 5">Amulet</button>
-      </th>
-      <th>
-        <button mat-button (click)="selectArtifact('Banner')" [disabled]="hero.awakenLevel !== 6">Banner</button>
-      </th>
-      <td>
-        Final
-      </td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>Artifact</td>
-      <td>&nbsp;</td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Weapon'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Helmet'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Shield'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Gloves'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Chest'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Boots'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Ring'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Cloak'])"></td>
-      <td [innerHTML]="account.getArtifactSet(artifactByKind['Banner'])"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Weapon'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Helmet'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Shield'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Gloves'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Chest'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Boots'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Ring'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Cloak'])"></td>
-      <td [innerHTML]="account.artifactToHtmlMultiline(artifactByKind['Banner'])"></td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Health</td>
-      <td>{{ hero.health }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'], hero.health, 'Health') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.health, 'Health') }}</td>
-      <td>{{ account.getHeroStat(hero, 'Health') }}</td>
-    </tr>
-    <tr>
-      <td>Attack</td>
-      <td>{{ hero.attack }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.attack, 'Attack') }}</td>
-      <td>{{ account.getHeroStat(hero, 'Attack') }}</td>
-    </tr>
-    <tr>
-      <td>Defense</td>
-      <td>{{ hero.defense }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.defense, 'Defense') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.defense, 'Defense') }}</td>
-      <td>{{ account.getHeroStat(hero, 'Defense') }}</td>
-    </tr>
-    <tr>
-      <td>Speed</td>
-      <td>{{ hero.speed }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.speed, 'Speed') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.speed, 'Speed') }}</td>
-      <td>{{ account.getHeroStat(hero, 'Speed') }}</td>
-    </tr>
-    <tr>
-      <td>C. Rate</td>
-      <td>{{ hero.criticalChance }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], 100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], 100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], 100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], 100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'],  100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'],  100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'],   100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'],  100, 'CriticalChance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], 100, 'CriticalChance') }}</td>
-      <td>{{ account.getHeroStat(hero, 'CriticalChance') }}</td>
-    </tr>
-    <tr>
-      <td>C. Dmg</td>
-      <td>{{ hero.criticalDamage }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], 100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], 100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], 100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], 100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'],  100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'],  100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'],   100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'],  100, 'CriticalDamage') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], 100, 'CriticalDamage') }}</td>
-      <td>{{ account.getHeroStat(hero, 'CriticalDamage') }}</td>
-    </tr>
-    <tr>
-      <td>Resistance</td>
-      <td>{{ hero.resistance }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.resistance, 'Resistance') }}</td>
-      <td>{{ account.getHeroStat(hero, 'Resistance') }}</td>
-    </tr>
-    <tr>
-      <td>Accuracy</td>
-      <td>{{ hero.accuracy }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Weapon'], hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Helmet'], hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Shield'], hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Gloves'], hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Chest'],  hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Boots'],  hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Ring'],   hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Cloak'],  hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getBonusValue(artifactByKind['Banner'], hero.accuracy, 'Accuracy') }}</td>
-      <td>{{ account.getHeroStat(hero, 'Accuracy') }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <small>* The values shown here are the current in-game values, if 'Max main stat to level 16' was chosen then the optimizer may show higher values.</small>
   </mat-tab>
 </mat-tab-group>
 <div *ngIf="!account">

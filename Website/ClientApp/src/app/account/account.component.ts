@@ -71,10 +71,23 @@ export class AccountComponent implements OnInit {
         return;
       }
 
-      this.hero = new Hero(<IHero>{ ...hero });
-      this.hero.artifacts = [];
-      this.artifactByKind = {};
+      this.editHero(hero);
     });
+  }
+
+  editHero(hero: Hero) {
+    this.hero = new Hero(<IHero>{ ...hero });
+    const artifacts = hero.artifacts || [];
+    this.hero.artifacts = [ ...artifacts ];
+    this.artifactByKind = {};
+    for (let id of this.hero.artifacts) {
+      const artifact = this.account.artifactsById[id];
+      if (artifact) {
+        this.artifactByKind[artifact.kind] = artifact;
+      }
+    }
+
+    this.activeTab = 1;
   }
 
   optimizer: ArtifactOptimizerWorker;
