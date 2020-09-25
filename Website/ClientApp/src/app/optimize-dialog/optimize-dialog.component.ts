@@ -183,9 +183,15 @@ export class OptimizeDialogComponent {
           }
         } else {
           if (art.kind === 'Ring' || art.kind === 'Cloak' || art.kind === 'Banner') {
+            // TODO; Figure out what the max is for this
             art.primaryBonus.value = [0, art.primaryBonus.value, art.primaryBonus.value, 0.2, 0.25, 0.33, 0.4][rank];
           } else {
-            art.primaryBonus.value = 0.1 * rank;
+            if (art.primaryBonus.kind === 'CriticalDamage') {
+              // TODO; Figure out what the max is for critical damage 
+              art.primaryBonus.value = [0, art.primaryBonus.value, art.primaryBonus.value, 0.4, 0.49, 0.65, 0.8][rank];
+            } else {
+              art.primaryBonus.value = 0.1 * rank;
+            }
           }
         }
       }
