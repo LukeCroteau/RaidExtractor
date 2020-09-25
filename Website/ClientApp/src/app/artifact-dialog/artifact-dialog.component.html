@@ -10,6 +10,14 @@
     </mat-form-field>
 
     <mat-form-field>
+      <mat-label>Show set</mat-label>
+      <mat-select [(value)]="filterSet" (selectionChange)="refreshArtifacts()">
+        <mat-option value="">All</mat-option>
+        <mat-option *ngFor="let set of sets" [value]="set.setKind">{{ set.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
       <mat-label>Order by</mat-label>
       <mat-select [(value)]="orderBy" (selectionChange)="refreshArtifacts()">
         <mat-option value="default">Default</mat-option>

@@ -13,8 +13,10 @@ export class ArtifactDialogComponent {
   artifacts: Artifact[];
   account: RaidAccount;
   equippedArtifacts: number[] = [];
+  sets: { name: string, setKind: string }[] = [];
 
   filter = 'all';
+  filterSet = '';
   orderBy = 'default';
 
   constructor(
@@ -34,6 +36,13 @@ export class ArtifactDialogComponent {
       for (let id of h.artifacts) {
         this.equippedArtifacts.push(id);
       }
+    }
+
+    for (let setKind in Raid.sets) {
+      if (!Raid.sets.hasOwnProperty(setKind)) {
+        continue;
+      }
+      this.sets.push({ name: Raid.sets[setKind].name, setKind: setKind });
     }
 
     this.refreshArtifacts();
@@ -69,6 +78,7 @@ export class ArtifactDialogComponent {
       return c;
     }).filter(a => {
       if (this.filter === 'not-equipped' && this.equippedArtifacts.indexOf(a.id) >= 0) return false;
+      if (this.filterSet && a.setKind !== this.filterSet) return false;
       if (!a.requiredFraction) return true;
       return a.requiredFraction === this.data.hero.fraction;
     });
