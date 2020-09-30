@@ -102,10 +102,12 @@ export class RaidAccount {
     if (stat !== bonus.kind) {
       return 0;
     }
+
+    const value = bonus.value + bonus.enhancement;
     if (bonus.isAbsolute) {
-      return bonus.value;
+      return value;
     } else {
-      return Math.round(baseValue * bonus.value);
+      return Math.round(baseValue * value);
     }
   }
 
