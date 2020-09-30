@@ -87,7 +87,7 @@ export class AccountComponent implements OnInit {
       }
     }
 
-    this.activeTab = 1;
+    this.activeTab = 2;
   }
 
   optimizer: ArtifactOptimizerWorker;
