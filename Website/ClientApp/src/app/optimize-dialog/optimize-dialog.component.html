@@ -59,7 +59,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightHealth"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightHealth"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -82,7 +82,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightAttack"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightAttack"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -105,7 +105,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightDefense"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightDefense"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -128,7 +128,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightSpeed"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightSpeed"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -151,7 +151,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightCriticalChance"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightCriticalChance"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -174,7 +174,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightCriticalDamage"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightCriticalDamage"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -197,7 +197,7 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightResistance"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightResistance"></mat-slider>
         </td>
       </tr>
       <tr>
@@ -220,13 +220,13 @@
           </mat-form-field>
         </td>
         <td>
-          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="3" [(value)]="weightAccuracy"></mat-slider>
+          <mat-slider thumbLabel [displayWith]="weightDisplay" tickInterval="1" min="0" max="16" [(value)]="weightAccuracy"></mat-slider>
         </td>
       </tr>
     </table>
     <small>* Soft-cap means the stat can go higher but values above soft-cap won't be seen as improvements</small>
     <br />
-    <small>- = No priority, + = Low priority, ++ = Normal priority, +++ = High priority</small>
+    <small>Slider changes importance of the stat, NI = Not Important, +[number] = Higher number means more important</small>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
