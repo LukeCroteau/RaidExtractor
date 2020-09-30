@@ -1,3 +1,7 @@
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   padding: 8px;
 }
+
+.mat-tab-body-content {
+  padding: 16px;
+}
