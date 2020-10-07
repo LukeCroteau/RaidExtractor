@@ -39,12 +39,12 @@ export abstract class Raid {
     'ShieldAndCriticalChance': { 'name': 'Divine Critical Rate', 'setSize': 2, 'bonuses': [Raid.percBonus('CritcalChance',0.12)] },
     'ShieldAndHp': { 'name': 'Divine Life', 'setSize': 2, 'bonuses': [Raid.percBonus('Health',0.15)] },
     'ShieldAndSpeed': { 'name': 'Divine Speed', 'setSize': 2, 'bonuses': [Raid.percBonus('Speed',0.12)] },
-    'UnkillableAndSpdAndCrDmg': { 'name': '', 'setSize': 4, 'bonuses': [Raid.percBonus('Speed',0.18),Raid.percBonus('CriticalDamage',0.3)] },
-    'BlockReflectDebuffAndHpAndDef': { 'name': '', 'setSize': 4, 'bonuses': [Raid.percBonus('Health',0.2),Raid.percBonus('Defense',0.2)] },
-    'HpAndDefense': { 'name': '', 'setSize': 2, 'bonuses': [Raid.percBonus('Health',0.1),Raid.percBonus('Defense',0.1)] },
-    'AccuracyAndSpeed': { 'name': '', 'setSize': 2, 'bonuses': [Raid.absBonus('Accuracy',40),Raid.percBonus('Speed',0.05)] },
-    'IgnoreCooldown': { 'name': '', 'setSize': 4, 'bonuses': [] },
-    'RemoveDebuff': { 'name': '', 'setSize': 4, 'bonuses': [] }
+    'UnkillableAndSpdAndCrDmg': { 'name': 'Swift Parry', 'setSize': 4, 'bonuses': [Raid.percBonus('Speed',0.18),Raid.percBonus('CriticalDamage',0.3)] },
+    'BlockReflectDebuffAndHpAndDef': { 'name': 'Deflection', 'setSize': 4, 'bonuses': [Raid.percBonus('Health',0.2),Raid.percBonus('Defense',0.2)] },
+    'HpAndDefense': { 'name': 'Resilience', 'setSize': 2, 'bonuses': [Raid.percBonus('Health',0.1),Raid.percBonus('Defense',0.1)] },
+    'AccuracyAndSpeed': { 'name': 'Perception', 'setSize': 2, 'bonuses': [Raid.absBonus('Accuracy',40),Raid.percBonus('Speed',0.05)] },
+    'IgnoreCooldown': { 'name': 'Refresh', 'setSize': 4, 'bonuses': [] },
+    'RemoveDebuff': { 'name': 'Cleanse', 'setSize': 4, 'bonuses': [] }
   }
 
   
