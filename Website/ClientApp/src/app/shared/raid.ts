@@ -18,7 +18,7 @@ export abstract class Raid {
     'SleepChance': { 'name': 'Daze', 'setSize': 4, 'bonuses': [] },
     'BlockHealChance': { 'name': 'Cursed', 'setSize': 4, 'bonuses': [] },
     'FreezeRateOnDamageReceived': { 'name': 'Frost', 'setSize': 4, 'bonuses': [] },
-    'Stamina': { 'name': '', 'setSize': 4, 'bonuses': [] },
+    'Stamina': { 'name': 'Frenzy', 'setSize': 4, 'bonuses': [] },
     'Heal': { 'name': 'Regeneration', 'setSize': 4, 'bonuses': [] },
     'BlockDebuff': { 'name': 'Immunity', 'setSize': 4, 'bonuses': [] },
     'Shield': { 'name': 'Shield', 'setSize': 4, 'bonuses': [] },
