@@ -4401,7 +4401,7 @@
     "accuracy": 0.0,
     "attack": 79,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 96,
     "health": 75,
@@ -4431,7 +4431,7 @@
     "accuracy": 0.0,
     "attack": 80,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 97,
     "health": 76,
@@ -4461,7 +4461,7 @@
     "accuracy": 0.0,
     "attack": 81,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 98,
     "health": 77,
@@ -4491,7 +4491,7 @@
     "accuracy": 0.0,
     "attack": 82,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 99,
     "health": 79,
@@ -4521,7 +4521,7 @@
     "accuracy": 0.0,
     "attack": 83,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 100,
     "health": 81,
@@ -4551,7 +4551,7 @@
     "accuracy": 0.0,
     "attack": 84,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 101,
     "health": 84,
@@ -4581,7 +4581,7 @@
     "accuracy": 0.0,
     "attack": 85,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 103,
     "health": 87,
@@ -34251,7 +34251,7 @@
     "accuracy": 0.0,
     "attack": 105,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 72,
     "health": 73,
@@ -34281,7 +34281,7 @@
     "accuracy": 0.0,
     "attack": 106,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 72,
     "health": 74,
@@ -34311,7 +34311,7 @@
     "accuracy": 0.0,
     "attack": 108,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 72,
     "health": 75,
@@ -34341,7 +34341,7 @@
     "accuracy": 0.0,
     "attack": 110,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 72,
     "health": 76,
@@ -34371,7 +34371,7 @@
     "accuracy": 0.0,
     "attack": 112,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 72,
     "health": 77,
@@ -34401,7 +34401,7 @@
     "accuracy": 0.0,
     "attack": 116,
     "criticalChance": 15.0,
-    "criticalDamage": 30.0,
+    "criticalDamage": 50.0,
     "criticalHeal": 50.0,
     "defense": 73,
     "health": 78,
@@ -34431,7 +34431,7 @@
     "accuracy": 0.0,
     "attack": 121,
     "criticalChance": 15.0,
-    "criticalDamage": 37.0,
+    "criticalDamage": 57.0,
     "criticalHeal": 50.0,
     "defense": 75,
     "health": 79,
@@ -68997,7 +68997,7 @@
     "health": 84,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "Barbarians",
@@ -69027,7 +69027,7 @@
     "health": 85,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "Barbarians",
@@ -69057,7 +69057,7 @@
     "health": 86,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "Barbarians",
@@ -69087,7 +69087,7 @@
     "health": 87,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "Barbarians",
@@ -69117,7 +69117,7 @@
     "health": 88,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "Barbarians",
@@ -69147,7 +69147,7 @@
     "health": 89,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "Barbarians",
@@ -69177,7 +69177,7 @@
     "health": 90,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 3700 name"
+    "name": "Haarken Greatblade"
   },
   {
     "fraction": "BannerLords",
@@ -70707,7 +70707,7 @@
     "health": 90,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -70737,7 +70737,7 @@
     "health": 91,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -70767,7 +70767,7 @@
     "health": 92,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -70797,7 +70797,7 @@
     "health": 94,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -70827,7 +70827,7 @@
     "health": 96,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -70857,7 +70857,7 @@
     "health": 98,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -70887,7 +70887,7 @@
     "health": 101,
     "resistance": 30.0,
     "speed": 109,
-    "name": "Hero 3790name"
+    "name": "Chancellor Yasmin"
   },
   {
     "fraction": "BannerLords",
@@ -71907,7 +71907,7 @@
     "health": 73,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "Barbarians",
@@ -71937,7 +71937,7 @@
     "health": 73,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "Barbarians",
@@ -71967,7 +71967,7 @@
     "health": 74,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "Barbarians",
@@ -71997,7 +71997,7 @@
     "health": 75,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "Barbarians",
@@ -72027,7 +72027,7 @@
     "health": 76,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "Barbarians",
@@ -72057,7 +72057,7 @@
     "health": 77,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "Barbarians",
@@ -72087,7 +72087,7 @@
     "health": 78,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3840 name"
+    "name": "Sandbow"
   },
   {
     "fraction": "BannerLords",
@@ -72586,7 +72586,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3869,
     "accuracy": 0.0,
     "attack": 79,
@@ -72597,7 +72597,7 @@
     "health": 98,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "SacredOrder",
@@ -72616,7 +72616,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3870,
     "accuracy": 0.0,
     "attack": 80,
@@ -72627,7 +72627,7 @@
     "health": 99,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "SacredOrder",
@@ -72646,7 +72646,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3871,
     "accuracy": 0.0,
     "attack": 81,
@@ -72657,7 +72657,7 @@
     "health": 100,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "SacredOrder",
@@ -72676,7 +72676,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3872,
     "accuracy": 0.0,
     "attack": 82,
@@ -72687,7 +72687,7 @@
     "health": 102,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "SacredOrder",
@@ -72706,7 +72706,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3873,
     "accuracy": 0.0,
     "attack": 83,
@@ -72717,7 +72717,7 @@
     "health": 104,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "SacredOrder",
@@ -72736,7 +72736,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3874,
     "accuracy": 0.0,
     "attack": 84,
@@ -72747,7 +72747,7 @@
     "health": 106,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "SacredOrder",
@@ -72766,7 +72766,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": true,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3875,
     "accuracy": 15.0,
     "attack": 86,
@@ -72777,7 +72777,7 @@
     "health": 108,
     "resistance": 30.0,
     "speed": 100,
-    "name": "Hero 3870 name"
+    "name": "Deacon Armstrong"
   },
   {
     "fraction": "KnightsRevenant",
@@ -73257,7 +73257,7 @@
     "health": 107,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "OgrynTribes",
@@ -73287,7 +73287,7 @@
     "health": 108,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "OgrynTribes",
@@ -73317,7 +73317,7 @@
     "health": 110,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "OgrynTribes",
@@ -73347,7 +73347,7 @@
     "health": 112,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "OgrynTribes",
@@ -73377,7 +73377,7 @@
     "health": 114,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "OgrynTribes",
@@ -73407,7 +73407,7 @@
     "health": 118,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "OgrynTribes",
@@ -73437,7 +73437,7 @@
     "health": 122,
     "resistance": 30.0,
     "speed": 103,
-    "name": "Hero 3900 name"
+    "name": "Lichenback"
   },
   {
     "fraction": "HighElves",
@@ -73486,7 +73486,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3909,
     "accuracy": 0.0,
     "attack": 138,
@@ -73497,7 +73497,7 @@
     "health": 68,
     "resistance": 30.0,
     "speed": 91,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "Orcs",
@@ -73516,7 +73516,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3910,
     "accuracy": 0.0,
     "attack": 139,
@@ -73527,7 +73527,7 @@
     "health": 68,
     "resistance": 30.0,
     "speed": 91,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "Orcs",
@@ -73546,7 +73546,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3911,
     "accuracy": 0.0,
     "attack": 141,
@@ -73557,7 +73557,7 @@
     "health": 69,
     "resistance": 30.0,
     "speed": 91,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "Orcs",
@@ -73576,7 +73576,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3912,
     "accuracy": 0.0,
     "attack": 143,
@@ -73587,7 +73587,7 @@
     "health": 70,
     "resistance": 30.0,
     "speed": 91,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "Orcs",
@@ -73606,7 +73606,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3913,
     "accuracy": 0.0,
     "attack": 145,
@@ -73617,7 +73617,7 @@
     "health": 71,
     "resistance": 30.0,
     "speed": 91,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "Orcs",
@@ -73636,7 +73636,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3914,
     "accuracy": 0.0,
     "attack": 149,
@@ -73647,7 +73647,7 @@
     "health": 72,
     "resistance": 30.0,
     "speed": 91,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "Orcs",
@@ -73666,7 +73666,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": true,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 3915,
     "accuracy": 0.0,
     "attack": 154,
@@ -73677,7 +73677,7 @@
     "health": 73,
     "resistance": 30.0,
     "speed": 96,
-    "name": "Hero 3910 name"
+    "name": "Nogdar the Headhunter"
   },
   {
     "fraction": "HighElves",
@@ -73737,7 +73737,7 @@
     "health": 90,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "OgrynTribes",
@@ -73767,7 +73767,7 @@
     "health": 90,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "OgrynTribes",
@@ -73797,7 +73797,7 @@
     "health": 90,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "OgrynTribes",
@@ -73827,7 +73827,7 @@
     "health": 91,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "OgrynTribes",
@@ -73857,7 +73857,7 @@
     "health": 92,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "OgrynTribes",
@@ -73887,7 +73887,7 @@
     "health": 93,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "OgrynTribes",
@@ -73917,7 +73917,7 @@
     "health": 94,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 3920 name"
+    "name": "Ruffstone"
   },
   {
     "fraction": "HighElves",
@@ -77757,7 +77757,7 @@
     "health": 76,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "Orcs",
@@ -77787,7 +77787,7 @@
     "health": 76,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "Orcs",
@@ -77817,7 +77817,7 @@
     "health": 77,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "Orcs",
@@ -77847,7 +77847,7 @@
     "health": 78,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "Orcs",
@@ -77877,7 +77877,7 @@
     "health": 79,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "Orcs",
@@ -77907,7 +77907,7 @@
     "health": 80,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "Orcs",
@@ -77937,7 +77937,7 @@
     "health": 81,
     "resistance": 30.0,
     "speed": 96,
-    "name": "hero 4100 name"
+    "name": "Pigsticker"
   },
   {
     "fraction": "UndeadHordes",
@@ -78237,7 +78237,7 @@
     "health": 117,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "KnightsRevenant",
@@ -78267,7 +78267,7 @@
     "health": 118,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "KnightsRevenant",
@@ -78297,7 +78297,7 @@
     "health": 120,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "KnightsRevenant",
@@ -78327,7 +78327,7 @@
     "health": 122,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "KnightsRevenant",
@@ -78357,7 +78357,7 @@
     "health": 124,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "KnightsRevenant",
@@ -78387,7 +78387,7 @@
     "health": 128,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "KnightsRevenant",
@@ -78417,7 +78417,7 @@
     "health": 132,
     "resistance": 45.0,
     "speed": 95,
-    "name": "hero 4120 name"
+    "name": "Bergoth the Malformed"
   },
   {
     "fraction": "UndeadHordes",
@@ -80086,7 +80086,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4199,
     "accuracy": 0.0,
     "attack": 56,
@@ -80116,7 +80116,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4200,
     "accuracy": 0.0,
     "attack": 57,
@@ -80146,7 +80146,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4201,
     "accuracy": 0.0,
     "attack": 58,
@@ -80176,7 +80176,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4202,
     "accuracy": 0.0,
     "attack": 59,
@@ -80206,7 +80206,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4203,
     "accuracy": 0.0,
     "attack": 60,
@@ -80236,7 +80236,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4204,
     "accuracy": 0.0,
     "attack": 61,
@@ -80266,7 +80266,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": true,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4205,
     "accuracy": 0.0,
     "attack": 63,
@@ -83877,7 +83877,7 @@
     "health": 92,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "Orcs",
@@ -83907,7 +83907,7 @@
     "health": 93,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "Orcs",
@@ -83937,7 +83937,7 @@
     "health": 94,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "Orcs",
@@ -83967,7 +83967,7 @@
     "health": 95,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "Orcs",
@@ -83997,7 +83997,7 @@
     "health": 96,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "Orcs",
@@ -84027,7 +84027,7 @@
     "health": 98,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "Orcs",
@@ -84057,7 +84057,7 @@
     "health": 100,
     "resistance": 30.0,
     "speed": 95,
-    "name": "hero 4360 name"
+    "name": "Suntribe"
   },
   {
     "fraction": "SacredOrder",
@@ -85486,7 +85486,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4429,
     "accuracy": 0.0,
     "attack": 123,
@@ -85516,7 +85516,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4430,
     "accuracy": 0.0,
     "attack": 124,
@@ -85546,7 +85546,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4431,
     "accuracy": 0.0,
     "attack": 126,
@@ -85576,7 +85576,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4432,
     "accuracy": 0.0,
     "attack": 129,
@@ -85606,7 +85606,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4433,
     "accuracy": 0.0,
     "attack": 132,
@@ -85636,7 +85636,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4434,
     "accuracy": 0.0,
     "attack": 136,
@@ -85666,7 +85666,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": true,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4435,
     "accuracy": 0.0,
     "attack": 140,
@@ -90436,7 +90436,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4649,
     "accuracy": 0.0,
     "attack": 76,
@@ -90466,7 +90466,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4650,
     "accuracy": 0.0,
     "attack": 77,
@@ -90496,7 +90496,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4651,
     "accuracy": 0.0,
     "attack": 78,
@@ -90526,7 +90526,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4652,
     "accuracy": 0.0,
     "attack": 79,
@@ -90556,7 +90556,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4653,
     "accuracy": 0.0,
     "attack": 80,
@@ -90586,7 +90586,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4654,
     "accuracy": 0.0,
     "attack": 81,
@@ -90616,7 +90616,7 @@
     "isLocationOnly": false,
     "isMaxAwakened": true,
     "onQuarantine": false,
-    "summonWeight": 100.0,
+    "summonWeight": 0.0,
     "unAwakenHeroId": 4655,
     "accuracy": 0.0,
     "attack": 82,
@@ -91782,7 +91782,7 @@
     "baseId": 4710,
     "isBaseType": true,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
@@ -91796,7 +91796,7 @@
     "defense": 107,
     "health": 117,
     "resistance": 30.0,
-    "speed": 105,
+    "speed": 100,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -91812,7 +91812,7 @@
     "baseId": 4710,
     "isBaseType": false,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
@@ -91826,7 +91826,7 @@
     "defense": 108,
     "health": 118,
     "resistance": 30.0,
-    "speed": 105,
+    "speed": 100,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -91842,7 +91842,7 @@
     "baseId": 4710,
     "isBaseType": false,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
@@ -91856,7 +91856,7 @@
     "defense": 109,
     "health": 119,
     "resistance": 30.0,
-    "speed": 105,
+    "speed": 100,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -91872,7 +91872,7 @@
     "baseId": 4710,
     "isBaseType": false,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
@@ -91886,7 +91886,7 @@
     "defense": 111,
     "health": 120,
     "resistance": 30.0,
-    "speed": 105,
+    "speed": 100,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -91902,7 +91902,7 @@
     "baseId": 4710,
     "isBaseType": false,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
@@ -91916,7 +91916,7 @@
     "defense": 113,
     "health": 121,
     "resistance": 30.0,
-    "speed": 105,
+    "speed": 100,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -91932,7 +91932,7 @@
     "baseId": 4710,
     "isBaseType": false,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": false,
     "onQuarantine": false,
@@ -91946,7 +91946,7 @@
     "defense": 115,
     "health": 123,
     "resistance": 30.0,
-    "speed": 105,
+    "speed": 100,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -91962,7 +91962,7 @@
     "baseId": 4710,
     "isBaseType": false,
     "isBoss": false,
-    "isChecked": false,
+    "isChecked": true,
     "isLocationOnly": false,
     "isMaxAwakened": true,
     "onQuarantine": false,
@@ -91976,7 +91976,7 @@
     "defense": 117,
     "health": 126,
     "resistance": 40.0,
-    "speed": 115,
+    "speed": 110,
     "name": "Lydia the Deathsiren"
   },
   {
@@ -93867,7 +93867,7 @@
     "health": 120,
     "resistance": 30.0,
     "speed": 92,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "UndeadHordes",
@@ -93897,7 +93897,7 @@
     "health": 121,
     "resistance": 30.0,
     "speed": 92,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "UndeadHordes",
@@ -93927,7 +93927,7 @@
     "health": 122,
     "resistance": 30.0,
     "speed": 92,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "UndeadHordes",
@@ -93957,7 +93957,7 @@
     "health": 124,
     "resistance": 30.0,
     "speed": 92,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "UndeadHordes",
@@ -93987,7 +93987,7 @@
     "health": 126,
     "resistance": 30.0,
     "speed": 92,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "UndeadHordes",
@@ -94017,7 +94017,7 @@
     "health": 128,
     "resistance": 30.0,
     "speed": 92,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "UndeadHordes",
@@ -94045,9 +94045,9 @@
     "criticalHeal": 50.0,
     "defense": 123,
     "health": 130,
-    "resistance": 30.0,
+    "resistance": 50.0,
     "speed": 97,
-    "name": "hero 4800 name"
+    "name": "Nekhret the Great"
   },
   {
     "fraction": "BannerLords",
@@ -94107,7 +94107,7 @@
     "health": 94,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "KnightsRevenant",
@@ -94137,7 +94137,7 @@
     "health": 95,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "KnightsRevenant",
@@ -94167,7 +94167,7 @@
     "health": 96,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "KnightsRevenant",
@@ -94197,7 +94197,7 @@
     "health": 97,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "KnightsRevenant",
@@ -94227,7 +94227,7 @@
     "health": 98,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "KnightsRevenant",
@@ -94257,7 +94257,7 @@
     "health": 100,
     "resistance": 30.0,
     "speed": 102,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "KnightsRevenant",
@@ -94287,7 +94287,7 @@
     "health": 103,
     "resistance": 30.0,
     "speed": 109,
-    "name": "Hero 4810 name"
+    "name": "Rector Drath"
   },
   {
     "fraction": "BannerLords",
@@ -94347,7 +94347,7 @@
     "health": 91,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "LizardMen",
@@ -94377,7 +94377,7 @@
     "health": 92,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "LizardMen",
@@ -94407,7 +94407,7 @@
     "health": 93,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "LizardMen",
@@ -94437,7 +94437,7 @@
     "health": 95,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "LizardMen",
@@ -94467,7 +94467,7 @@
     "health": 97,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "LizardMen",
@@ -94497,7 +94497,7 @@
     "health": 100,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "LizardMen",
@@ -94527,7 +94527,7 @@
     "health": 103,
     "resistance": 30.0,
     "speed": 99,
-    "name": "Hero 4820 name"
+    "name": "Aox the Rememberer"
   },
   {
     "fraction": "BannerLords",
@@ -95127,7 +95127,7 @@
     "health": 80,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "Dwarves",
@@ -95157,7 +95157,7 @@
     "health": 81,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "Dwarves",
@@ -95187,7 +95187,7 @@
     "health": 82,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "Dwarves",
@@ -95217,7 +95217,7 @@
     "health": 83,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "Dwarves",
@@ -95247,7 +95247,7 @@
     "health": 84,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "Dwarves",
@@ -95277,7 +95277,7 @@
     "health": 85,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "Dwarves",
@@ -95307,7 +95307,7 @@
     "health": 87,
     "resistance": 30.0,
     "speed": 93,
-    "name": "Hero 4910 name"
+    "name": "Icebound Prospector"
   },
   {
     "fraction": "UndeadHordes",
@@ -95337,7 +95337,7 @@
     "health": 101,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "UndeadHordes",
@@ -95367,7 +95367,7 @@
     "health": 102,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "UndeadHordes",
@@ -95397,7 +95397,7 @@
     "health": 104,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "UndeadHordes",
@@ -95427,7 +95427,7 @@
     "health": 106,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "UndeadHordes",
@@ -95457,7 +95457,7 @@
     "health": 108,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "UndeadHordes",
@@ -95487,7 +95487,7 @@
     "health": 112,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "UndeadHordes",
@@ -95517,7 +95517,7 @@
     "health": 117,
     "resistance": 30.0,
     "speed": 89,
-    "name": "hero 4960 name"
+    "name": "Vogoth"
   },
   {
     "fraction": "BannerLords",
@@ -104100,6 +104100,216 @@
     "name": "Duelist"
   },
   {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 0,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5341,
+    "id": 5340,
+    "baseId": 5340,
+    "isBaseType": true,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5339,
+    "accuracy": 0.0,
+    "attack": 126,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 102,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Little Miss Annie"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 1,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5342,
+    "id": 5341,
+    "baseId": 5340,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5340,
+    "accuracy": 0.0,
+    "attack": 128,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 103,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Little Miss Annie"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 2,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5343,
+    "id": 5342,
+    "baseId": 5340,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5341,
+    "accuracy": 0.0,
+    "attack": 130,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 104,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Little Miss Annie"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 3,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5344,
+    "id": 5343,
+    "baseId": 5340,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5342,
+    "accuracy": 0.0,
+    "attack": 133,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 105,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Little Miss Annie"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 4,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5345,
+    "id": 5344,
+    "baseId": 5340,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5343,
+    "accuracy": 0.0,
+    "attack": 136,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 106,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Little Miss Annie"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 5,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5346,
+    "id": 5345,
+    "baseId": 5340,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5344,
+    "accuracy": 0.0,
+    "attack": 140,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 107,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Little Miss Annie"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Attack",
+    "element": "Void",
+    "awakeLevel": 6,
+    "isAwakeSupported": true,
+    "isAwakable": false,
+    "awakenHeroId": 5347,
+    "id": 5346,
+    "baseId": 5340,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": true,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5345,
+    "accuracy": 0.0,
+    "attack": 145,
+    "criticalChance": 15.0,
+    "criticalDamage": 63.0,
+    "criticalHeal": 50.0,
+    "defense": 72,
+    "health": 108,
+    "resistance": 30.0,
+    "speed": 102,
+    "name": "Little Miss Annie"
+  },
+  {
     "fraction": "BannerLords",
     "rarity": "Uncommon",
     "role": "Attack",
@@ -104130,6 +104340,216 @@
     "name": "Duelist"
   },
   {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 0,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5351,
+    "id": 5350,
+    "baseId": 5350,
+    "isBaseType": true,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5349,
+    "accuracy": 0.0,
+    "attack": 85,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 107,
+    "health": 108,
+    "resistance": 30.0,
+    "speed": 95,
+    "name": "Narma the Returned"
+  },
+  {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 1,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5352,
+    "id": 5351,
+    "baseId": 5350,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5350,
+    "accuracy": 0.0,
+    "attack": 86,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 108,
+    "health": 109,
+    "resistance": 30.0,
+    "speed": 95,
+    "name": "Narma the Returned"
+  },
+  {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 2,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5353,
+    "id": 5352,
+    "baseId": 5350,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5351,
+    "accuracy": 0.0,
+    "attack": 87,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 109,
+    "health": 110,
+    "resistance": 30.0,
+    "speed": 95,
+    "name": "Narma the Returned"
+  },
+  {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 3,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5354,
+    "id": 5353,
+    "baseId": 5350,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5352,
+    "accuracy": 0.0,
+    "attack": 88,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 110,
+    "health": 112,
+    "resistance": 30.0,
+    "speed": 95,
+    "name": "Narma the Returned"
+  },
+  {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 4,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5355,
+    "id": 5354,
+    "baseId": 5350,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5353,
+    "accuracy": 0.0,
+    "attack": 89,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 111,
+    "health": 114,
+    "resistance": 30.0,
+    "speed": 95,
+    "name": "Narma the Returned"
+  },
+  {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 5,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5356,
+    "id": 5355,
+    "baseId": 5350,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5354,
+    "accuracy": 0.0,
+    "attack": 90,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 112,
+    "health": 117,
+    "resistance": 30.0,
+    "speed": 95,
+    "name": "Narma the Returned"
+  },
+  {
+    "fraction": "KnightsRevenant",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 6,
+    "isAwakeSupported": true,
+    "isAwakable": false,
+    "awakenHeroId": 5357,
+    "id": 5356,
+    "baseId": 5350,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": true,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5355,
+    "accuracy": 20.0,
+    "attack": 91,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 114,
+    "health": 120,
+    "resistance": 30.0,
+    "speed": 100,
+    "name": "Narma the Returned"
+  },
+  {
     "fraction": "BannerLords",
     "rarity": "Uncommon",
     "role": "Attack",
@@ -104158,6 +104578,426 @@
     "resistance": 30.0,
     "speed": 101,
     "name": "Duelist"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 0,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5361,
+    "id": 5360,
+    "baseId": 5360,
+    "isBaseType": true,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5359,
+    "accuracy": 0.0,
+    "attack": 111,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 89,
+    "health": 75,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 1,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5362,
+    "id": 5361,
+    "baseId": 5360,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5360,
+    "accuracy": 0.0,
+    "attack": 112,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 89,
+    "health": 75,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 2,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5363,
+    "id": 5362,
+    "baseId": 5360,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5361,
+    "accuracy": 0.0,
+    "attack": 114,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 89,
+    "health": 75,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 3,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5364,
+    "id": 5363,
+    "baseId": 5360,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5362,
+    "accuracy": 0.0,
+    "attack": 116,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 90,
+    "health": 76,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 4,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5365,
+    "id": 5364,
+    "baseId": 5360,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5363,
+    "accuracy": 0.0,
+    "attack": 118,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 91,
+    "health": 77,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 5,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5366,
+    "id": 5365,
+    "baseId": 5360,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5364,
+    "accuracy": 0.0,
+    "attack": 122,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 92,
+    "health": 78,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "BannerLords",
+    "rarity": "Epic",
+    "role": "Attack",
+    "element": "Spirit",
+    "awakeLevel": 6,
+    "isAwakeSupported": true,
+    "isAwakable": false,
+    "awakenHeroId": 5367,
+    "id": 5366,
+    "baseId": 5360,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": true,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5365,
+    "accuracy": 0.0,
+    "attack": 127,
+    "criticalChance": 15.0,
+    "criticalDamage": 60.0,
+    "criticalHeal": 50.0,
+    "defense": 93,
+    "health": 80,
+    "resistance": 30.0,
+    "speed": 97,
+    "name": "Masked Fearmonger"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 0,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5371,
+    "id": 5370,
+    "baseId": 5370,
+    "isBaseType": true,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5369,
+    "accuracy": 0.0,
+    "attack": 74,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 101,
+    "health": 125,
+    "resistance": 30.0,
+    "speed": 101,
+    "name": "Elegaius"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 1,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5372,
+    "id": 5371,
+    "baseId": 5370,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5370,
+    "accuracy": 0.0,
+    "attack": 75,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 102,
+    "health": 126,
+    "resistance": 30.0,
+    "speed": 101,
+    "name": "Elegaius"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 2,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5373,
+    "id": 5372,
+    "baseId": 5370,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5371,
+    "accuracy": 0.0,
+    "attack": 76,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 103,
+    "health": 127,
+    "resistance": 30.0,
+    "speed": 101,
+    "name": "Elegaius"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 3,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5374,
+    "id": 5373,
+    "baseId": 5370,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5372,
+    "accuracy": 0.0,
+    "attack": 77,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 104,
+    "health": 129,
+    "resistance": 30.0,
+    "speed": 101,
+    "name": "Elegaius"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 4,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5375,
+    "id": 5374,
+    "baseId": 5370,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5373,
+    "accuracy": 0.0,
+    "attack": 78,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 105,
+    "health": 131,
+    "resistance": 30.0,
+    "speed": 101,
+    "name": "Elegaius"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 5,
+    "isAwakeSupported": true,
+    "isAwakable": true,
+    "awakenHeroId": 5376,
+    "id": 5375,
+    "baseId": 5370,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": false,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5374,
+    "accuracy": 0.0,
+    "attack": 79,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 107,
+    "health": 133,
+    "resistance": 30.0,
+    "speed": 101,
+    "name": "Elegaius"
+  },
+  {
+    "fraction": "UndeadHordes",
+    "rarity": "Legendary",
+    "role": "Support",
+    "element": "Magic",
+    "awakeLevel": 6,
+    "isAwakeSupported": true,
+    "isAwakable": false,
+    "awakenHeroId": 5377,
+    "id": 5376,
+    "baseId": 5370,
+    "isBaseType": false,
+    "isBoss": false,
+    "isChecked": false,
+    "isLocationOnly": false,
+    "isMaxAwakened": true,
+    "onQuarantine": false,
+    "summonWeight": 100.0,
+    "unAwakenHeroId": 5375,
+    "accuracy": 20.0,
+    "attack": 80,
+    "criticalChance": 15.0,
+    "criticalDamage": 50.0,
+    "criticalHeal": 50.0,
+    "defense": 110,
+    "health": 135,
+    "resistance": 30.0,
+    "speed": 106,
+    "name": "Elegaius"
   },
   {
     "fraction": "SacredOrder",

@@ -34,7 +34,7 @@ namespace RaidExtractor
                 return null;
             }
 
-            if (!process.MainModule.FileName.Contains("\\224\\"))
+            if (!process.MainModule.FileName.Contains("\\225\\"))
             {
                 MessageBox.Show("Raid has been updated and needs a newer version of RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -51,7 +51,7 @@ namespace RaidExtractor
                 }
                 //
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 50069800, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 53992520, ref klass);
 
                 var appModel = klass;
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
@@ -61,7 +61,7 @@ namespace RaidExtractor
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
 
                 var userWrapper = appModel;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x150, ref userWrapper); // AppModel._userWrapper
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x148, ref userWrapper); // AppModel._userWrapper
 
                 var heroesWrapper = userWrapper;
                 NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper); // UserWrapper.Heroes
