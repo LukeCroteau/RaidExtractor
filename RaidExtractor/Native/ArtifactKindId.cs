@@ -1,6 +1,6 @@
 ﻿namespace RaidExtractor.Native
 {
-    public enum ArtifactKindId 
+    public enum ArtifactKindId : int
     {
         UnknownArtifact = 0,
         Helmet = 1,

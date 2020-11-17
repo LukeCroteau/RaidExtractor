@@ -34,7 +34,7 @@ namespace RaidExtractor
                 return null;
             }
 
-            if (!process.MainModule.FileName.Contains("\\225\\"))
+            if (!process.MainModule.FileName.Contains("\\226\\"))
             {
                 MessageBox.Show("Raid has been updated and needs a newer version of RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
@@ -51,7 +51,7 @@ namespace RaidExtractor
                 }
                 //
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 53992520, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 54070664, ref klass);
 
                 var appModel = klass;
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
@@ -153,6 +153,7 @@ namespace RaidExtractor
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer); // Dictionary<int, Hero>.entries
 
                 var heroStruct = new HeroStruct();
+                var heroMasteriesStruct = new HeroMasteryDataStruct();
                 var heroesById = new Dictionary<int, Hero>();
                 var heroes = new List<Hero>();
                 for (var i = 0; i < count; i++)
@@ -161,6 +162,9 @@ namespace RaidExtractor
                     var heroPointer = heroesDataPointer + 0x30 + 0x18 * i;
                     NativeWrapper.ReadProcessMemory(handle, heroPointer, ref heroPointer);
                     NativeWrapper.ReadProcessMemory(handle, heroPointer, ref heroStruct);
+
+                    heroMasteriesStruct.Masteries = IntPtr.Zero;
+                    NativeWrapper.ReadProcessMemory(handle, heroStruct.MasteryData, ref heroMasteriesStruct);
 
                     var hero = new Hero
                     {
@@ -171,8 +175,22 @@ namespace RaidExtractor
                         Experience = heroStruct.Experience,
                         FullExperience = heroStruct.FullExperience,
                         Locked = heroStruct.Locked,
-                        InStorage = heroStruct.InStorage
+                        InStorage = heroStruct.InStorage,
+                        Masteries = new List<int>(),
                     };
+
+                    var masteriesPtr = heroMasteriesStruct.Masteries;
+                    var masteryCount = 0;
+                    if (heroStruct.MasteryData != IntPtr.Zero && masteriesPtr != IntPtr.Zero)
+                    {
+                        NativeWrapper.ReadProcessMemory(handle, masteriesPtr + 0x18, ref masteryCount);
+                        NativeWrapper.ReadProcessMemory(handle, masteriesPtr + 0x10, ref masteriesPtr);
+                    }
+
+                    if (masteryCount > 0) Debugger.Break();
+                    var masteries = new int[masteryCount];
+                    if (masteryCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, masteriesPtr + 0x20, masteries, 0, masteries.Length);
+                    hero.Masteries.AddRange(masteries);
 
                     if (_heroTypeById.TryGetValue(hero.TypeId, out var heroType))
                     {

@@ -68,6 +68,7 @@
     <Compile Include="Native\ArtifactStruct.cs" />
     <Compile Include="Native\HeroFraction.cs" />
     <Compile Include="Native\HeroGrade.cs" />
+    <Compile Include="Native\HeroMasteryDataStruct.cs" />
     <Compile Include="Native\HeroRarity.cs" />
     <Compile Include="Native\HeroRole.cs" />
     <Compile Include="Native\HeroStruct.cs" />

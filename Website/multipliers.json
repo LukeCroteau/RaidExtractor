@@ -1,0 +1,1052 @@
+[
+  {
+    "stars": "Stars1",
+    "level": 1,
+    "multiplier": 1.0000000002328306
+  },
+  {
+    "stars": "Stars1",
+    "level": 2,
+    "multiplier": 1.0759493673391216
+  },
+  {
+    "stars": "Stars1",
+    "level": 3,
+    "multiplier": 1.1645569622964611
+  },
+  {
+    "stars": "Stars1",
+    "level": 4,
+    "multiplier": 1.2658227851048489
+  },
+  {
+    "stars": "Stars1",
+    "level": 5,
+    "multiplier": 1.3670886079132367
+  },
+  {
+    "stars": "Stars1",
+    "level": 6,
+    "multiplier": 1.4683544307216247
+  },
+  {
+    "stars": "Stars1",
+    "level": 7,
+    "multiplier": 1.5822784813810611
+  },
+  {
+    "stars": "Stars1",
+    "level": 8,
+    "multiplier": 1.708860759891546
+  },
+  {
+    "stars": "Stars1",
+    "level": 9,
+    "multiplier": 1.8481012662530794
+  },
+  {
+    "stars": "Stars1",
+    "level": 10,
+    "multiplier": 2.0000000004656613
+  },
+  {
+    "stars": "Stars2",
+    "level": 1,
+    "multiplier": 1.5949367092321096
+  },
+  {
+    "stars": "Stars2",
+    "level": 2,
+    "multiplier": 1.6582278484873521
+  },
+  {
+    "stars": "Stars2",
+    "level": 3,
+    "multiplier": 1.708860759891546
+  },
+  {
+    "stars": "Stars2",
+    "level": 4,
+    "multiplier": 1.7721518991467884
+  },
+  {
+    "stars": "Stars2",
+    "level": 5,
+    "multiplier": 1.8354430384020308
+  },
+  {
+    "stars": "Stars2",
+    "level": 6,
+    "multiplier": 1.8987341776572735
+  },
+  {
+    "stars": "Stars2",
+    "level": 7,
+    "multiplier": 1.9620253169125159
+  },
+  {
+    "stars": "Stars2",
+    "level": 8,
+    "multiplier": 2.0253164561677583
+  },
+  {
+    "stars": "Stars2",
+    "level": 9,
+    "multiplier": 2.1012658232740491
+  },
+  {
+    "stars": "Stars2",
+    "level": 10,
+    "multiplier": 2.1645569625292915
+  },
+  {
+    "stars": "Stars2",
+    "level": 11,
+    "multiplier": 2.2405063296355827
+  },
+  {
+    "stars": "Stars2",
+    "level": 12,
+    "multiplier": 2.3164556967418735
+  },
+  {
+    "stars": "Stars2",
+    "level": 13,
+    "multiplier": 2.405063291699213
+  },
+  {
+    "stars": "Stars2",
+    "level": 14,
+    "multiplier": 2.4810126588055037
+  },
+  {
+    "stars": "Stars2",
+    "level": 15,
+    "multiplier": 2.5696202537628432
+  },
+  {
+    "stars": "Stars2",
+    "level": 16,
+    "multiplier": 2.6582278487201827
+  },
+  {
+    "stars": "Stars2",
+    "level": 17,
+    "multiplier": 2.7468354436775222
+  },
+  {
+    "stars": "Stars2",
+    "level": 18,
+    "multiplier": 2.8354430386348617
+  },
+  {
+    "stars": "Stars2",
+    "level": 19,
+    "multiplier": 2.9367088614432495
+  },
+  {
+    "stars": "Stars2",
+    "level": 20,
+    "multiplier": 3.0379746842516373
+  },
+  {
+    "stars": "Stars3",
+    "level": 1,
+    "multiplier": 2.43037974740131
+  },
+  {
+    "stars": "Stars3",
+    "level": 2,
+    "multiplier": 2.4810126588055037
+  },
+  {
+    "stars": "Stars3",
+    "level": 3,
+    "multiplier": 2.5316455702096978
+  },
+  {
+    "stars": "Stars3",
+    "level": 4,
+    "multiplier": 2.582278481613892
+  },
+  {
+    "stars": "Stars3",
+    "level": 5,
+    "multiplier": 2.6329113930180856
+  },
+  {
+    "stars": "Stars3",
+    "level": 6,
+    "multiplier": 2.6962025322733281
+  },
+  {
+    "stars": "Stars3",
+    "level": 7,
+    "multiplier": 2.7468354436775222
+  },
+  {
+    "stars": "Stars3",
+    "level": 8,
+    "multiplier": 2.7974683550817163
+  },
+  {
+    "stars": "Stars3",
+    "level": 9,
+    "multiplier": 2.8607594943369588
+  },
+  {
+    "stars": "Stars3",
+    "level": 10,
+    "multiplier": 2.9240506335922012
+  },
+  {
+    "stars": "Stars3",
+    "level": 11,
+    "multiplier": 2.9746835449963949
+  },
+  {
+    "stars": "Stars3",
+    "level": 12,
+    "multiplier": 3.0379746842516373
+  },
+  {
+    "stars": "Stars3",
+    "level": 13,
+    "multiplier": 3.1012658235068797
+  },
+  {
+    "stars": "Stars3",
+    "level": 14,
+    "multiplier": 3.1645569627621222
+  },
+  {
+    "stars": "Stars3",
+    "level": 15,
+    "multiplier": 3.2278481020173646
+  },
+  {
+    "stars": "Stars3",
+    "level": 16,
+    "multiplier": 3.291139241272607
+  },
+  {
+    "stars": "Stars3",
+    "level": 17,
+    "multiplier": 3.3670886083788982
+  },
+  {
+    "stars": "Stars3",
+    "level": 18,
+    "multiplier": 3.4303797476341407
+  },
+  {
+    "stars": "Stars3",
+    "level": 19,
+    "multiplier": 3.5063291147404314
+  },
+  {
+    "stars": "Stars3",
+    "level": 20,
+    "multiplier": 3.5696202539956738
+  },
+  {
+    "stars": "Stars3",
+    "level": 21,
+    "multiplier": 3.645569621101965
+  },
+  {
+    "stars": "Stars3",
+    "level": 22,
+    "multiplier": 3.7215189882082558
+  },
+  {
+    "stars": "Stars3",
+    "level": 23,
+    "multiplier": 3.797468355314547
+  },
+  {
+    "stars": "Stars3",
+    "level": 24,
+    "multiplier": 3.8734177224208377
+  },
+  {
+    "stars": "Stars3",
+    "level": 25,
+    "multiplier": 3.9620253173781772
+  },
+  {
+    "stars": "Stars3",
+    "level": 26,
+    "multiplier": 4.0379746844844684
+  },
+  {
+    "stars": "Stars3",
+    "level": 27,
+    "multiplier": 4.1139240515907591
+  },
+  {
+    "stars": "Stars3",
+    "level": 28,
+    "multiplier": 4.2025316465480982
+  },
+  {
+    "stars": "Stars3",
+    "level": 29,
+    "multiplier": 4.2911392415054381
+  },
+  {
+    "stars": "Stars3",
+    "level": 30,
+    "multiplier": 4.3797468364627772
+  },
+  {
+    "stars": "Stars4",
+    "level": 1,
+    "multiplier": 3.5063291147404314
+  },
+  {
+    "stars": "Stars4",
+    "level": 2,
+    "multiplier": 3.5443037982935768
+  },
+  {
+    "stars": "Stars4",
+    "level": 3,
+    "multiplier": 3.5949367096977709
+  },
+  {
+    "stars": "Stars4",
+    "level": 4,
+    "multiplier": 3.645569621101965
+  },
+  {
+    "stars": "Stars4",
+    "level": 5,
+    "multiplier": 3.6962025325061587
+  },
+  {
+    "stars": "Stars4",
+    "level": 6,
+    "multiplier": 3.7468354439103528
+  },
+  {
+    "stars": "Stars4",
+    "level": 7,
+    "multiplier": 3.797468355314547
+  },
+  {
+    "stars": "Stars4",
+    "level": 8,
+    "multiplier": 3.8481012667187406
+  },
+  {
+    "stars": "Stars4",
+    "level": 9,
+    "multiplier": 3.8987341781229348
+  },
+  {
+    "stars": "Stars4",
+    "level": 10,
+    "multiplier": 3.9620253173781772
+  },
+  {
+    "stars": "Stars4",
+    "level": 11,
+    "multiplier": 4.0126582287823709
+  },
+  {
+    "stars": "Stars4",
+    "level": 12,
+    "multiplier": 4.063291140186565
+  },
+  {
+    "stars": "Stars4",
+    "level": 13,
+    "multiplier": 4.1265822794418074
+  },
+  {
+    "stars": "Stars4",
+    "level": 14,
+    "multiplier": 4.1772151908460016
+  },
+  {
+    "stars": "Stars4",
+    "level": 15,
+    "multiplier": 4.240506330101244
+  },
+  {
+    "stars": "Stars4",
+    "level": 16,
+    "multiplier": 4.2911392415054381
+  },
+  {
+    "stars": "Stars4",
+    "level": 17,
+    "multiplier": 4.3544303807606806
+  },
+  {
+    "stars": "Stars4",
+    "level": 18,
+    "multiplier": 4.417721520015923
+  },
+  {
+    "stars": "Stars4",
+    "level": 19,
+    "multiplier": 4.4683544314201162
+  },
+  {
+    "stars": "Stars4",
+    "level": 20,
+    "multiplier": 4.53164557067536
+  },
+  {
+    "stars": "Stars4",
+    "level": 21,
+    "multiplier": 4.594936709930602
+  },
+  {
+    "stars": "Stars4",
+    "level": 22,
+    "multiplier": 4.6582278491858444
+  },
+  {
+    "stars": "Stars4",
+    "level": 23,
+    "multiplier": 4.7215189884410869
+  },
+  {
+    "stars": "Stars4",
+    "level": 24,
+    "multiplier": 4.7848101276963293
+  },
+  {
+    "stars": "Stars4",
+    "level": 25,
+    "multiplier": 4.86075949480262
+  },
+  {
+    "stars": "Stars4",
+    "level": 26,
+    "multiplier": 4.9240506340578625
+  },
+  {
+    "stars": "Stars4",
+    "level": 27,
+    "multiplier": 4.9873417733131049
+  },
+  {
+    "stars": "Stars4",
+    "level": 28,
+    "multiplier": 5.0506329125683473
+  },
+  {
+    "stars": "Stars4",
+    "level": 29,
+    "multiplier": 5.1265822796746381
+  },
+  {
+    "stars": "Stars4",
+    "level": 30,
+    "multiplier": 5.1898734189298805
+  },
+  {
+    "stars": "Stars4",
+    "level": 31,
+    "multiplier": 5.2658227860361713
+  },
+  {
+    "stars": "Stars4",
+    "level": 32,
+    "multiplier": 5.341772153142462
+  },
+  {
+    "stars": "Stars4",
+    "level": 33,
+    "multiplier": 5.4177215202487536
+  },
+  {
+    "stars": "Stars4",
+    "level": 34,
+    "multiplier": 5.4810126595039961
+  },
+  {
+    "stars": "Stars4",
+    "level": 35,
+    "multiplier": 5.5569620266102868
+  },
+  {
+    "stars": "Stars4",
+    "level": 36,
+    "multiplier": 5.6329113937165776
+  },
+  {
+    "stars": "Stars4",
+    "level": 37,
+    "multiplier": 5.7215189886739175
+  },
+  {
+    "stars": "Stars4",
+    "level": 38,
+    "multiplier": 5.7974683557802082
+  },
+  {
+    "stars": "Stars4",
+    "level": 39,
+    "multiplier": 5.873417722886499
+  },
+  {
+    "stars": "Stars4",
+    "level": 40,
+    "multiplier": 5.94936708999279
+  },
+  {
+    "stars": "Stars5",
+    "level": 1,
+    "multiplier": 4.7594936719942318
+  },
+  {
+    "stars": "Stars5",
+    "level": 2,
+    "multiplier": 4.8101265833984259
+  },
+  {
+    "stars": "Stars5",
+    "level": 3,
+    "multiplier": 4.8734177226536683
+  },
+  {
+    "stars": "Stars5",
+    "level": 4,
+    "multiplier": 4.9240506340578625
+  },
+  {
+    "stars": "Stars5",
+    "level": 5,
+    "multiplier": 4.9746835454620566
+  },
+  {
+    "stars": "Stars5",
+    "level": 6,
+    "multiplier": 5.02531645686625
+  },
+  {
+    "stars": "Stars5",
+    "level": 7,
+    "multiplier": 5.0886075961214923
+  },
+  {
+    "stars": "Stars5",
+    "level": 8,
+    "multiplier": 5.1392405075256864
+  },
+  {
+    "stars": "Stars5",
+    "level": 9,
+    "multiplier": 5.1898734189298805
+  },
+  {
+    "stars": "Stars5",
+    "level": 10,
+    "multiplier": 5.253164558185123
+  },
+  {
+    "stars": "Stars5",
+    "level": 11,
+    "multiplier": 5.3037974695893171
+  },
+  {
+    "stars": "Stars5",
+    "level": 12,
+    "multiplier": 5.3670886088445595
+  },
+  {
+    "stars": "Stars5",
+    "level": 13,
+    "multiplier": 5.4177215202487536
+  },
+  {
+    "stars": "Stars5",
+    "level": 14,
+    "multiplier": 5.4810126595039961
+  },
+  {
+    "stars": "Stars5",
+    "level": 15,
+    "multiplier": 5.5443037987592385
+  },
+  {
+    "stars": "Stars5",
+    "level": 16,
+    "multiplier": 5.6075949380144809
+  },
+  {
+    "stars": "Stars5",
+    "level": 17,
+    "multiplier": 5.6582278494186751
+  },
+  {
+    "stars": "Stars5",
+    "level": 18,
+    "multiplier": 5.7215189886739175
+  },
+  {
+    "stars": "Stars5",
+    "level": 19,
+    "multiplier": 5.78481012792916
+  },
+  {
+    "stars": "Stars5",
+    "level": 20,
+    "multiplier": 5.8481012671844024
+  },
+  {
+    "stars": "Stars5",
+    "level": 21,
+    "multiplier": 5.9113924064396448
+  },
+  {
+    "stars": "Stars5",
+    "level": 22,
+    "multiplier": 5.9746835456948872
+  },
+  {
+    "stars": "Stars5",
+    "level": 23,
+    "multiplier": 6.03797468495013
+  },
+  {
+    "stars": "Stars5",
+    "level": 24,
+    "multiplier": 6.11392405205642
+  },
+  {
+    "stars": "Stars5",
+    "level": 25,
+    "multiplier": 6.1772151913116629
+  },
+  {
+    "stars": "Stars5",
+    "level": 26,
+    "multiplier": 6.2405063305669053
+  },
+  {
+    "stars": "Stars5",
+    "level": 27,
+    "multiplier": 6.316455697673196
+  },
+  {
+    "stars": "Stars5",
+    "level": 28,
+    "multiplier": 6.3797468369284385
+  },
+  {
+    "stars": "Stars5",
+    "level": 29,
+    "multiplier": 6.4556962040347292
+  },
+  {
+    "stars": "Stars5",
+    "level": 30,
+    "multiplier": 6.5189873432899716
+  },
+  {
+    "stars": "Stars5",
+    "level": 31,
+    "multiplier": 6.5949367103962633
+  },
+  {
+    "stars": "Stars5",
+    "level": 32,
+    "multiplier": 6.6582278496515057
+  },
+  {
+    "stars": "Stars5",
+    "level": 33,
+    "multiplier": 6.7341772167577965
+  },
+  {
+    "stars": "Stars5",
+    "level": 34,
+    "multiplier": 6.8101265838640872
+  },
+  {
+    "stars": "Stars5",
+    "level": 35,
+    "multiplier": 6.8860759509703779
+  },
+  {
+    "stars": "Stars5",
+    "level": 36,
+    "multiplier": 6.9620253180766687
+  },
+  {
+    "stars": "Stars5",
+    "level": 37,
+    "multiplier": 7.03797468518296
+  },
+  {
+    "stars": "Stars5",
+    "level": 38,
+    "multiplier": 7.1139240522892511
+  },
+  {
+    "stars": "Stars5",
+    "level": 39,
+    "multiplier": 7.1898734193955418
+  },
+  {
+    "stars": "Stars5",
+    "level": 40,
+    "multiplier": 7.2658227865018326
+  },
+  {
+    "stars": "Stars5",
+    "level": 41,
+    "multiplier": 7.3417721536081233
+  },
+  {
+    "stars": "Stars5",
+    "level": 42,
+    "multiplier": 7.4303797485654632
+  },
+  {
+    "stars": "Stars5",
+    "level": 43,
+    "multiplier": 7.506329115671754
+  },
+  {
+    "stars": "Stars5",
+    "level": 44,
+    "multiplier": 7.5822784827780447
+  },
+  {
+    "stars": "Stars5",
+    "level": 45,
+    "multiplier": 7.6708860777353847
+  },
+  {
+    "stars": "Stars5",
+    "level": 46,
+    "multiplier": 7.7594936726927237
+  },
+  {
+    "stars": "Stars5",
+    "level": 47,
+    "multiplier": 7.8354430397990145
+  },
+  {
+    "stars": "Stars5",
+    "level": 48,
+    "multiplier": 7.9240506347563544
+  },
+  {
+    "stars": "Stars5",
+    "level": 49,
+    "multiplier": 8.0126582297136935
+  },
+  {
+    "stars": "Stars5",
+    "level": 50,
+    "multiplier": 8.1012658246710334
+  },
+  {
+    "stars": "Stars6",
+    "level": 1,
+    "multiplier": 6.4810126597368267
+  },
+  {
+    "stars": "Stars6",
+    "level": 2,
+    "multiplier": 6.5316455711410208
+  },
+  {
+    "stars": "Stars6",
+    "level": 3,
+    "multiplier": 6.5949367103962633
+  },
+  {
+    "stars": "Stars6",
+    "level": 4,
+    "multiplier": 6.6582278496515057
+  },
+  {
+    "stars": "Stars6",
+    "level": 5,
+    "multiplier": 6.708860761055699
+  },
+  {
+    "stars": "Stars6",
+    "level": 6,
+    "multiplier": 6.7721519003109414
+  },
+  {
+    "stars": "Stars6",
+    "level": 7,
+    "multiplier": 6.8354430395661838
+  },
+  {
+    "stars": "Stars6",
+    "level": 8,
+    "multiplier": 6.8987341788214263
+  },
+  {
+    "stars": "Stars6",
+    "level": 9,
+    "multiplier": 6.9620253180766687
+  },
+  {
+    "stars": "Stars6",
+    "level": 10,
+    "multiplier": 7.0253164573319111
+  },
+  {
+    "stars": "Stars6",
+    "level": 11,
+    "multiplier": 7.0886075965871536
+  },
+  {
+    "stars": "Stars6",
+    "level": 12,
+    "multiplier": 7.151898735842396
+  },
+  {
+    "stars": "Stars6",
+    "level": 13,
+    "multiplier": 7.2151898750976384
+  },
+  {
+    "stars": "Stars6",
+    "level": 14,
+    "multiplier": 7.2784810143528809
+  },
+  {
+    "stars": "Stars6",
+    "level": 15,
+    "multiplier": 7.3417721536081233
+  },
+  {
+    "stars": "Stars6",
+    "level": 16,
+    "multiplier": 7.4177215207144149
+  },
+  {
+    "stars": "Stars6",
+    "level": 17,
+    "multiplier": 7.4810126599696574
+  },
+  {
+    "stars": "Stars6",
+    "level": 18,
+    "multiplier": 7.5443037992249
+  },
+  {
+    "stars": "Stars6",
+    "level": 19,
+    "multiplier": 7.6202531663311905
+  },
+  {
+    "stars": "Stars6",
+    "level": 20,
+    "multiplier": 7.683544305586433
+  },
+  {
+    "stars": "Stars6",
+    "level": 21,
+    "multiplier": 7.7594936726927237
+  },
+  {
+    "stars": "Stars6",
+    "level": 22,
+    "multiplier": 7.8227848119479662
+  },
+  {
+    "stars": "Stars6",
+    "level": 23,
+    "multiplier": 7.8987341790542569
+  },
+  {
+    "stars": "Stars6",
+    "level": 24,
+    "multiplier": 7.9620253183094993
+  },
+  {
+    "stars": "Stars6",
+    "level": 25,
+    "multiplier": 8.03797468541579
+  },
+  {
+    "stars": "Stars6",
+    "level": 26,
+    "multiplier": 8.1139240525220817
+  },
+  {
+    "stars": "Stars6",
+    "level": 27,
+    "multiplier": 8.1898734196283733
+  },
+  {
+    "stars": "Stars6",
+    "level": 28,
+    "multiplier": 8.2531645588836149
+  },
+  {
+    "stars": "Stars6",
+    "level": 29,
+    "multiplier": 8.3291139259899065
+  },
+  {
+    "stars": "Stars6",
+    "level": 30,
+    "multiplier": 8.4050632930961964
+  },
+  {
+    "stars": "Stars6",
+    "level": 31,
+    "multiplier": 8.481012660202488
+  },
+  {
+    "stars": "Stars6",
+    "level": 32,
+    "multiplier": 8.5569620273087779
+  },
+  {
+    "stars": "Stars6",
+    "level": 33,
+    "multiplier": 8.63291139441507
+  },
+  {
+    "stars": "Stars6",
+    "level": 34,
+    "multiplier": 8.72151898937241
+  },
+  {
+    "stars": "Stars6",
+    "level": 35,
+    "multiplier": 8.7974683564787
+  },
+  {
+    "stars": "Stars6",
+    "level": 36,
+    "multiplier": 8.8734177235849909
+  },
+  {
+    "stars": "Stars6",
+    "level": 37,
+    "multiplier": 8.9493670906912826
+  },
+  {
+    "stars": "Stars6",
+    "level": 38,
+    "multiplier": 9.03797468564862
+  },
+  {
+    "stars": "Stars6",
+    "level": 39,
+    "multiplier": 9.1139240527549124
+  },
+  {
+    "stars": "Stars6",
+    "level": 40,
+    "multiplier": 9.2025316477122523
+  },
+  {
+    "stars": "Stars6",
+    "level": 41,
+    "multiplier": 9.2784810148185421
+  },
+  {
+    "stars": "Stars6",
+    "level": 42,
+    "multiplier": 9.3670886097758821
+  },
+  {
+    "stars": "Stars6",
+    "level": 43,
+    "multiplier": 9.455696204733222
+  },
+  {
+    "stars": "Stars6",
+    "level": 44,
+    "multiplier": 9.5316455718395119
+  },
+  {
+    "stars": "Stars6",
+    "level": 45,
+    "multiplier": 9.6202531667968518
+  },
+  {
+    "stars": "Stars6",
+    "level": 46,
+    "multiplier": 9.7088607617541918
+  },
+  {
+    "stars": "Stars6",
+    "level": 47,
+    "multiplier": 9.79746835671153
+  },
+  {
+    "stars": "Stars6",
+    "level": 48,
+    "multiplier": 9.88607595166887
+  },
+  {
+    "stars": "Stars6",
+    "level": 49,
+    "multiplier": 9.97468354662621
+  },
+  {
+    "stars": "Stars6",
+    "level": 50,
+    "multiplier": 10.06329114158355
+  },
+  {
+    "stars": "Stars6",
+    "level": 51,
+    "multiplier": 10.151898736540888
+  },
+  {
+    "stars": "Stars6",
+    "level": 52,
+    "multiplier": 10.253164559349276
+  },
+  {
+    "stars": "Stars6",
+    "level": 53,
+    "multiplier": 10.341772154306616
+  },
+  {
+    "stars": "Stars6",
+    "level": 54,
+    "multiplier": 10.430379749263954
+  },
+  {
+    "stars": "Stars6",
+    "level": 55,
+    "multiplier": 10.531645572072343
+  },
+  {
+    "stars": "Stars6",
+    "level": 56,
+    "multiplier": 10.620253167029682
+  },
+  {
+    "stars": "Stars6",
+    "level": 57,
+    "multiplier": 10.721518989838071
+  },
+  {
+    "stars": "Stars6",
+    "level": 58,
+    "multiplier": 10.810126584795409
+  },
+  {
+    "stars": "Stars6",
+    "level": 59,
+    "multiplier": 10.911392407603797
+  },
+  {
+    "stars": "Stars6",
+    "level": 60,
+    "multiplier": 11.012658230412185
+  }
+]

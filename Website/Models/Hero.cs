@@ -1,4 +1,6 @@
-﻿namespace Website.Models
+﻿using System.Collections.Generic;
+
+namespace Website.Models
 {
     public class Hero
     {
@@ -26,5 +28,6 @@
         public float CriticalHeal { get; set; }
         public float Resistance { get; set; }
         public float Speed { get; set; }
+        public List<int> Masteries { get; set; }
     }
 }
