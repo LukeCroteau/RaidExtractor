@@ -73,11 +73,55 @@ namespace RaidExtractor
                 var artifactCount = 0;
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
 
-                var arrayPointer = artifactsPointer;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer); // List<Artifact>._array
+                var pointers = new List<IntPtr>();
+                if (artifactCount > 0)
+                {
+                    var arrayPointer = artifactsPointer;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer); // List<Artifact>._array
 
-                var pointers = new IntPtr[artifactCount+1];
-                NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, pointers);
+                    var ptrs = new IntPtr[artifactCount];
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    pointers.AddRange(ptrs);
+
+                }
+
+                if (artifactCount == 0)
+                {
+                    // This means it's in external storage instead which is in a concurrent dictionary (teh sucks)
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 0x33C8C20, ref klass);
+
+                    var artifactStorageResolver = klass;
+                    NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver + 0xB8, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields
+                    NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields._implementation
+
+                    var state = artifactStorageResolver;
+                    NativeWrapper.ReadProcessMemory(handle, state + 0x10, ref state); // ExternalArtifactsStorage._state
+
+                    artifactsPointer = state;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactsPointer); // _state._artifacts
+
+                    var buckets = artifactsPointer;
+                    NativeWrapper.ReadProcessMemory(handle, buckets + 0x10, ref buckets); // ConcurrentDictionary._tables
+                    NativeWrapper.ReadProcessMemory(handle, buckets + 0x10, ref buckets); // _tables._buckets
+
+                    var bucketCount = 0;
+                    NativeWrapper.ReadProcessMemory(handle, buckets + 0x18, ref bucketCount);
+
+                    var nodes = new IntPtr[bucketCount];
+                    if (bucketCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, buckets + 0x20, nodes);
+
+                    for (var i = 0; i < nodes.Length; i++)
+                    {
+                        var node = nodes[i];
+                        while (node != IntPtr.Zero)
+                        {
+                            var pointer = node;
+                            NativeWrapper.ReadProcessMemory(handle, pointer + 0x18, ref pointer); // Node.m_value
+                            if (pointer != IntPtr.Zero) pointers.Add(pointer);
+                            NativeWrapper.ReadProcessMemory(handle, node + 0x20, ref node); // Node.m_next
+                        }
+                    }
+                }
 
                 var artifacts = new List<Artifact>();
                 var artifactStruct = new ArtifactStruct();
@@ -187,7 +231,6 @@ namespace RaidExtractor
                         NativeWrapper.ReadProcessMemory(handle, masteriesPtr + 0x10, ref masteriesPtr);
                     }
 
-                    if (masteryCount > 0) Debugger.Break();
                     var masteries = new int[masteryCount];
                     if (masteryCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, masteriesPtr + 0x20, masteries, 0, masteries.Length);
                     hero.Masteries.AddRange(masteries);
