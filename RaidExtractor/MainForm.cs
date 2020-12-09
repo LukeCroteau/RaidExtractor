@@ -142,7 +142,7 @@ namespace RaidExtractor
                 var gameAssembly = GetRaidAssembly(process);
 
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 54070664, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + StartingMemoryLocations, ref klass);
 
                 var appModel = klass;
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
