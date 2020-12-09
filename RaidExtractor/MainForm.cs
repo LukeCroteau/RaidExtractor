@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -16,6 +16,8 @@ namespace RaidExtractor
     {
         private Dictionary<int, HeroType> _heroTypeById;
         private StatMultiplier[] _multipliers;
+        private string ExpectedRaidVersion = "\\227\\";
+        private int StartingMemoryLocations = 54070664;
                 
         public MainForm()
         {
@@ -25,31 +27,120 @@ namespace RaidExtractor
             _multipliers = JsonConvert.DeserializeObject<StatMultiplier[]>(File.ReadAllText("multipliers.json"));
         }
 
-        private AccountDump GetDump()
+        private Process IsRaidRunning()
         {
             var process = Process.GetProcessesByName("Raid").FirstOrDefault();
             if (process == null)
             {
                 MessageBox.Show("Raid needs to be running before running RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return process;
+        }
+
+        private bool CheckRaidVersion(Process process)
+        {
+            if (!process.MainModule.FileName.Contains(ExpectedRaidVersion))
+            {
+                MessageBox.Show("Raid has been updated and needs a newer version of RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        private ProcessModule GetRaidAssembly(Process process)
+        {
+            var gameAssembly = process.Modules.OfType<ProcessModule>().FirstOrDefault(m => m.ModuleName == "GameAssembly.dll");
+            if (gameAssembly == null)
+            {
+                MessageBox.Show("Unable to locate GameAssembly.dll in memory", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return gameAssembly;
+        }
+
+        private void AttemptToFindMemoryLocations()
+        {
+            MessageBox.Show("Scanning Memory to look for Likely Targets. This may take a while.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var process = IsRaidRunning();
+            var likelyTargets = "";
+
+            if (!CheckRaidVersion(process))
+            {
+                return;
+            }
+
+            var handle = NativeWrapper.OpenProcess(ProcessAccessFlags.Read, true, process.Id);
+            try
+            {
+                var gameAssembly = GetRaidAssembly(process);
+                var klass = IntPtr.Zero;
+                var appModel = klass;
+                var userWrapper = appModel;
+                var heroesWrapper = userWrapper;
+                var artifactsPointer = heroesWrapper;
+
+                var artifactCount = 0;
+
+                for (int i = StartingMemoryLocations; i < (StartingMemoryLocations + 1000000); i++)
+                {
+                    klass = IntPtr.Zero;
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + i, ref klass);
+
+                    appModel = klass;
+                    NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
+                    NativeWrapper.ReadProcessMemory(handle, appModel + 0xC0, ref appModel);
+                    NativeWrapper.ReadProcessMemory(handle, appModel + 0x0, ref appModel);
+                    NativeWrapper.ReadProcessMemory(handle, appModel + 0xB8, ref appModel);
+                    NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
+
+                    userWrapper = appModel;
+                    NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x148, ref userWrapper); // AppModel._userWrapper
+
+                    heroesWrapper = userWrapper;
+                    NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper); // UserWrapper.Heroes
+
+                    artifactsPointer = heroesWrapper;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactsPointer); // UserArtifactData.Artifacts
+
+                    artifactCount = 0;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
+
+                    if (artifactCount > 0)
+                    {
+                        likelyTargets += String.Format("{0} with {1} artifacts\r\n", i, artifactCount);
+                        Debug.Write("Found ");
+                        Debug.Write(i);
+                        Debug.Write(" with ");
+                        Debug.Write(artifactCount);
+                        Debug.WriteLine(" artifacts.");
+                    }
+                }
+            }
+            finally
+            {
+                NativeWrapper.CloseHandle(handle);
+            }
+            MessageBox.Show("Memory Scan Complete. Likely targets are:\r\n" + likelyTargets, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private AccountDump GetDump()
+        {
+            var process = IsRaidRunning();
+            if (process == null)
+            {
                 return null;
             }
 
-            if (!process.MainModule.FileName.Contains("\\226\\"))
+            if (!CheckRaidVersion(process))
             {
-                MessageBox.Show("Raid has been updated and needs a newer version of RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
             var handle = NativeWrapper.OpenProcess(ProcessAccessFlags.Read, true, process.Id);
             try
             {
-                var gameAssembly = process.Modules.OfType<ProcessModule>().FirstOrDefault(m => m.ModuleName == "GameAssembly.dll");
-                if (gameAssembly == null)
-                {
-                    MessageBox.Show("Unable to locate GameAssembly.dll in memory", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
-                }
-                //
+                var gameAssembly = GetRaidAssembly(process);
+
                 var klass = IntPtr.Zero;
                 NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 54070664, ref klass);
 
@@ -312,6 +403,14 @@ namespace RaidExtractor
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+#if DEBUG
+            if (Control.ModifierKeys == Keys.Control)
+            {
+                AttemptToFindMemoryLocations();
+                return;
+            }
+#endif
+
             var result = GetDump();
 
             if (result == null) return;
