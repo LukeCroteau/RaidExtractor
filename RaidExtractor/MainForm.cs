@@ -17,7 +17,7 @@ namespace RaidExtractor
         private Dictionary<int, HeroType> _heroTypeById;
         private StatMultiplier[] _multipliers;
         private string ExpectedRaidVersion = "\\227\\";
-        private int StartingMemoryLocations = 54070664;
+        private int StartingMemoryLocations = 54612104;
                 
         public MainForm()
         {
