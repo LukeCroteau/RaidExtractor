@@ -16,8 +16,8 @@ namespace RaidExtractor
     {
         private Dictionary<int, HeroType> _heroTypeById;
         private StatMultiplier[] _multipliers;
-        private string ExpectedRaidVersion = "\\227\\";
-        private int StartingMemoryLocations = 54874664;
+        private string ExpectedRaidVersion = "\\228\\";
+        private int StartingMemoryLocations = 54875208;
                 
         public MainForm()
         {
@@ -179,7 +179,7 @@ namespace RaidExtractor
                 if (artifactCount == 0)
                 {
                     // This means it's in external storage instead which is in a concurrent dictionary (teh sucks)
-                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 55077032, ref klass);
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 55077352, ref klass);
 
                     var artifactStorageResolver = klass;
                     NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver + 0xB8, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields
