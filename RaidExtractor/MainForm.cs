@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using ProcessMemoryUtilities.Managed;
 using ProcessMemoryUtilities.Native;
 using RaidExtractor.Native;
+using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace RaidExtractor
 {
@@ -17,8 +19,16 @@ namespace RaidExtractor
         private Dictionary<int, HeroType> _heroTypeById;
         private StatMultiplier[] _multipliers;
         private string ExpectedRaidVersion = "\\228\\";
-        private int StartingMemoryLocations = 54875208;
+        private int MemoryLocation = 54875208;
+        private static int ExternalStorageAddress = 55077352;
                 
+        private static int StartingMemoryLocation =   54000000;
+        private static int EndingScanLocation =       54900000;
+
+        private static int StorageScanRange = 5000;
+        private static int ExternalStorageStartAddress = 0x33C8C20 - StorageScanRange;
+        private static int ExternalStorageEndAddress = ExternalStorageStartAddress + StorageScanRange;
+
         public MainForm()
         {
             InitializeComponent();
@@ -57,70 +67,236 @@ namespace RaidExtractor
             return gameAssembly;
         }
 
+        private class ScanTarget
+        {
+            public int MemoryLocation { get; set; }
+            public int StorageLocation { get; set; }
+        }
+
+        private class ScanResult
+        {
+            public int MemoryLocation { get; set; } = 0;
+            public int StorageLocation { get; set; } = 0;
+            public bool ExceptionThrown { get; set; } = false;
+            public string ExceptionText { get; set; }
+            public int ArtifactsFound { get; set; } = 0;
+            public int ArtifactsFoundDeep { get; set; } = 0;
+            public int ArtifactsFoundOld { get; set; } = 0;
+        }
+
+        private ScanResult DoMemoryScan(ProcessModule gameAssembly, IntPtr handle, ScanTarget i)
+        {
+            ScanResult result = new ScanResult()
+            {
+                MemoryLocation = i.MemoryLocation,
+                StorageLocation = i.StorageLocation
+            };
+
+            var klass = IntPtr.Zero;
+            try
+            {
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + i.MemoryLocation, ref klass);
+
+                var appModel = klass;
+                NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
+                NativeWrapper.ReadProcessMemory(handle, appModel + 0xC0, ref appModel);
+                NativeWrapper.ReadProcessMemory(handle, appModel + 0x0, ref appModel);
+                NativeWrapper.ReadProcessMemory(handle, appModel + 0xB8, ref appModel);
+                NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
+
+                var userWrapper = appModel;
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x148, ref userWrapper); // AppModel._userWrapper
+
+                var heroesWrapper = userWrapper;
+                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper); // UserWrapper.Heroes
+
+                var artifactsPointer = heroesWrapper;
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactsPointer); // UserArtifactData.Artifacts
+
+                var artifactCount = 0;
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
+
+                var pointers = new List<IntPtr>();
+                if (artifactCount > 0)
+                {
+                    result.ArtifactsFoundOld = artifactCount;
+                    var arrayPointer = artifactsPointer;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer); // List<Artifact>._array
+
+                    var ptrs = new IntPtr[artifactCount];
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    pointers.AddRange(ptrs);
+                }
+
+                if ((artifactCount == 0) || (pointers.Count == 0))
+                {
+                    // This means it's in external storage instead which is in a concurrent dictionary (teh sucks)
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + i.StorageLocation, ref klass);
+
+                    var artifactStorageResolver = klass;
+                    NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver + 0xB8, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields
+                    NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields._implementation
+
+                    var state = artifactStorageResolver;
+                    NativeWrapper.ReadProcessMemory(handle, state + 0x10, ref state); // ExternalArtifactsStorage._state
+
+                    artifactsPointer = state;
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactsPointer); // _state._artifacts
+
+                    var buckets = artifactsPointer;
+                    NativeWrapper.ReadProcessMemory(handle, buckets + 0x10, ref buckets); // ConcurrentDictionary._tables
+                    NativeWrapper.ReadProcessMemory(handle, buckets + 0x10, ref buckets); // _tables._buckets
+
+                    var bucketCount = 0;
+                    NativeWrapper.ReadProcessMemory(handle, buckets + 0x18, ref bucketCount);
+
+                    var nodes = new IntPtr[bucketCount];
+                    if (bucketCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, buckets + 0x20, nodes);
+
+                    for (var j = 0; j < nodes.Length; j++)
+                    {
+                        var node = nodes[j];
+                        while (node != IntPtr.Zero)
+                        {
+                            var pointer = node;
+                            NativeWrapper.ReadProcessMemory(handle, pointer + 0x18, ref pointer); // Node.m_value
+                            if (pointer != IntPtr.Zero)
+                            {
+                                pointers.Add(pointer);
+                                result.ArtifactsFoundDeep += 1;
+                            }
+                            NativeWrapper.ReadProcessMemory(handle, node + 0x20, ref node); // Node.m_next
+                        }
+                    }
+                }
+
+                result.ArtifactsFound = pointers.Count;
+            }
+            catch (Exception e)
+            {
+                result.ExceptionThrown = true;
+                result.ExceptionText = e.Message;
+            }
+
+            return result;
+        }
+
+        private void HandleResults(ScanResult results, ConcurrentBag<string> resultList, ConcurrentBag<string> exceptionList)
+        {
+            if (results.ExceptionThrown)
+            {
+                var tmp = String.Format("An Exception occurred for Memory Address {0} Storage Address {1}: {2}", results.MemoryLocation, results.StorageLocation, results.ExceptionText);
+                Debug.WriteLine(tmp);
+                exceptionList.Add(tmp);
+            }
+            else if ((results.ArtifactsFound > 0) || (results.ArtifactsFoundOld > 0))
+            {
+                var tmp = "Found Memory Address {0} Storage Address {1} with {2} artifacts using {3}";
+                if (results.ArtifactsFoundOld > 24) Debug.WriteLine(String.Format(tmp, results.MemoryLocation, results.StorageLocation, results.ArtifactsFoundOld, "Old Method"));
+                tmp = String.Format(tmp, results.MemoryLocation, results.StorageLocation, results.ArtifactsFound, "DEEP SCAN (Likely Correct)");
+                if (results.ArtifactsFoundDeep > 0)
+                {
+                    Debug.WriteLine(tmp);
+                    resultList.Add(tmp);
+                }
+            }
+        }
+
+        private void DumpResults(ConcurrentBag<string> resultList, ConcurrentBag<string> exceptionList)
+        {
+            var resFilename = String.Format("{0}\\MemoryAttempts.txt", Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName));
+            if (File.Exists(resFilename)) File.Delete(resFilename);
+            TextWriter resultFile = new StreamWriter(resFilename);
+
+            foreach (string item in resultList) resultFile.WriteLine(item);
+
+            resultFile.Close();
+
+            var exFilename = String.Format("{0}\\Exceptions.txt", Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName));
+            if (File.Exists(exFilename)) File.Delete(exFilename);
+            TextWriter exFile = new StreamWriter(exFilename);
+
+            foreach (string item in exceptionList) exFile.WriteLine(item);
+
+            exFile.Close();
+        }
+
         private void AttemptToFindMemoryLocations()
         {
-            MessageBox.Show("Scanning Memory to look for Likely Targets. This may take a while.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
             var process = IsRaidRunning();
-            var likelyTargets = "";
+            List<int> memorylist = Enumerable.Range(StartingMemoryLocation, EndingScanLocation - StartingMemoryLocation).ToList();
+            List<int> storagelist = Enumerable.Range(ExternalStorageStartAddress, ExternalStorageEndAddress - ExternalStorageStartAddress).ToList();
+            List<int> prioritylist = new List<int>();
+            prioritylist.Add(54070664);
+            prioritylist.Add(54612104);
+            prioritylist.Add(54731336);
+            prioritylist.Add(54731440);
+            prioritylist.Add(54874664);
+            Int64 maxAttempts = memorylist.Count() * storagelist.Count();
+            MessageBox.Show(String.Format("Scanning {0} locations in Memory to look for Likely Targets. This may take a while.", maxAttempts), "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            if (!CheckRaidVersion(process))
-            {
-                return;
-            }
+            ConcurrentBag<string> resultList = new ConcurrentBag<string>();
+            ConcurrentBag<string> exceptionList = new ConcurrentBag<string>();
+
+            Int64 totalAttempts = 0;
+
+            if (!CheckRaidVersion(process)) return;
 
             var handle = NativeWrapper.OpenProcess(ProcessAccessFlags.Read, true, process.Id);
             try
             {
                 var gameAssembly = GetRaidAssembly(process);
-                var klass = IntPtr.Zero;
-                var appModel = klass;
-                var userWrapper = appModel;
-                var heroesWrapper = userWrapper;
-                var artifactsPointer = heroesWrapper;
+                object __lockObj = new object();
 
-                var artifactCount = 0;
-
-                for (int i = StartingMemoryLocations; i < (StartingMemoryLocations + 1000000); i++)
+                Debug.WriteLine("Scanning Prioritylist...");
+                Parallel.ForEach(prioritylist, memloc =>
                 {
-                    klass = IntPtr.Zero;
-                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + i, ref klass);
-
-                    appModel = klass;
-                    NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
-                    NativeWrapper.ReadProcessMemory(handle, appModel + 0xC0, ref appModel);
-                    NativeWrapper.ReadProcessMemory(handle, appModel + 0x0, ref appModel);
-                    NativeWrapper.ReadProcessMemory(handle, appModel + 0xB8, ref appModel);
-                    NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
-
-                    userWrapper = appModel;
-                    NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x148, ref userWrapper); // AppModel._userWrapper
-
-                    heroesWrapper = userWrapper;
-                    NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper); // UserWrapper.Heroes
-
-                    artifactsPointer = heroesWrapper;
-                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
-                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactsPointer); // UserArtifactData.Artifacts
-
-                    artifactCount = 0;
-                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
-
-                    if (artifactCount > 0)
+                    Parallel.ForEach(storagelist, storageloc =>
                     {
-                        likelyTargets += String.Format("{0} with {1} artifacts\r\n", i, artifactCount);
-                        Debug.Write("Found ");
-                        Debug.Write(i);
-                        Debug.Write(" with ");
-                        Debug.Write(artifactCount);
-                        Debug.WriteLine(" artifacts.");
-                    }
-                }
+                        var scanres = DoMemoryScan(gameAssembly, handle, new ScanTarget() { MemoryLocation = memloc, StorageLocation = storageloc });
+                        lock (__lockObj)
+                        {
+                            totalAttempts += 1;
+                            if (totalAttempts % 500000 == 0)
+                            {
+                                DumpResults(resultList, exceptionList);
+                                Debug.WriteLine(@"...Attempted {0} scans out of {1}.", totalAttempts, maxAttempts);
+                            }
+                        }
+                        HandleResults(scanres, resultList, exceptionList);
+                    });
+                });
+                Debug.WriteLine(@"...Attempted {0} scans on Priority List.", totalAttempts);
+                totalAttempts = 0;
+
+                Debug.WriteLine("Scanning memorylist...");
+                Parallel.ForEach(memorylist, memloc =>
+                {
+                    Parallel.ForEach(storagelist, storageloc =>
+                    {
+                        var scanres = DoMemoryScan(gameAssembly, handle, new ScanTarget() { MemoryLocation = memloc, StorageLocation = storageloc });
+                        lock (__lockObj)
+                        {
+                            totalAttempts += 1;
+                            if (totalAttempts % 500000 == 0)
+                            {
+                                DumpResults(resultList, exceptionList);
+                                Debug.WriteLine(@"...Attempted {0} scans out of {1}.", totalAttempts, maxAttempts);
+                            }
+                        }
+                        HandleResults(scanres, resultList, exceptionList);
+                    });
+                });
+
             }
             finally
             {
                 NativeWrapper.CloseHandle(handle);
             }
-            MessageBox.Show("Memory Scan Complete. Likely targets are:\r\n" + likelyTargets, "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            DumpResults(resultList, exceptionList);
+            MessageBox.Show("Memory Scan Complete. Likely targets have been written to MemoryAttempts.txt", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private AccountDump GetDump()
@@ -142,7 +318,7 @@ namespace RaidExtractor
                 var gameAssembly = GetRaidAssembly(process);
 
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + StartingMemoryLocations, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + MemoryLocation, ref klass);
 
                 var appModel = klass;
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
@@ -179,7 +355,7 @@ namespace RaidExtractor
                 if (artifactCount == 0)
                 {
                     // This means it's in external storage instead which is in a concurrent dictionary (teh sucks)
-                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + 55077352, ref klass);
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + ExternalStorageAddress, ref klass);
 
                     var artifactStorageResolver = klass;
                     NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver + 0xB8, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields
