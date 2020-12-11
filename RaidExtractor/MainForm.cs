@@ -360,7 +360,7 @@ namespace RaidExtractor
                 
                 var artifactsByHeroIdPtr = heroesWrapper;
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x40, ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x28, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x30, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
 
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x20, ref count);
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x18, ref artifactsByHeroIdPtr);
