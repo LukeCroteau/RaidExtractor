@@ -285,9 +285,9 @@ namespace RaidExtractor
                     var multiplier = _multipliers.FirstOrDefault(m => m.Stars == hero.Grade && m.Level == hero.Level);
                     if (multiplier != null)
                     {
-                        hero.Attack = (int)(hero.Attack * multiplier.Multiplier);
-                        hero.Defense = (int)(hero.Defense * multiplier.Multiplier);
-                        hero.Health = (int)(hero.Health * multiplier.Multiplier) * 15;
+                        hero.Attack = (int)Math.Round(hero.Attack * multiplier.Multiplier);
+                        hero.Defense = (int)Math.Round(hero.Defense * multiplier.Multiplier);
+                        hero.Health = (int)Math.Round(hero.Health * multiplier.Multiplier) * 15;
                     }
 
                     heroes.Add(hero);
