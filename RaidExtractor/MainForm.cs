@@ -18,9 +18,9 @@ namespace RaidExtractor
     {
         private Dictionary<int, HeroType> _heroTypeById;
         private StatMultiplier[] _multipliers;
-        private string ExpectedRaidVersion = "\\228\\";
-        private int MemoryLocation = 54875208;
-        private static int ExternalStorageAddress = 55077352;
+        private string ExpectedRaidVersion = "\\229\\";
+        private int MemoryLocation = 54984472;
+        private static int ExternalStorageAddress = 55186120;
 
         public MainForm()
         {
