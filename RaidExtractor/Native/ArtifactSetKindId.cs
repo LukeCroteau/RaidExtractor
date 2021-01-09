@@ -41,6 +41,10 @@
         BlockReflectDebuffAndHpAndDef = 36,
         HpAndDefence = 37,
         AccuracyAndSpeed = 38,
+        CritDmgAndTransformWeekIntoCritHit = 39,
+        ResistanceAndBlockDebuff = 40,
+        AttackAndCritRate = 41,
+        FreezeResistAndRate = 42,
         IgnoreCooldown = 1000,
         RemoveDebuff = 1001,
     }
