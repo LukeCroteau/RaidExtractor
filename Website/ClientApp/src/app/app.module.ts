@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
+import { OptimizeDialogQuery } from './optimize-dialog/optimize-dialog.query';
+import { OptimizeDialogStore } from './optimize-dialog/optimize-dialog.store';
 import { AccountService } from './shared/account.service';
 import { ExpiredComponent } from './expired/expired.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
@@ -29,6 +29,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { HeroDialogComponent } from './hero-dialog/hero-dialog.component';
 import { ArtifactDialogComponent } from './artifact-dialog/artifact-dialog.component';
 import { OptimizeDialogComponent } from './optimize-dialog/optimize-dialog.component';
+import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,7 @@ import { OptimizeDialogComponent } from './optimize-dialog/optimize-dialog.compo
     ArtifactDialogComponent,
     OptimizeDialogComponent
   ],
-entryComponents: [
+  entryComponents: [
     HeroDialogComponent,
     ArtifactDialogComponent,
     OptimizeDialogComponent
@@ -69,9 +73,15 @@ entryComponents: [
     MatCheckboxModule,
     MatInputModule,
     MatSliderModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    AkitaNgRouterStoreModule.forRoot()
   ],
-  providers: [AccountService],
+  providers: [AccountService, {
+    provide: NG_ENTITY_SERVICE_CONFIG,
+    useValue: {baseUrl: 'https://jsonplaceholder.typicode.com'}
+  }, OptimizeDialogStore, OptimizeDialogQuery],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
