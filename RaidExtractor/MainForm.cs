@@ -18,9 +18,6 @@ namespace RaidExtractor
     {
         private Dictionary<int, HeroType> _heroTypeById;
         private StatMultiplier[] _multipliers;
-        private string ExpectedRaidVersion = "\\229\\";
-        private int MemoryLocation = 54984472;
-        private static int ExternalStorageAddress = 55186120;
 
         public MainForm()
         {
@@ -42,7 +39,7 @@ namespace RaidExtractor
 
         private bool CheckRaidVersion(Process process)
         {
-            if (!process.MainModule.FileName.Contains(ExpectedRaidVersion))
+            if (!process.MainModule.FileName.Contains(RaidStaticInformation.ExpectedRaidVersion))
             {
                 MessageBox.Show("Raid has been updated and needs a newer version of RaidExtractor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -79,7 +76,7 @@ namespace RaidExtractor
                 var gameAssembly = GetRaidAssembly(process);
 
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + MemoryLocation, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + RaidStaticInformation.MemoryLocation, ref klass);
 
                 var appModel = klass;
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
@@ -116,7 +113,7 @@ namespace RaidExtractor
                 if (artifactCount == 0)
                 {
                     // This means it's in external storage instead which is in a concurrent dictionary (teh sucks)
-                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + ExternalStorageAddress, ref klass);
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + RaidStaticInformation.ExternalStorageAddress, ref klass);
 
                     var artifactStorageResolver = klass;
                     NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver + 0xB8, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields

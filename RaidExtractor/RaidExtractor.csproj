@@ -73,6 +73,7 @@
     <Compile Include="Native\HeroRole.cs" />
     <Compile Include="Native\HeroStruct.cs" />
     <Compile Include="Native\HeroType.cs" />
+    <Compile Include="Native\RaidStaticInformation.cs" />
     <Compile Include="Native\Multiplier.cs" />
     <Compile Include="Native\StatKindId.cs" />
     <Compile Include="Program.cs" />
