@@ -79,6 +79,7 @@ namespace RaidExtractor
                 NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + RaidStaticInformation.MemoryLocation, ref klass);
 
                 var appModel = klass;
+                // These Reposition the AppModel to be in the right place. TODO: Figure out where these magic numbers come from?
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x18, ref appModel);
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0xC0, ref appModel);
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x0, ref appModel);
@@ -86,14 +87,14 @@ namespace RaidExtractor
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
 
                 var userWrapper = appModel;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0x148, ref userWrapper); // AppModel._userWrapper
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.AppModelUserWrapper, ref userWrapper); // AppModel._userWrapper
 
                 var heroesWrapper = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + 0x28, ref heroesWrapper); // UserWrapper.Heroes
+                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + RaidStaticInformation.UserWrapperHeroes, ref heroesWrapper); // UserWrapper.Heroes
 
                 var artifactsPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x40, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x28, ref artifactsPointer); // UserArtifactData.Artifacts
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.HeroesWrapperArtifactData, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.UserArtifactDataArtifacts, ref artifactsPointer); // UserArtifactData.Artifacts
 
                 var artifactCount = 0;
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
@@ -214,11 +215,11 @@ namespace RaidExtractor
                 }
 
                 var heroesDataPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x38, ref heroesDataPointer); // HeroesWrapperReadOnly.HeroData
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer); // UserHeroData.HeroById
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.HeroesWrapperHeroData, ref heroesDataPointer); // HeroesWrapperReadOnly.HeroData
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.UserHeroDataHeroById, ref heroesDataPointer); // UserHeroData.HeroById
 
                 var count = 0;
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x20, ref count); // Dictionary<int, Hero>.Count
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.DictionaryCount, ref count); // Dictionary<int, Hero>.Count
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer); // Dictionary<int, Hero>.entries
 
                 var heroStruct = new HeroStruct();
@@ -293,10 +294,10 @@ namespace RaidExtractor
                 }
                 
                 var artifactsByHeroIdPtr = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x40, ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x30, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.HeroesWrapperArtifactData, ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.UserArtifactArtifactDataByHeroId, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
 
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x20, ref count);
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.DictionaryCount, ref count);
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x18, ref artifactsByHeroIdPtr);
 
                 for (var i = 0; i < count; i++)
@@ -309,7 +310,7 @@ namespace RaidExtractor
                     NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref artifactsPointer);
 
                     artifactCount = 0;
-                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x20, ref artifactCount);
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.DictionaryCount, ref artifactCount);
                     NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactsPointer);
 
                     var arts = new List<int>();
