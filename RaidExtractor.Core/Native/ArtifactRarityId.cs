@@ -1,7 +1,8 @@
-﻿namespace RaidExtractor.Native
+﻿namespace RaidExtractor.Core.Native
 {
-    public enum HeroRarity : int
+    public enum ArtifactRarityId : int
     {
+        Unknown = 0,
         Common = 1,
         Uncommon = 2,
         Rare = 3,
