@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.230</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="hero_types.json" />
+    <None Remove="multipliers.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="hero_types.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="multipliers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="ProcessMemoryUtilities.Net" Version="1.3.4" />
+  </ItemGroup>
+</Project>

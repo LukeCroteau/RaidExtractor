@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace RaidExtractor.Native
+namespace RaidExtractor.Core.Native
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct ArtifactStruct

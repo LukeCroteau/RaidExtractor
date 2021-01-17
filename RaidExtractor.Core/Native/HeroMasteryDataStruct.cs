@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace RaidExtractor.Native
+namespace RaidExtractor.Core.Native
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct ArtifactBonusStruct
+    public struct HeroMasteryDataStruct
     {
         [FieldOffset(0x10)]
-        public StatKindId KindId; 
+        public IntPtr CurrentAmount;
         [FieldOffset(0x18)]
-        public IntPtr Value; 
+        public IntPtr TotalAmount;
         [FieldOffset(0x20)]
-        public long PowerUpValue; 
+        public IntPtr Masteries;
         [FieldOffset(0x28)]
-        public int Level; 
+        public int ResetCount;
     }
 }
