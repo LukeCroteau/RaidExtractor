@@ -11,6 +11,7 @@ using ProcessMemoryUtilities.Native;
 using RaidExtractor.Native;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using System.IO.Compression;
 
 namespace RaidExtractor
 {
@@ -344,6 +345,27 @@ namespace RaidExtractor
             if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
 
             File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Formatting.Indented));
+
+            if (SaveZipFile.Checked)
+            {
+                File.Delete(Path.ChangeExtension(SaveJSONDialog.FileName, ".ZIP"));
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    using (ZipArchive archive = ZipFile.Open(Path.ChangeExtension(SaveJSONDialog.FileName, ".ZIP"), ZipArchiveMode.Create))
+                    {
+                        var artifactFile = archive.CreateEntry("artifacts.json");
+
+                        using (var entryStream = artifactFile.Open())
+                        {
+                            using (var streamWriter = new StreamWriter(entryStream))
+                            {
+                                streamWriter.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private async void UploadButton_Click(object sender, EventArgs e)

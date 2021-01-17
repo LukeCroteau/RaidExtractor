@@ -31,6 +31,7 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.SaveJSONDialog = new System.Windows.Forms.SaveFileDialog();
             this.UploadButton = new System.Windows.Forms.Button();
+            this.SaveZipFile = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // SaveButton
@@ -60,17 +61,29 @@
             this.UploadButton.UseVisualStyleBackColor = true;
             this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
             // 
+            // SaveZipFile
+            // 
+            this.SaveZipFile.AutoSize = true;
+            this.SaveZipFile.Location = new System.Drawing.Point(12, 50);
+            this.SaveZipFile.Name = "SaveZipFile";
+            this.SaveZipFile.Size = new System.Drawing.Size(236, 17);
+            this.SaveZipFile.TabIndex = 2;
+            this.SaveZipFile.Text = "Also save a Zipped Copy of the artifacts.json";
+            this.SaveZipFile.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(208, 48);
+            this.ClientSize = new System.Drawing.Size(270, 89);
+            this.Controls.Add(this.SaveZipFile);
             this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.SaveButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.Text = "Raid Extractor";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -79,5 +92,6 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.SaveFileDialog SaveJSONDialog;
         private System.Windows.Forms.Button UploadButton;
+        private System.Windows.Forms.CheckBox SaveZipFile;
     }
 }
