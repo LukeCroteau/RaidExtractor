@@ -1,4 +1,4 @@
-﻿namespace RaidExtractor.Native
+﻿namespace RaidExtractor.Core.Native
 {
     public enum ArtifactKindId : int
     {

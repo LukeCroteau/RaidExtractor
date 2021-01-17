@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace RaidExtractor.Native
+namespace RaidExtractor.Core.Native
 {
     [StructLayout(LayoutKind.Explicit)]
     public struct BonusValueStruct

@@ -12,59 +12,59 @@ using System.Collections.Generic;
 #pragma warning disable 1573 // Disable "CS1573 Parameter '...' has no matching param tag in the XML comment for ...
 #pragma warning disable 1591 // Disable "CS1591 Missing XML comment for publicly visible type or member ..."
 
-namespace RaidExtractor
+namespace RaidExtractor.Core
 {
     using System = global::System;
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.7.0.0 (NJsonSchema v10.1.24.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class AccountClient 
+    public partial class AccountClient
     {
         private string _baseUrl = "http://localhost:5000";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public AccountClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
+            _httpClient = httpClient;
             _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings);
         }
-    
+
         private Newtonsoft.Json.JsonSerializerSettings CreateSerializerSettings()
         {
             var settings = new Newtonsoft.Json.JsonSerializerSettings();
             UpdateJsonSerializerSettings(settings);
             return settings;
         }
-    
-        public string BaseUrl 
+
+        public string BaseUrl
         {
             get { return _baseUrl; }
             set { _baseUrl = value; }
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<string> UploadAsync(AccountDump accountDump)
         {
             return UploadAsync(accountDump, System.Threading.CancellationToken.None);
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<string> UploadAsync(AccountDump accountDump, System.Threading.CancellationToken cancellationToken)
         {
             if (accountDump == null)
                 throw new System.ArgumentNullException("accountDump");
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Account");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -75,12 +75,12 @@ namespace RaidExtractor
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -90,9 +90,9 @@ namespace RaidExtractor
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
@@ -105,7 +105,7 @@ namespace RaidExtractor
                         }
                         else
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
@@ -120,25 +120,25 @@ namespace RaidExtractor
             {
             }
         }
-    
+
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<AccountDump> GetAsync(string id)
         {
             return GetAsync(id, System.Threading.CancellationToken.None);
         }
-    
+
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public async System.Threading.Tasks.Task<AccountDump> GetAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Account?");
-            if (id != null) 
+            if (id != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("id") + "=").Append(System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -146,12 +146,12 @@ namespace RaidExtractor
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -161,9 +161,9 @@ namespace RaidExtractor
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
@@ -176,7 +176,7 @@ namespace RaidExtractor
                         }
                         else
                         {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
                         }
                     }
@@ -191,7 +191,7 @@ namespace RaidExtractor
             {
             }
         }
-    
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -199,21 +199,21 @@ namespace RaidExtractor
                 this.Object = responseObject;
                 this.Text = responseText;
             }
-    
+
             public T Object { get; }
-    
+
             public string Text { get; }
         }
-    
+
         public bool ReadResponseAsString { get; set; }
-        
+
         protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
         {
             if (response == null || response.Content == null)
             {
                 return new ObjectResponseResult<T>(default(T), string.Empty);
             }
-        
+
             if (ReadResponseAsString)
             {
                 var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -248,14 +248,14 @@ namespace RaidExtractor
                 }
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value == null)
             {
                 return null;
             }
-        
+
             if (value is System.Enum)
             {
                 var name = System.Enum.GetName(value.GetType(), value);
@@ -264,181 +264,181 @@ namespace RaidExtractor
                     return System.Convert.ToString(System.Convert.ChangeType(value, System.Enum.GetUnderlyingType(value.GetType()), cultureInfo));
                 }
             }
-            else if (value is bool) 
+            else if (value is bool)
             {
                 return System.Convert.ToString((bool)value, cultureInfo).ToLowerInvariant();
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             var result = System.Convert.ToString(value, cultureInfo);
             return (result is null) ? string.Empty : result;
         }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class AccountDump 
+    public partial class AccountDump
     {
         [Newtonsoft.Json.JsonProperty("artifacts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<Artifact> Artifacts { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("heroes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<Hero> Heroes { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Artifact 
+    public partial class Artifact
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         public int Id { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sellPrice", Required = Newtonsoft.Json.Required.Always)]
         public int SellPrice { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("price", Required = Newtonsoft.Json.Required.Always)]
         public int Price { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("level", Required = Newtonsoft.Json.Required.Always)]
         public int Level { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("isActivated", Required = Newtonsoft.Json.Required.Always)]
         public bool IsActivated { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Kind { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rank", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Rank { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rarity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Rarity { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("setKind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SetKind { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("isSeen", Required = Newtonsoft.Json.Required.Always)]
         public bool IsSeen { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("failedUpgrades", Required = Newtonsoft.Json.Required.Always)]
         public int FailedUpgrades { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("primaryBonus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ArtifactBonus PrimaryBonus { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("secondaryBonuses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<ArtifactBonus> SecondaryBonuses { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("requiredFraction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string RequiredFraction { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class ArtifactBonus 
+    public partial class ArtifactBonus
     {
         [Newtonsoft.Json.JsonProperty("kind", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Kind { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("isAbsolute", Required = Newtonsoft.Json.Required.Always)]
         public bool IsAbsolute { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public float Value { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("enhancement", Required = Newtonsoft.Json.Required.Always)]
         public float Enhancement { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("level", Required = Newtonsoft.Json.Required.Always)]
         public int Level { get; set; }
-    
-    
+
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Hero 
+    public partial class Hero
     {
         [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Always)]
         public int Id { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("typeId", Required = Newtonsoft.Json.Required.Always)]
         public int TypeId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("grade", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Grade { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("level", Required = Newtonsoft.Json.Required.Always)]
         public int Level { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("experience", Required = Newtonsoft.Json.Required.Always)]
         public int Experience { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fullExperience", Required = Newtonsoft.Json.Required.Always)]
         public int FullExperience { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("locked", Required = Newtonsoft.Json.Required.Always)]
         public bool Locked { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("inStorage", Required = Newtonsoft.Json.Required.Always)]
         public bool InStorage { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("artifacts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<int> Artifacts { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fraction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Fraction { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rarity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Rarity { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("role", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Role { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("element", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Element { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("awakenLevel", Required = Newtonsoft.Json.Required.Always)]
         public int AwakenLevel { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("health", Required = Newtonsoft.Json.Required.Always)]
         public float Health { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("accuracy", Required = Newtonsoft.Json.Required.Always)]
         public float Accuracy { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("attack", Required = Newtonsoft.Json.Required.Always)]
         public float Attack { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("defense", Required = Newtonsoft.Json.Required.Always)]
         public float Defense { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("criticalChance", Required = Newtonsoft.Json.Required.Always)]
         public float CriticalChance { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("criticalDamage", Required = Newtonsoft.Json.Required.Always)]
         public float CriticalDamage { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("criticalHeal", Required = Newtonsoft.Json.Required.Always)]
         public float CriticalHeal { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("resistance", Required = Newtonsoft.Json.Required.Always)]
         public float Resistance { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("speed", Required = Newtonsoft.Json.Required.Always)]
         public float Speed { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("masteries", Required = Newtonsoft.Json.Required.Always)]
         public List<int> Masteries { get; set; }
     }
@@ -456,7 +456,7 @@ namespace RaidExtractor
             : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
         {
             StatusCode = statusCode;
-            Response = response; 
+            Response = response;
             Headers = headers;
         }
 
