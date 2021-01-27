@@ -38,8 +38,8 @@ def find_address_in_script(lines, searchstr: str):
 def dump_class(vernum, metadata_path):
     metadata_path = os.path.join(metadata_path, '')    
     print('Metadata Full Path', metadata_path)
-    outfile = open('../RaidExtractor/Native/RaidStaticInformation.cs', 'w')
-    outfile.write('namespace RaidExtractor.Native\n')
+    outfile = open('../RaidExtractor.Core/Native/RaidStaticInformation.cs', 'w')
+    outfile.write('namespace RaidExtractor.Core.Native\n')
     outfile.write('{\n')
     outfile.write('    class RaidStaticInformation\n')
     outfile.write('    {\n')
