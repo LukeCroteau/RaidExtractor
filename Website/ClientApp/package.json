@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "echo Starting... && ng serve",
-    "build": "node git-version.js && ng build --prod",
+    "build": "ng build --prod",
     "build:ssr": "ng run Website:server:dev",
+	"genver": "node git-version.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
