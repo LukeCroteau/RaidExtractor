@@ -78,7 +78,7 @@ export class RaidAccount {
   }
 
   getArtifactSet(artifact: Artifact): string {
-    if (!artifact) return '';
+    if (!artifact || !Raid.sets[artifact.setKind]) return '';
     return Raid.sets[artifact.setKind].name;
   }
 

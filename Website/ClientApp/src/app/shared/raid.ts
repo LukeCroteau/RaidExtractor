@@ -43,6 +43,10 @@ export abstract class Raid {
     'BlockReflectDebuffAndHpAndDef': { 'name': 'Deflection', 'setSize': 4, 'bonuses': [Raid.percBonus('Health',0.2),Raid.percBonus('Defense',0.2)] },
     'HpAndDefense': { 'name': 'Resilience', 'setSize': 2, 'bonuses': [Raid.percBonus('Health',0.1),Raid.percBonus('Defense',0.1)] },
     'AccuracyAndSpeed': { 'name': 'Perception', 'setSize': 2, 'bonuses': [Raid.absBonus('Accuracy',40),Raid.percBonus('Speed',0.05)] },
+    'CritDmgAndTransformWeekIntoCritHit': { 'name': 'Affinitybreaker', 'setSize': 4, 'bonuses': [Raid.percBonus('CriticalDamage', 0.3)] },
+    'ResistanceAndBlockDebuff': { 'name': 'Immunity', 'setSize': 4, 'bonuses': [Raid.absBonus('Resistance', 40)] },
+    'AttackAndCritRate': { 'name': 'Fatal', 'setSize': 4, 'bonuses': [Raid.percBonus('Attack', 0.15), Raid.percBonus('CritcalChance', 0.05)] },
+    'FreezeResistAndRate': { 'name': 'Frostbite', 'setSize': 4, 'bonuses': [] },
     'IgnoreCooldown': { 'name': 'Refresh', 'setSize': 4, 'bonuses': [] },
     'RemoveDebuff': { 'name': 'Cleanse', 'setSize': 4, 'bonuses': [] }
   }
