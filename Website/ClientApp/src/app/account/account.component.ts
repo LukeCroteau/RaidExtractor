@@ -44,6 +44,7 @@ export class AccountComponent implements OnInit {
           }
 
           this.account = dump;
+          dump.heroes = dump.heroes.filter(hero => hero.name);
           this.heroes = dump.heroes.sort((a, b) => {
             let c = a.name.localeCompare(b.name);
             if (c !== 0) return c;
