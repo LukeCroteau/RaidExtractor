@@ -49,18 +49,6 @@ namespace RaidExtractor
             }
         }
 
-        private async void UploadButton_Click(object sender, EventArgs e)
-        {
-            var result = GetDump();
-            if (result == null) return;
-
-            var client = new AccountClient(new HttpClient());
-            client.BaseUrl = AppSettings.Default.BaseUrl;
-
-            var key = await client.UploadAsync(result);
-            Process.Start(AppSettings.Default.BaseUrl + "/account/" + key);
-        }
-
         private AccountDump GetDump()
         {
             try
