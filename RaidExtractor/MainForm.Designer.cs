@@ -30,7 +30,6 @@
         {
             this.SaveButton = new System.Windows.Forms.Button();
             this.SaveJSONDialog = new System.Windows.Forms.SaveFileDialog();
-            this.UploadButton = new System.Windows.Forms.Button();
             this.SaveZipFile = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -51,16 +50,6 @@
             this.SaveJSONDialog.Filter = "JSON files|*.json";
             this.SaveJSONDialog.Title = "Save JSON";
             // 
-            // UploadButton
-            // 
-            this.UploadButton.Location = new System.Drawing.Point(93, 12);
-            this.UploadButton.Name = "UploadButton";
-            this.UploadButton.Size = new System.Drawing.Size(103, 23);
-            this.UploadButton.TabIndex = 1;
-            this.UploadButton.Text = "View on Website";
-            this.UploadButton.UseVisualStyleBackColor = true;
-            this.UploadButton.Click += new System.EventHandler(this.UploadButton_Click);
-            // 
             // SaveZipFile
             // 
             this.SaveZipFile.AutoSize = true;
@@ -77,7 +66,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 89);
             this.Controls.Add(this.SaveZipFile);
-            this.Controls.Add(this.UploadButton);
             this.Controls.Add(this.SaveButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
@@ -91,7 +79,6 @@
 
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.SaveFileDialog SaveJSONDialog;
-        private System.Windows.Forms.Button UploadButton;
         private System.Windows.Forms.CheckBox SaveZipFile;
     }
 }
