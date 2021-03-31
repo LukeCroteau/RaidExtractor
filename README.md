@@ -18,12 +18,9 @@ This application has 2 Modes:
 ## Projects Using Extracted Data!
 Several other projects already exist that like to use the data this project extracts!
 
-* Artifact "Sell Helper" - https://laughing-engelbart-62bcb5.netlify.app/
-** This tool lets you set parameters to attempt to help you decide which artifacts aren't pulling their own weight, and should be sold!
-* Raid Tools - https://raidtools.club/
-** This tool lets you import your data in an attempt to give you a better look at what you have, and what you need!
-* Raidtool Calculator - https://github.com/Jekoh497/RaidShadowLegend
-** This Excel Spreadsheet helps use your artifacts and attempts to generate Clan Boss timings for you.
+* [Brago ](https://laughing-engelbart-62bcb5.netlify.app/) - Basic Raid Gear Observer. Recommends artifacts to sell and enchant.
+* Raid Tools - https://raidtools.club/ - This tool lets you import your data in an attempt to give you a better look at what you have, and what you need!
+* Raidtool Calculator - https://github.com/Jekoh497/RaidShadowLegend - This Excel Spreadsheet helps use your artifacts and attempts to generate Clan Boss timings for you.
 
 ## Feedback
 Please use the Github Issues page for this project, located at https://github.com/LukeCroteau/RaidExtractor/issues for any currently known issues, or to report any bugs!
