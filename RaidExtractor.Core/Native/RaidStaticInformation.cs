@@ -2,9 +2,9 @@ namespace RaidExtractor.Core.Native
 {
     class RaidStaticInformation
     {
-        public static string ExpectedRaidVersion = "\\235\\";
-        public static int MemoryLocation = 56560864;
-        public static int ExternalStorageAddress = 56701992;
+        public static string ExpectedRaidVersion = "\\236\\";
+        public static int MemoryLocation = 56760088;
+        public static int ExternalStorageAddress = 56894592;
 
         public static int UserHeroDataHeroById = 0x18; // UserHeroData.HeroById
 
