@@ -223,6 +223,7 @@ namespace RaidExtractor.Core
                         FullExperience = heroStruct.FullExperience,
                         Locked = heroStruct.Locked,
                         InStorage = heroStruct.InStorage,
+                        Marker = heroStruct.Marker.ToString(),
                         Masteries = new List<int>(),
                     };
 
