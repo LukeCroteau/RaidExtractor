@@ -391,6 +391,9 @@ namespace RaidExtractor.Core
         [Newtonsoft.Json.JsonProperty("inStorage", Required = Newtonsoft.Json.Required.Always)]
         public bool InStorage { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("marker", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Marker { get; set; }
+
         [Newtonsoft.Json.JsonProperty("artifacts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<int> Artifacts { get; set; }
 

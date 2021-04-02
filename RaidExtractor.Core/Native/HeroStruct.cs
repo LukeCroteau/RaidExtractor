@@ -27,7 +27,9 @@ namespace RaidExtractor.Core.Native
         [FieldOffset(0x38)]
         public IntPtr RecentBattleTimePtr; 
         [FieldOffset(0x40)]
-        public long RecentBattleTime; 
+        public long RecentBattleTime;
+        [FieldOffset(0x48)]
+        public HeroMarker Marker;
         [FieldOffset(0x50)]
         public IntPtr Skills; 
         [FieldOffset(0x58)]
