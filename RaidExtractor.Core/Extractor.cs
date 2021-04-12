@@ -303,10 +303,10 @@ namespace RaidExtractor.Core
                 }
 
                 var arenaPtr = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + 0xB0, ref arenaPtr);
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.UserWrapperArena, ref arenaPtr);
 
                 ArenaLeagueId arenaLeague = 0;
-                NativeWrapper.ReadProcessMemory(handle, arenaPtr + 0x40, ref arenaLeague);
+                NativeWrapper.ReadProcessMemory(handle, arenaPtr + RaidStaticInformation.ArenaWrapperLeagueId, ref arenaLeague);
 
                 return new AccountDump
                 {

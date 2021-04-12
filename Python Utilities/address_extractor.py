@@ -17,7 +17,10 @@ findclasslist = {
     'public abstract class HeroesWrapperReadOnly ': [{
         'protected readonly UpdatableArtifactData ArtifactData;': '        public static int HeroesWrapperArtifactData = {}; // HeroesWrapperReadOnly.ArtifactData\n',
         'protected readonly UpdatableHeroData HeroData;': '        public static int HeroesWrapperHeroData = {}; // HeroesWrapperReadOnly.HeroData\n',
-    }],    
+    }],
+    'public abstract class ArenaWrapperReadOnly ': [{
+        'protected Nullable<ArenaLeagueId> LeagueId;': '        public static int ArenaWrapperLeagueId = {}; // ArenaWrapperReadOnly.LeagueId\n',
+    }],
     'public class UserArtifactData ': [{
         'public List<Artifact> Artifacts;': '        public static int UserArtifactDataArtifacts = {}; // UserArtifactData.Artifactsa\n',
         'public Dictionary<int, HeroArtifactData> ArtifactDataByHeroId;': '        public static int UserArtifactArtifactDataByHeroId = {}; // UserArtifactData.ArtifactDataByHeroId\n',

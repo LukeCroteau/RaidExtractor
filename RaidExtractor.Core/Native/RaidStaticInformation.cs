@@ -21,6 +21,8 @@ namespace RaidExtractor.Core.Native
         public static int HeroesWrapperArtifactData = 0x60; // HeroesWrapperReadOnly.ArtifactData
         public static int HeroesWrapperHeroData = 0x50; // HeroesWrapperReadOnly.HeroData
 
+        public static int ArenaWrapperLeagueId = 0x40; // ArenaWrapperReadOnly.LeagueId
+
         public static int DictionaryCount = 0x20; // Dictionary.Count
     }
 }
