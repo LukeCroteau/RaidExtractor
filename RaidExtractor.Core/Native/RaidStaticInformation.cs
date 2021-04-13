@@ -6,6 +6,8 @@ namespace RaidExtractor.Core.Native
         public static int MemoryLocation = 56875040;
         public static int ExternalStorageAddress = 57009952;
 
+        public static int UserVillageDataCapitolBonusLevelByStatByElement = 0x30; // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement
+
         public static int UserHeroDataHeroById = 0x18; // UserHeroData.HeroById
 
         public static int UserArtifactDataArtifacts = 0x28; // UserArtifactData.Artifactsa
@@ -18,11 +20,15 @@ namespace RaidExtractor.Core.Native
         public static int UserWrapperArena = 0xB0; // UserWrapper.Arena
         public static int UserWrapperCapitol = 0xC8; // UserWrapper.Capitol
 
+        public static int CapitolWrapperVillageData = 0x18; // CapitolWrapperReadOnly.VillageData
+
         public static int HeroesWrapperArtifactData = 0x60; // HeroesWrapperReadOnly.ArtifactData
         public static int HeroesWrapperHeroData = 0x50; // HeroesWrapperReadOnly.HeroData
 
         public static int ArenaWrapperLeagueId = 0x40; // ArenaWrapperReadOnly.LeagueId
 
+        public static int DictionaryEntries = 0x18; // Dictionary.Entries
         public static int DictionaryCount = 0x20; // Dictionary.Count
+        public static int ListCount = 0x18; // List.Count
     }
 }

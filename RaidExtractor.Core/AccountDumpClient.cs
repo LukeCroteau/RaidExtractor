@@ -295,7 +295,11 @@ namespace RaidExtractor.Core
 
         [Newtonsoft.Json.JsonProperty("arenaLeague", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ArenaLeague { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("greatHall", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Dictionary<Element, Dictionary<StatKindId, int>> GreatHall { get; set; }
     }
+    
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Artifact
