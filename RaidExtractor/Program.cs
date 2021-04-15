@@ -79,16 +79,6 @@ namespace RaidExtractor
                         }
 
                         var outFile = o.OutputFile;
-
-                        var resolver = new DefaultContractResolver
-                        {
-                            NamingStrategy = new CamelCaseNamingStrategy
-                            {
-                                ProcessDictionaryKeys = true,
-                                OverrideSpecifiedNames = false
-                            }
-                        };
-
                         var json = JsonConvert.SerializeObject(dump, Formatting.Indented, SerializerSettings);
                         if (o.DumpType.ToLower() == "zip")
                         {
