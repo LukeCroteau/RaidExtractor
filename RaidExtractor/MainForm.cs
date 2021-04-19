@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using RaidExtractor.Core;
 using System.IO.Compression;
+using Newtonsoft.Json.Serialization;
 
 namespace RaidExtractor
 {
@@ -25,7 +26,7 @@ namespace RaidExtractor
             if (result == null) return;
             if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
 
-            File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Formatting.Indented));
+            File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Program.SerializerSettings));
 
             if (SaveZipFile.Checked)
             {
@@ -41,7 +42,7 @@ namespace RaidExtractor
                         {
                             using (var streamWriter = new StreamWriter(entryStream))
                             {
-                                streamWriter.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                                streamWriter.Write(JsonConvert.SerializeObject(result, Formatting.Indented, Program.SerializerSettings));
                             }
                         }
                     }

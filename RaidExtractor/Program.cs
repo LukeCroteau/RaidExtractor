@@ -6,11 +6,25 @@ using System.IO.Compression;
 using CommandLine;
 using RaidExtractor.Core;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace RaidExtractor
 {
     class Program
     {
+        public static JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy
+                {
+                    ProcessDictionaryKeys = true,
+                    OverrideSpecifiedNames = false
+                },
+            },
+        };
+
         public class Options
         {
             [Option('g', "nogui", Required = false, Default = false,
@@ -65,8 +79,7 @@ namespace RaidExtractor
                         }
 
                         var outFile = o.OutputFile;
-
-                        var json = JsonConvert.SerializeObject(dump, Formatting.Indented);
+                        var json = JsonConvert.SerializeObject(dump, Formatting.Indented, SerializerSettings);
                         if (o.DumpType.ToLower() == "zip")
                         {
                             if (!outFile.ToLower().Contains("zip")) outFile += ".zip";

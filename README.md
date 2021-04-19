@@ -1,5 +1,5 @@
 # RaidExtractor
-A tool made to extract information from the windows version of "Raid: Shadow Legends". Currently it supports v0.230 (as seen in Plarium Play launcher) and currently only extracts artifacts and current champions.
+A tool made to extract information from the windows version of "Raid: Shadow Legends". Currently it supports v0.237 (as seen in Plarium Play launcher) and currently only extracts artifacts and current champions.
 
 This application has 2 Modes:
 * A Windows GUI application. The functionality is slim, but it works!
@@ -13,7 +13,8 @@ This application has 2 Modes:
 * .NET Framework 4.8
 
 ## Future versions
-* Add Great Hall and Arena data
+* Extract last known hero compositions
+* Account stats
 
 ## Projects Using Extracted Data!
 Several other projects already exist that like to use the data this project extracts!

@@ -69,12 +69,14 @@ namespace RaidExtractor.Core
                 var heroesWrapper = userWrapper;
                 NativeWrapper.ReadProcessMemory(handle, heroesWrapper + RaidStaticInformation.UserWrapperHeroes, ref heroesWrapper); // UserWrapper.Heroes
 
+#region Artifact Extraction
+
                 var artifactsPointer = heroesWrapper;
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.HeroesWrapperArtifactData, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.UserArtifactDataArtifacts, ref artifactsPointer); // UserArtifactData.Artifacts
 
                 var artifactCount = 0;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x18, ref artifactCount); // List<Artifact>.Count
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.ListCount, ref artifactCount); // List<Artifact>.Count
 
                 var pointers = new List<IntPtr>();
                 if (artifactCount > 0)
@@ -191,13 +193,17 @@ namespace RaidExtractor.Core
                     artifacts.Add(artifact);
                 }
 
+#endregion
+
+#region Hero Extraction
+
                 var heroesDataPointer = heroesWrapper;
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.HeroesWrapperHeroData, ref heroesDataPointer); // HeroesWrapperReadOnly.HeroData
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.UserHeroDataHeroById, ref heroesDataPointer); // UserHeroData.HeroById
 
                 var count = 0;
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.DictionaryCount, ref count); // Dictionary<int, Hero>.Count
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + 0x18, ref heroesDataPointer); // Dictionary<int, Hero>.entries
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.DictionaryEntries, ref heroesDataPointer); // Dictionary<int, Hero>.entries
 
                 var heroStruct = new HeroStruct();
                 var heroMasteriesStruct = new HeroMasteryDataStruct();
@@ -271,6 +277,10 @@ namespace RaidExtractor.Core
                     heroesById[heroStruct.Id] = hero;
                 }
 
+#endregion
+
+#region Hero Artifact Extraction
+
                 var artifactsByHeroIdPtr = heroesWrapper;
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.HeroesWrapperArtifactData, ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.UserArtifactArtifactDataByHeroId, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
@@ -302,10 +312,71 @@ namespace RaidExtractor.Core
                     if (heroesById.TryGetValue(heroId, out var hero)) hero.Artifacts = arts;
                 }
 
+#endregion
+
+#region Arena League Extraction
+
+                var arenaPtr = userWrapper;
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.UserWrapperArena, ref arenaPtr);
+
+                ArenaLeagueId arenaLeague = 0;
+                NativeWrapper.ReadProcessMemory(handle, arenaPtr + RaidStaticInformation.ArenaWrapperLeagueId, ref arenaLeague);
+
+#endregion
+
+#region Great Hall Extraction
+
+                var villageDataPointer = IntPtr.Zero;
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.UserWrapperCapitol, ref villageDataPointer); // UserWrapper.Capitol
+                NativeWrapper.ReadProcessMemory(handle, villageDataPointer + RaidStaticInformation.CapitolWrapperVillageData, ref villageDataPointer); // Capitol.VillageData
+
+                var bonusLevelPointer = IntPtr.Zero;
+                NativeWrapper.ReadProcessMemory(handle, villageDataPointer + RaidStaticInformation.UserVillageDataCapitolBonusLevelByStatByElement, ref bonusLevelPointer); // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement
+
+                count = 0;
+                NativeWrapper.ReadProcessMemory(handle, bonusLevelPointer + RaidStaticInformation.DictionaryCount, ref count); // Dictionary<Element, Dictionary<StatKindId, int>>.Count
+                NativeWrapper.ReadProcessMemory(handle, bonusLevelPointer + RaidStaticInformation.DictionaryEntries, ref bonusLevelPointer); // Dictionary<Element, Dictionary<StatKindId, int>>.Entries
+
+                var greatHall = new Dictionary<Element, Dictionary<StatKindId, int>>();
+
+                for (var i = 0; i < count; i++)
+                {
+                    var elementPointer = bonusLevelPointer + 0x28 + 0x18 * i; // Dictionary<Element, Dictionary<StatKindId, int>>.Key;
+                    var statDictionaryPointer = bonusLevelPointer + 0x30 + 0x18 * i; // Dictionary<Element, Dictionary<StatKindId, int>>.Value
+
+                    Element currentElement = 0; // Initial value
+                    NativeWrapper.ReadProcessMemory(handle, elementPointer, ref currentElement);
+                    NativeWrapper.ReadProcessMemory(handle, statDictionaryPointer, ref statDictionaryPointer);
+
+                    var statsCount = 0;
+                    var statsPointer = IntPtr.Zero;
+                    var statsDictionary = new Dictionary<StatKindId, int>();
+
+                    NativeWrapper.ReadProcessMemory(handle, statDictionaryPointer + RaidStaticInformation.DictionaryCount, ref statsCount); // Dictionary<StatKindId, int>().Count
+                    NativeWrapper.ReadProcessMemory(handle, statDictionaryPointer + RaidStaticInformation.DictionaryEntries, ref statsPointer); // Dictionary<StatKindId, int>().Entries
+                    for (var j = 0; j < statsCount; j++)
+                    {
+                        var statKindPointer = statsPointer + 0x28 + 0x10 * j;
+                        var statValuePointer = statsPointer + 0x2C + 0x10 * j;
+
+                        StatKindId statKindId = 0;
+                        int statLevel = 0;
+                        NativeWrapper.ReadProcessMemory(handle, statKindPointer, ref statKindId);
+                        NativeWrapper.ReadProcessMemory(handle, statValuePointer, ref statLevel);
+
+                        statsDictionary.Add(statKindId, statLevel);
+                    }
+                    greatHall.Add(currentElement, statsDictionary);
+                }
+
+#endregion
+
                 return new AccountDump
                 {
                     Artifacts = artifacts,
-                    Heroes = heroes
+                    Heroes = heroes,
+                    ArenaLeague = arenaLeague.ToString(),
+                    GreatHall = greatHall
                 };
             }
             finally

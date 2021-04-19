@@ -17,13 +17,22 @@ findclasslist = {
     'public abstract class HeroesWrapperReadOnly ': [{
         'protected readonly UpdatableArtifactData ArtifactData;': '        public static int HeroesWrapperArtifactData = {}; // HeroesWrapperReadOnly.ArtifactData\n',
         'protected readonly UpdatableHeroData HeroData;': '        public static int HeroesWrapperHeroData = {}; // HeroesWrapperReadOnly.HeroData\n',
-    }],    
+    }],
+    'public abstract class ArenaWrapperReadOnly ': [{
+        'protected Nullable<ArenaLeagueId> LeagueId;': '        public static int ArenaWrapperLeagueId = {}; // ArenaWrapperReadOnly.LeagueId\n',
+    }],
+    'public abstract class CapitolWrapperReadOnly ': [{
+        'protected readonly UpdatableVillageData VillageData;': '        public static int CapitolWrapperVillageData = {}; // CapitolWrapperReadOnly.VillageData\n',
+    }],
     'public class UserArtifactData ': [{
         'public List<Artifact> Artifacts;': '        public static int UserArtifactDataArtifacts = {}; // UserArtifactData.Artifactsa\n',
         'public Dictionary<int, HeroArtifactData> ArtifactDataByHeroId;': '        public static int UserArtifactArtifactDataByHeroId = {}; // UserArtifactData.ArtifactDataByHeroId\n',
     }],
     'public class UserHeroData ': [{
         'public Dictionary<int, Hero> HeroById;': '        public static int UserHeroDataHeroById = {}; // UserHeroData.HeroById\n',
+    }],
+    'public class UserVillageData ': [{
+        'public Dictionary<Element, Dictionary<StatKindId, int>> CapitolBonusLevelByStatByElement;': '        public static int UserVillageDataCapitolBonusLevelByStatByElement = {}; // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement\n',
     }],
 }
 
@@ -87,7 +96,9 @@ def dump_class(vernum, metadata_path):
     if classesfound != len(findclasslist):
         print(str.format('*** ERROR *** Expected {} classes, found {} classes.', len(findclasslist), classesfound))
 
+    outfile.write('        public static int DictionaryEntries = 0x18; // Dictionary.Entries\n')
     outfile.write('        public static int DictionaryCount = 0x20; // Dictionary.Count\n')
+    outfile.write('        public static int ListCount = 0x18; // List.Count\n')
 
     outfile.write('    }\n')
     outfile.write('}\n')
