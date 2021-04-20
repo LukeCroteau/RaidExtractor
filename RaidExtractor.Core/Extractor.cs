@@ -371,12 +371,100 @@ namespace RaidExtractor.Core
 
 #endregion
 
+#region Shard extraction
+                var shards = new Dictionary<string, ShardInfo>();
+
+                var shardsDataPointer = userWrapper;
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.UserWrapperShards, ref shardsDataPointer); // UserWrapper.ShardWrapperReadOnly
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ShardWrapperData, ref shardsDataPointer); // ShardWrapperReadOnly.UserShardData
+
+                var shardSummonDataPointer = shardsDataPointer;
+                NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + RaidStaticInformation.ShardSummonData, ref shardSummonDataPointer); // UserShardData.SummonResults
+
+                // Read the shard count data
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ShardData, ref shardsDataPointer); 
+
+                var shardCount = 0;
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ListCount, ref shardCount);
+
+                List<IntPtr> shardPointers = new List<IntPtr>();
+                if (shardCount > 0)
+                {
+                    var arrayPointer = shardsDataPointer;
+                    NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + 0x10, ref arrayPointer); 
+
+                    var ptrs = new IntPtr[shardCount];
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    shardPointers.AddRange(ptrs);
+
+                }
+
+                List<ShardStruct> shardCounts = new List<ShardStruct>();
+                foreach (var pointer in shardPointers)
+                {
+                    ShardStruct countData = new ShardStruct();
+                    NativeWrapper.ReadProcessMemory(handle, pointer, ref countData);
+
+                    string key = countData.ShardTypeId.ToString();
+
+                    if (!shards.ContainsKey(key))
+                    {
+                        shards.Add(key, new ShardInfo());
+                        shards[key].SummonData = new List<ShardSummonInfo>();
+                    }
+
+                    shards[key].Count = countData.Count;
+                }
+
+                // Now read the summon data (pity system)
+                var shardSummonCount = 0;
+                NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + RaidStaticInformation.ListCount, ref shardSummonCount);
+
+                shardPointers = new List<IntPtr>();
+                if (shardSummonCount > 0)
+                {
+                    var arrayPointer = shardSummonDataPointer;
+                    NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + 0x10, ref arrayPointer);
+
+                    var ptrs = new IntPtr[shardSummonCount];
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    shardPointers.AddRange(ptrs);
+
+                }
+
+                List<ShardSummonData> shardSummons = new List<ShardSummonData>();
+                foreach (var pointer in shardPointers)
+                {
+                    ShardSummonData summonData = new ShardSummonData();
+                    NativeWrapper.ReadProcessMemory(handle, pointer, ref summonData);
+
+                    string key = summonData.ShardTypeId.ToString();
+                    if (!shards.ContainsKey(key))
+                    {
+                        // We might have to add an entry if the user has no shards of that type.
+                        shards.Add(key, new ShardInfo());
+                        shards[key].SummonData = new List<ShardSummonInfo>();
+                        shards[key].Count = 0;
+                    }
+
+                    ShardSummonInfo info = new ShardSummonInfo();
+                    info.Rarity = summonData.rarity.ToString();
+                    info.LastHeroId = summonData.lastHeroId;
+                    info.PullCount = summonData.pullCount;
+                    shards[key].SummonData.Add(info);
+
+                }
+
+
+                #endregion
+
                 return new AccountDump
                 {
                     Artifacts = artifacts,
                     Heroes = heroes,
                     ArenaLeague = arenaLeague.ToString(),
-                    GreatHall = greatHall
+                    GreatHall = greatHall,
+                    Shards = shards
                 };
             }
             finally
