@@ -30,6 +30,7 @@ findclasslist = {
     }],
     'public class UserHeroData ': [{
         'public Dictionary<int, Hero> HeroById;': '        public static int UserHeroDataHeroById = {}; // UserHeroData.HeroById\n',
+        'public Dictionary<int, int[]> BattlePresets;': '        public static int UserHeroDataBattlePresets = {}; // UserHeroData.BattlePresets\n',
     }],
     'public class UserVillageData ': [{
         'public Dictionary<Element, Dictionary<StatKindId, int>> CapitolBonusLevelByStatByElement;': '        public static int UserVillageDataCapitolBonusLevelByStatByElement = {}; // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement\n',

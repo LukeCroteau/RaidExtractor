@@ -13,7 +13,6 @@ This application has 2 Modes:
 * .NET Framework 4.8
 
 ## Future versions
-* Extract last known hero compositions
 * Account stats
 
 ## Projects Using Extracted Data!
