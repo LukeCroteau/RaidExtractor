@@ -105,11 +105,15 @@ def dump_class(vernum, metadata_path):
 
     outfile.write('        public static int DictionaryEntries = 0x18; // Dictionary.Entries\n')
     outfile.write('        public static int DictionaryCount = 0x20; // Dictionary.Count\n')
-    outfile.write('        public static int ListCount = 0x18; // List.Count\n')
 
+    outfile.write('        public static int ListIndexArray = 0x10; // Offset to array of element pointers.\n')
+    outfile.write('        public static int ListCount = 0x18; // List.Count\n')
+    outfile.write('        public static int ListElementPointerArray = 0x20; // Offset from ListIndexArray to start of element pointers.\n')
+    
     outfile.write('    }\n')
     outfile.write('}\n')
     outfile.close()
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 2:

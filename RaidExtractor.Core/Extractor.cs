@@ -82,10 +82,10 @@ namespace RaidExtractor.Core
                 if (artifactCount > 0)
                 {
                     var arrayPointer = artifactsPointer;
-                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + 0x10, ref arrayPointer); // List<Artifact>._array
+                    NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.ListIndexArray, ref arrayPointer); // List<Artifact>._array
 
                     var ptrs = new IntPtr[artifactCount];
-                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + RaidStaticInformation.ListElementPointerArray, ptrs);
                     pointers.AddRange(ptrs);
 
                 }
@@ -391,12 +391,11 @@ namespace RaidExtractor.Core
                 if (shardCount > 0)
                 {
                     var arrayPointer = shardsDataPointer;
-                    NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + 0x10, ref arrayPointer); 
+                    NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ListIndexArray, ref arrayPointer); 
 
                     var ptrs = new IntPtr[shardCount];
-                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + RaidStaticInformation.ListElementPointerArray, ptrs);
                     shardPointers.AddRange(ptrs);
-
                 }
 
                 List<ShardStruct> shardCounts = new List<ShardStruct>();
@@ -424,10 +423,10 @@ namespace RaidExtractor.Core
                 if (shardSummonCount > 0)
                 {
                     var arrayPointer = shardSummonDataPointer;
-                    NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + 0x10, ref arrayPointer);
+                    NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + RaidStaticInformation.ListIndexArray, ref arrayPointer);
 
                     var ptrs = new IntPtr[shardSummonCount];
-                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + 0x20, ptrs);
+                    NativeWrapper.ReadProcessMemoryArray(handle, arrayPointer + RaidStaticInformation.ListElementPointerArray, ptrs);
                     shardPointers.AddRange(ptrs);
 
                 }
@@ -452,11 +451,9 @@ namespace RaidExtractor.Core
                     info.LastHeroId = summonData.lastHeroId;
                     info.PullCount = summonData.pullCount;
                     shards[key].SummonData.Add(info);
-
                 }
 
-
-                #endregion
+#endregion
 
                 return new AccountDump
                 {
