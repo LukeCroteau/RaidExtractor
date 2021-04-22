@@ -45,7 +45,11 @@
         ResistanceAndBlockDebuff = 40,
         AttackAndCritRate = 41,
         FreezeResistAndRate = 42,
+        CritRateAndLifeDrain = 43,
+        PassiveShareDamageAndHeal = 44,
         IgnoreCooldown = 1000,
         RemoveDebuff = 1001,
+        ShieldAccessory = 1002,
+        ChangeHitType = 1003,
     }
 }

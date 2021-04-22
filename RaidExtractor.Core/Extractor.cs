@@ -193,6 +193,7 @@ namespace RaidExtractor.Core
                     artifacts.Add(artifact);
                 }
 
+                artifacts = artifacts.OrderBy(o => o.Id).ToList();
 #endregion
 
 #region Hero Extraction
@@ -277,6 +278,7 @@ namespace RaidExtractor.Core
                     heroesById[heroStruct.Id] = hero;
                 }
 
+                heroes = heroes.OrderBy(o => o.Id).ToList();
 #endregion
 
 #region Hero Artifact Extraction
