@@ -34,6 +34,13 @@ findclasslist = {
     'public class UserVillageData ': [{
         'public Dictionary<Element, Dictionary<StatKindId, int>> CapitolBonusLevelByStatByElement;': '        public static int UserVillageDataCapitolBonusLevelByStatByElement = {}; // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement\n',
     }],
+    'public abstract class ShardWrapperReadOnly ': [{
+        'protected readonly UserShardData ShardData;': '        public static int ShardWrapperData = {}; // ShardWrapperReadOnly\n',
+    }],
+    'public class UserShardData ': [{
+        'public List<Shard> Shards;': '        public static int ShardData = {}; // ShardWrapperReadOnly.UserShardData.Shards\n',
+        'public List<ShardSummonResult> SummonResults;': '        public static int ShardSummonData = {}; // ShardWrapperReadOnly.UserShardData.SummonResults\n',
+    }],
 }
 
 def find_address_in_script(lines, searchstr: str):
@@ -45,7 +52,7 @@ def find_address_in_script(lines, searchstr: str):
     return result
 
 def dump_class(vernum, metadata_path):
-    metadata_path = os.path.join(metadata_path, '')    
+    metadata_path = os.path.join(metadata_path, '')
     print('Metadata Full Path', metadata_path)
     outfile = open('../RaidExtractor.Core/Native/RaidStaticInformation.cs', 'w')
     outfile.write('namespace RaidExtractor.Core.Native\n')
@@ -91,18 +98,22 @@ def dump_class(vernum, metadata_path):
                                 outfile.write(str.format(nv, lines[finder].split('// ')[1]))
                     if subclassesfound != len(item):
                         print(str.format('*** ERROR *** Expected {} subclasses, found {} subclasses.', len(item), subclassesfound))
-                outfile.write('\n')            
+                outfile.write('\n')
 
     if classesfound != len(findclasslist):
         print(str.format('*** ERROR *** Expected {} classes, found {} classes.', len(findclasslist), classesfound))
 
     outfile.write('        public static int DictionaryEntries = 0x18; // Dictionary.Entries\n')
     outfile.write('        public static int DictionaryCount = 0x20; // Dictionary.Count\n')
-    outfile.write('        public static int ListCount = 0x18; // List.Count\n')
 
+    outfile.write('        public static int ListIndexArray = 0x10; // Offset to array of element pointers.\n')
+    outfile.write('        public static int ListCount = 0x18; // List.Count\n')
+    outfile.write('        public static int ListElementPointerArray = 0x20; // Offset from ListIndexArray to start of element pointers.\n')
+    
     outfile.write('    }\n')
     outfile.write('}\n')
     outfile.close()
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 2:

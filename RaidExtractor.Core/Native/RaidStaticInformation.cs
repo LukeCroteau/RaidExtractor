@@ -8,6 +8,9 @@ namespace RaidExtractor.Core.Native
 
         public static int UserVillageDataCapitolBonusLevelByStatByElement = 0x30; // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement
 
+        public static int ShardData = 0x10; // ShardWrapperReadOnly.UserShardData.Shards
+        public static int ShardSummonData = 0x18; // ShardWrapperReadOnly.UserShardData.SummonResults
+
         public static int UserHeroDataHeroById = 0x18; // UserHeroData.HeroById
 
         public static int UserArtifactDataArtifacts = 0x28; // UserArtifactData.Artifactsa
@@ -22,6 +25,8 @@ namespace RaidExtractor.Core.Native
 
         public static int CapitolWrapperVillageData = 0x18; // CapitolWrapperReadOnly.VillageData
 
+        public static int ShardWrapperData = 0x18; // ShardWrapperReadOnly
+
         public static int HeroesWrapperArtifactData = 0x60; // HeroesWrapperReadOnly.ArtifactData
         public static int HeroesWrapperHeroData = 0x50; // HeroesWrapperReadOnly.HeroData
 
@@ -29,6 +34,8 @@ namespace RaidExtractor.Core.Native
 
         public static int DictionaryEntries = 0x18; // Dictionary.Entries
         public static int DictionaryCount = 0x20; // Dictionary.Count
+        public static int ListIndexArray = 0x10; // Offset to array of element pointers.
         public static int ListCount = 0x18; // List.Count
+        public static int ListElementPointerArray = 0x20; // Offset from ListIndexArray to start of element pointers.
     }
 }

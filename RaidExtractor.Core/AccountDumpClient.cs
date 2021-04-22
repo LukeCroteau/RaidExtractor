@@ -298,6 +298,9 @@ namespace RaidExtractor.Core
 
         [Newtonsoft.Json.JsonProperty("greatHall", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Dictionary<Element, Dictionary<StatKindId, int>> GreatHall { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("shards", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Dictionary<string, ShardInfo> Shards { get; set; }
     }
     
 
@@ -450,6 +453,29 @@ namespace RaidExtractor.Core
 
         [Newtonsoft.Json.JsonProperty("masteries", Required = Newtonsoft.Json.Required.Always)]
         public List<int> Masteries { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ShardSummonInfo
+    {
+        [Newtonsoft.Json.JsonProperty("rarity", Required = Newtonsoft.Json.Required.Always)]
+        public string Rarity { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pullCount", Required = Newtonsoft.Json.Required.Always)]
+        public int PullCount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lastHeroId", Required = Newtonsoft.Json.Required.Always)]
+        public int LastHeroId { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ShardInfo
+    {
+        [Newtonsoft.Json.JsonProperty("count", Required = Newtonsoft.Json.Required.Always)]
+        public int Count { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("summonData", Required = Newtonsoft.Json.Required.Always)]
+        public List<ShardSummonInfo> SummonData { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.7.0.0 (NJsonSchema v10.1.24.0 (Newtonsoft.Json v11.0.0.0))")]
