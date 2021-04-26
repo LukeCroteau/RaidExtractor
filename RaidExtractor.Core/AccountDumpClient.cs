@@ -301,6 +301,9 @@ namespace RaidExtractor.Core
 
         [Newtonsoft.Json.JsonProperty("shards", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Dictionary<string, ShardInfo> Shards { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("stagePresets", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Dictionary<int, int[]> StagePresets { get; set; }
     }
     
 

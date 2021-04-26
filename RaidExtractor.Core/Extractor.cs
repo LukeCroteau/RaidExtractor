@@ -457,13 +457,53 @@ namespace RaidExtractor.Core
 
 #endregion
 
+#region BattlePresets extraction
+
+                var presetsPointer = heroesWrapper;
+                NativeWrapper.ReadProcessMemory(handle, presetsPointer + RaidStaticInformation.HeroesWrapperHeroData, ref presetsPointer); // HeroesWrapperReadOnly.HeroData
+                NativeWrapper.ReadProcessMemory(handle, presetsPointer + RaidStaticInformation.UserHeroDataBattlePresets, ref presetsPointer); // UserHeroData.BattlePresets
+
+                var battlePresetsCount = 0;
+                var presetsDataPointer = IntPtr.Zero;
+
+                NativeWrapper.ReadProcessMemory(handle, presetsPointer + RaidStaticInformation.DictionaryCount, ref battlePresetsCount); // Dictionary<int, int[]>.Count
+                NativeWrapper.ReadProcessMemory(handle, presetsPointer + RaidStaticInformation.DictionaryEntries, ref presetsDataPointer); // Dictionary<int, int[]>.Entries
+
+                var stagePresets = new Dictionary<int, int[]>();
+
+                for (var i = 0; i < battlePresetsCount; i++)
+                {
+                    var stageIdPointer = presetsDataPointer + 0x28 + 0x18 * i; // Dictionary<int, int[]>.Key;
+                    var heroIdArrayPointer = presetsDataPointer + 0x30 + 0x18 * i; // Dictionary<int, int[]>.Value
+                    int currentStage = 0;
+
+                    NativeWrapper.ReadProcessMemory(handle, stageIdPointer, ref currentStage);
+                    NativeWrapper.ReadProcessMemory(handle, heroIdArrayPointer, ref heroIdArrayPointer);
+
+                    var heroArrayCount = 0;
+                    NativeWrapper.ReadProcessMemory(handle, heroIdArrayPointer + RaidStaticInformation.ListCount, ref heroArrayCount); // Assuming Array.Count has identical offset as List.Count
+
+                    // Making use of ReadProcessMemoryArray instead of iterating the array ourselves
+                    if (heroArrayCount > 0)
+                    {
+                        var heroIdArray = new int[heroArrayCount];
+                        var heroIdPointer = heroIdArrayPointer + 0x20; // Location of the first entry
+
+                        NativeWrapper.ReadProcessMemoryArray(handle, heroIdPointer, heroIdArray);
+                        stagePresets[currentStage] = heroIdArray;
+                    }
+                }
+				
+#endregion
+
                 return new AccountDump
                 {
                     Artifacts = artifacts,
                     Heroes = heroes,
                     ArenaLeague = arenaLeague.ToString(),
                     GreatHall = greatHall,
-                    Shards = shards
+                    Shards = shards,
+                    StagePresets = stagePresets,  
                 };
             }
             finally

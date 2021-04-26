@@ -12,6 +12,7 @@ namespace RaidExtractor.Core.Native
         public static int ShardSummonData = 0x18; // ShardWrapperReadOnly.UserShardData.SummonResults
 
         public static int UserHeroDataHeroById = 0x18; // UserHeroData.HeroById
+        public static int UserHeroDataBattlePresets = 0x28; // UserHeroData.BattlePresets
 
         public static int UserArtifactDataArtifacts = 0x28; // UserArtifactData.Artifactsa
         public static int UserArtifactArtifactDataByHeroId = 0x30; // UserArtifactData.ArtifactDataByHeroId
