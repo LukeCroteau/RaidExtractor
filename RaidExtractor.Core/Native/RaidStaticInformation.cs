@@ -2,9 +2,9 @@ namespace RaidExtractor.Core.Native
 {
     class RaidStaticInformation
     {
-        public static string ExpectedRaidVersion = "\\237\\";
-        public static int MemoryLocation = 56875040;
-        public static int ExternalStorageAddress = 57009952;
+        public static string ExpectedRaidVersion = "\\238\\";
+        public static int MemoryLocation = 57002616;
+        public static int ExternalStorageAddress = 57135880;
 
         public static int UserVillageDataCapitolBonusLevelByStatByElement = 0x30; // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement
 
@@ -17,7 +17,7 @@ namespace RaidExtractor.Core.Native
         public static int UserArtifactDataArtifacts = 0x28; // UserArtifactData.Artifactsa
         public static int UserArtifactArtifactDataByHeroId = 0x30; // UserArtifactData.ArtifactDataByHeroId
 
-        public static int AppModelUserWrapper = 0x158; // AppModel._userWrapper
+        public static int AppModelUserWrapper = 0x160; // AppModel._userWrapper
 
         public static int UserWrapperHeroes = 0x28; // UserWrapper.Heroes
         public static int UserWrapperShards = 0x70; // UserWrapper.Shards
