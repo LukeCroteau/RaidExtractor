@@ -17,7 +17,7 @@
         KnightsRevenant = 12,
         Barbarians = 13,
         NyresanElves = 14,
-        AssassinsGuild = 15,
+        Samurai = 15,
         Dwarves = 16,
     }
 }
