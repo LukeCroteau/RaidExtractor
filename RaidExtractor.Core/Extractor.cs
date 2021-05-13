@@ -113,7 +113,7 @@ namespace RaidExtractor.Core
                     NativeWrapper.ReadProcessMemory(handle, buckets + 0x18, ref bucketCount);
 
                     var nodes = new IntPtr[bucketCount];
-                    if (bucketCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, buckets + 0x20, nodes);
+                    if (bucketCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, buckets + RaidStaticInformation.ListElementPointerArray, nodes);
 
                     for (var i = 0; i < nodes.Length; i++)
                     {
@@ -165,13 +165,13 @@ namespace RaidExtractor.Core
 
                     var bonusesPointer = artifactStruct.SecondaryBonuses;
                     var bonusCount = 0;
-                    NativeWrapper.ReadProcessMemory(handle, bonusesPointer + 0x18, ref bonusCount);
-                    NativeWrapper.ReadProcessMemory(handle, bonusesPointer + 0x10, ref bonusesPointer);
+                    NativeWrapper.ReadProcessMemory(handle, bonusesPointer + RaidStaticInformation.ListCount, ref bonusCount);
+                    NativeWrapper.ReadProcessMemory(handle, bonusesPointer + RaidStaticInformation.ListIndexArray, ref bonusesPointer);
 
                     artifact.SecondaryBonuses = new List<ArtifactBonus>();
 
                     var bonuses = new IntPtr[bonusCount];
-                    if (bonusCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, bonusesPointer + 0x20, bonuses, 0, bonuses.Length);
+                    if (bonusCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, bonusesPointer + RaidStaticInformation.ListElementPointerArray, bonuses, 0, bonuses.Length);
 
                     foreach (var bonusPointer in bonuses)
                     {
@@ -208,6 +208,7 @@ namespace RaidExtractor.Core
 
                 var heroStruct = new HeroStruct();
                 var heroMasteriesStruct = new HeroMasteryDataStruct();
+                var skillStruct = new SkillStruct();
                 var heroesById = new Dictionary<int, Hero>();
                 var heroes = new List<Hero>();
                 for (var i = 0; i < count; i++)
@@ -238,13 +239,39 @@ namespace RaidExtractor.Core
                     var masteryCount = 0;
                     if (heroStruct.MasteryData != IntPtr.Zero && masteriesPtr != IntPtr.Zero)
                     {
-                        NativeWrapper.ReadProcessMemory(handle, masteriesPtr + 0x18, ref masteryCount);
-                        NativeWrapper.ReadProcessMemory(handle, masteriesPtr + 0x10, ref masteriesPtr);
+                        NativeWrapper.ReadProcessMemory(handle, masteriesPtr + RaidStaticInformation.ListCount, ref masteryCount);
+                        NativeWrapper.ReadProcessMemory(handle, masteriesPtr + RaidStaticInformation.ListIndexArray, ref masteriesPtr);
                     }
 
                     var masteries = new int[masteryCount];
-                    if (masteryCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, masteriesPtr + 0x20, masteries, 0, masteries.Length);
+                    if (masteryCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, masteriesPtr + RaidStaticInformation.ListElementPointerArray, masteries, 0, masteries.Length);
                     hero.Masteries.AddRange(masteries);
+
+                    var skillsPtr = heroStruct.Skills;
+                    var skillsCount = 0;
+                    if (skillsPtr != IntPtr.Zero)
+                    {
+                        NativeWrapper.ReadProcessMemory(handle, heroStruct.Skills + RaidStaticInformation.ListCount, ref skillsCount);
+                        NativeWrapper.ReadProcessMemory(handle, heroStruct.Skills + RaidStaticInformation.ListIndexArray, ref skillsPtr);
+                    }
+
+                    hero.Skills = new List<Skill>();
+                    var skills = new IntPtr[skillsCount];
+                    if (skillsCount > 0) NativeWrapper.ReadProcessMemoryArray(handle, skillsPtr + RaidStaticInformation.ListElementPointerArray, skills, 0, skills.Length);
+
+                    foreach (var skillPointer in skills)
+                    {
+                        NativeWrapper.ReadProcessMemory(handle, skillPointer, ref skillStruct);
+
+                        var skill = new Skill
+                        {
+                            Id = skillStruct.Id,
+                            TypeId = skillStruct.TypeId,
+                            Level = skillStruct.Level,
+                        };
+
+                        hero.Skills.Add(skill);
+                    }
 
                     if (heroTypeById.TryGetValue(hero.TypeId, out var heroType))
                     {
