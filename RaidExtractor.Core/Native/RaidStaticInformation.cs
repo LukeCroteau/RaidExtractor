@@ -2,7 +2,7 @@ namespace RaidExtractor.Core.Native
 {
     class RaidStaticInformation
     {
-        public static string ExpectedRaidVersion = "\\238\\";
+        public static string ExpectedRaidVersion = "\\239\\";
         public static int MemoryLocation = 57002616;
         public static int ExternalStorageAddress = 57135880;
 
