@@ -3,12 +3,31 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.230</Version>
+    <Configurations>Debug;Release;Debug_Dev;Release_Dev</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_Dev|AnyCPU'">
+    <DefineConstants>TRACE;DEV_BUILD</DefineConstants>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_Dev|AnyCPU'">
+    <DefineConstants>TRACE;DEV_BUILD</DefineConstants>
+    <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="datavalues.json" />
     <None Remove="hero_types.json" />
     <None Remove="multipliers.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="datavalues.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="hero_types.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -19,9 +38,12 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ProcessMemoryUtilities.Net" Version="1.3.4" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.4.0" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Il2CppDumper\Il2CppDumper\Il2CppDumper.csproj" />
-  </ItemGroup>
+  <Choose>
+    <When Condition="$(DefineConstants.Contains('DEV_BUILD'))">
+      <ItemGroup>
+        <ProjectReference Include="..\Il2CppDumper\Il2CppDumper\Il2CppDumper.csproj" />
+      </ItemGroup>
+    </When>
+  </Choose>
 </Project>

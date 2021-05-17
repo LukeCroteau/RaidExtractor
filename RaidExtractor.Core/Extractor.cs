@@ -34,17 +34,12 @@ namespace RaidExtractor.Core
             }
         }
 
-        public AccountDump GetDump(bool forceDataRefresh)
+        public AccountDump GetDump()
         {
             var process = IsRaidRunning();
             if (process == null)
             {
                 return null;
-            }
-
-            if (forceDataRefresh)
-            {
-                StaticDataHandler.Instance.UpdateValuesFromGame(process.MainModule.FileName);
             }
 
             if (!CheckRaidVersion(process))

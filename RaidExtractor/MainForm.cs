@@ -61,7 +61,7 @@ namespace RaidExtractor
         {
             try
             {
-                return raidExtractor.GetDump(ForceUpdate.Checked);
+                return raidExtractor.GetDump();
             }
             catch (Exception ex)
             {

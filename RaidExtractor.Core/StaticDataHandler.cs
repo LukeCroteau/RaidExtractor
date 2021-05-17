@@ -1,12 +1,14 @@
 ﻿using System;
 using Microsoft.Win32;
 using System.Collections.Generic;
+#if DEV_BUILD
 using Il2CppDumper;
+#endif
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace RaidExtractor.Core
 {
@@ -17,9 +19,8 @@ namespace RaidExtractor.Core
         // Duplicated from the Il2CppDumper project as they are innaccessible there.
         public const int FIELD_ATTRIBUTE_STATIC = 0x0010;
         public const int TYPE_ATTRIBUTE_SEALED = 0x00000100;
-        #endregion
+#endregion
         public const uint IL2CPPMAGIC_PE = 0x905A4D;
-        public const string REGISTRY_KEY = "HKEY_CURRENT_USER\\SOFTWARE\\RaidExtractor";
 
         struct GameDataEntry
         {
@@ -35,6 +36,7 @@ namespace RaidExtractor.Core
             public string ClassName; // The name of the class containing the method.
             public string MemberName; // The member, or type name.
 
+
             public GameDataEntry(DataType dataType, string name, string className, string memberName)
             {
                 Type = dataType;
@@ -44,6 +46,7 @@ namespace RaidExtractor.Core
             }
         };
 
+        // List of class/member offsets to be accessed in the game.
         GameDataEntry[] SearchEntries =
         {
             new GameDataEntry(GameDataEntry.DataType.SystemMethod, "MemoryLocation", "Client.App.SingleInstance<AppModel>", "get_Instance"),
@@ -76,13 +79,61 @@ namespace RaidExtractor.Core
             new GameDataEntry(GameDataEntry.DataType.FieldOffset, "ShardSummonData", "UserShardData", "SummonResults")
         };
 
+        [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
+        public class DataValue
+        {
+            [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+            public string Name { get; set; }
+
+            [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+            public int Value { get; set; }
+        };
+
+        [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.24.0 (Newtonsoft.Json v11.0.0.0)")]
+        public class DataValues
+        {
+            [Newtonsoft.Json.JsonProperty("version", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+            public string Version { get; set; }
+
+            [Newtonsoft.Json.JsonProperty("values", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
+            public System.Collections.Generic.ICollection<DataValue> Values { get; set; }
+        };
+
+        private readonly DataValues CurrentData;
+
         private Dictionary<string, object> CurrentValues = new Dictionary<string, object>();
 
         private static readonly StaticDataHandler instance = new StaticDataHandler();
 
         public StaticDataHandler()
         {
-            UpdateValuesFromRegistry();
+            try
+            {
+                // Load existing data values from embedded resource.
+                var serializer = new JsonSerializer();
+                var assembly = typeof(Extractor).Assembly;
+
+                using (var stream = assembly.GetManifestResourceStream("RaidExtractor.Core.datavalues.json"))
+                using (var sr = new StreamReader(stream))
+                using (var textReader = new JsonTextReader(sr))
+                {
+                    CurrentData = serializer.Deserialize<DataValues>(textReader);
+                }
+
+                SetVariable("ExpectedRaidVersion", CurrentData.Version);
+                foreach (DataValue v in CurrentData.Values)
+                {
+                    SetVariable(v.Name, v.Value);
+                }
+            }
+            catch
+            {
+#if !DEV_BUILD
+                // Don't throw exception for dev build as we can generate new values.
+                throw new Exception("Unable to load static data values.");
+#endif
+            }
         }
 
         public static StaticDataHandler Instance
@@ -93,8 +144,22 @@ namespace RaidExtractor.Core
             }
         }
 
+        public static JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
+        {
+            Formatting = Formatting.Indented,
+            ContractResolver = new DefaultContractResolver
+            {
+                NamingStrategy = new CamelCaseNamingStrategy
+                {
+                    ProcessDictionaryKeys = true,
+                    OverrideSpecifiedNames = false
+                },
+            },
+        };
+
         public void UpdateValuesFromGame(string exePath)
         {
+#if DEV_BUILD
             Il2Cpp il2Cpp;
             Il2CppExecutor executor;
             Metadata metadata;
@@ -116,6 +181,9 @@ namespace RaidExtractor.Core
                 throw new Exception("Failed to extract the data from the game.");
             }
 
+            DataValues newValues = new DataValues();
+            newValues.Version = version;
+            newValues.Values = new List<DataValue>();
             foreach (GameDataEntry entry in SearchEntries)
             {
                 switch (entry.Type)
@@ -130,8 +198,21 @@ namespace RaidExtractor.Core
                         SetVariable(entry.Name, GetTypeInfoAddress(il2Cpp, metadata, executor, entry.MemberName));
                         break;
                 }
+
+                DataValue v = new DataValue();
+                v.Name = entry.Name;
+                v.Value = (int)GetValue(entry.Name);
+                newValues.Values.Add(v);
             }
+
+            string filename = Path.GetTempPath() + "\\datavalues.json";
+            File.WriteAllText(filename, JsonConvert.SerializeObject(newValues, SerializerSettings));
+            Console.WriteLine("Written class data to " + filename + ". Copy to porject directory before rebuilding.");
+#else
+            throw new Exception("Update required. Game version does not match expected version.");
+#endif
         }
+
 
         public object GetValue(string name)
         {
@@ -143,17 +224,7 @@ namespace RaidExtractor.Core
             return CurrentValues[name];
         }
 
-        private void UpdateValuesFromRegistry()
-        {
-            SetVariable("ExpectedRaidVersion", (string)Registry.GetValue(REGISTRY_KEY, "ExpectedRaidVersion", "None"));
-
-            foreach (GameDataEntry entry in SearchEntries)
-            {
-                int value = (int)Registry.GetValue(REGISTRY_KEY, entry.Name, 0);
-                SetVariable(entry.Name, value);
-            }
-        }
-
+#if DEV_BUILD
         private bool FindGameFiles(string baseDir, out string il2CppPath, out string metadataPath)
         {
             il2CppPath = "";
@@ -228,7 +299,7 @@ namespace RaidExtractor.Core
                     il2Cpp.Init(codeRegistration, metadataRegistration);
                 }
             }
-            catch (Exception e)
+            catch
             {
                 throw new Exception("ERROR: An error occurred while processing.");
             }
@@ -330,7 +401,7 @@ namespace RaidExtractor.Core
 
             throw new Exception("Class " + className + " not found.");
         }
-
+#endif
         private void SetVariable(string name, object value)
         {
             if (!CurrentValues.ContainsKey(name))
@@ -338,7 +409,6 @@ namespace RaidExtractor.Core
                 CurrentValues.Add(name, value);
             }
             CurrentValues[name] = value;
-            Registry.SetValue(REGISTRY_KEY, name, value);
         }
     }
 }

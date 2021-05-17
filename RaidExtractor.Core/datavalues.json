@@ -1,0 +1,81 @@
+{
+  "version": "\\239\\",
+  "values": [
+    {
+      "name": "MemoryLocation",
+      "value": 57002616
+    },
+    {
+      "name": "ExternalStorageAddress",
+      "value": 57135880
+    },
+    {
+      "name": "AppModelUserWrapper",
+      "value": 352
+    },
+    {
+      "name": "UserWrapperHeroes",
+      "value": 40
+    },
+    {
+      "name": "UserWrapperShards",
+      "value": 112
+    },
+    {
+      "name": "UserWrapperArena",
+      "value": 176
+    },
+    {
+      "name": "UserWrapperCapitol",
+      "value": 200
+    },
+    {
+      "name": "HeroesWrapperArtifactData",
+      "value": 96
+    },
+    {
+      "name": "HeroesWrapperHeroData",
+      "value": 80
+    },
+    {
+      "name": "ArenaWrapperLeagueId",
+      "value": 64
+    },
+    {
+      "name": "CapitolWrapperVillageData",
+      "value": 24
+    },
+    {
+      "name": "UserArtifactDataArtifacts",
+      "value": 40
+    },
+    {
+      "name": "UserArtifactArtifactDataByHeroId",
+      "value": 48
+    },
+    {
+      "name": "UserHeroDataHeroById",
+      "value": 24
+    },
+    {
+      "name": "UserHeroDataBattlePresets",
+      "value": 40
+    },
+    {
+      "name": "UserVillageDataCapitolBonusLevelByStatByElement",
+      "value": 48
+    },
+    {
+      "name": "ShardWrapperData",
+      "value": 24
+    },
+    {
+      "name": "ShardData",
+      "value": 16
+    },
+    {
+      "name": "ShardSummonData",
+      "value": 24
+    }
+  ]
+}

@@ -31,7 +31,6 @@
 			this.SaveButton = new System.Windows.Forms.Button();
 			this.SaveJSONDialog = new System.Windows.Forms.SaveFileDialog();
 			this.SaveZipFile = new System.Windows.Forms.CheckBox();
-			this.ForceUpdate = new System.Windows.Forms.CheckBox();
 			this.SuspendLayout();
 			// 
 			// SaveButton
@@ -61,22 +60,11 @@
 			this.SaveZipFile.Text = "Also save a Zipped Copy of the artifacts.json";
 			this.SaveZipFile.UseVisualStyleBackColor = true;
 			// 
-			// ForceUpdate
-			// 
-			this.ForceUpdate.AutoSize = true;
-			this.ForceUpdate.Location = new System.Drawing.Point(12, 74);
-			this.ForceUpdate.Name = "ForceUpdate";
-			this.ForceUpdate.Size = new System.Drawing.Size(144, 17);
-			this.ForceUpdate.TabIndex = 3;
-			this.ForceUpdate.Text = "Force game data refresh.";
-			this.ForceUpdate.UseVisualStyleBackColor = true;
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(434, 106);
-			this.Controls.Add(this.ForceUpdate);
+			this.ClientSize = new System.Drawing.Size(434, 75);
 			this.Controls.Add(this.SaveZipFile);
 			this.Controls.Add(this.SaveButton);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -92,6 +80,5 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.SaveFileDialog SaveJSONDialog;
         private System.Windows.Forms.CheckBox SaveZipFile;
-        private System.Windows.Forms.CheckBox ForceUpdate;
     }
 }
