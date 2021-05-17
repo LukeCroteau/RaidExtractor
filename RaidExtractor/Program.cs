@@ -70,7 +70,7 @@ namespace RaidExtractor
                         AccountDump dump;
                         try
                         {
-                            dump = raidExtractor.GetDump();
+                            dump = raidExtractor.GetDump(false);
                         }
                         catch (Exception ex)
                         {

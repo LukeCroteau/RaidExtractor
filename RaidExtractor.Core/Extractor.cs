@@ -34,12 +34,17 @@ namespace RaidExtractor.Core
             }
         }
 
-        public AccountDump GetDump()
+        public AccountDump GetDump(bool forceDataRefresh)
         {
             var process = IsRaidRunning();
             if (process == null)
             {
                 return null;
+            }
+
+            if (forceDataRefresh)
+            {
+                StaticDataHandler.Instance.UpdateValuesFromGame(process.MainModule.FileName);
             }
 
             if (!CheckRaidVersion(process))
@@ -53,7 +58,7 @@ namespace RaidExtractor.Core
                 var gameAssembly = GetRaidAssembly(process);
 
                 var klass = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + RaidStaticInformation.MemoryLocation, ref klass);
+                NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + (int)StaticDataHandler.Instance.GetValue("MemoryLocation"), ref klass);
 
                 var appModel = klass;
                 // These Reposition the AppModel to be in the right place. TODO: Figure out where these magic numbers come from?
@@ -64,16 +69,16 @@ namespace RaidExtractor.Core
                 NativeWrapper.ReadProcessMemory(handle, appModel + 0x8, ref appModel);
 
                 var userWrapper = appModel;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.AppModelUserWrapper, ref userWrapper); // AppModel._userWrapper
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + (int)StaticDataHandler.Instance.GetValue("AppModelUserWrapper"), ref userWrapper); // AppModel._userWrapper
 
                 var heroesWrapper = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + RaidStaticInformation.UserWrapperHeroes, ref heroesWrapper); // UserWrapper.Heroes
+                NativeWrapper.ReadProcessMemory(handle, heroesWrapper + (int)StaticDataHandler.Instance.GetValue("UserWrapperHeroes"), ref heroesWrapper); // UserWrapper.Heroes
 
 #region Artifact Extraction
 
                 var artifactsPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.HeroesWrapperArtifactData, ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
-                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.UserArtifactDataArtifacts, ref artifactsPointer); // UserArtifactData.Artifacts
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + (int)StaticDataHandler.Instance.GetValue("HeroesWrapperArtifactData"), ref artifactsPointer); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsPointer + (int)StaticDataHandler.Instance.GetValue("UserArtifactDataArtifacts"), ref artifactsPointer); // UserArtifactData.Artifacts
 
                 var artifactCount = 0;
                 NativeWrapper.ReadProcessMemory(handle, artifactsPointer + RaidStaticInformation.ListCount, ref artifactCount); // List<Artifact>.Count
@@ -93,7 +98,7 @@ namespace RaidExtractor.Core
                 if (artifactCount == 0)
                 {
                     // This means it's in external storage instead which is in a concurrent dictionary (teh sucks)
-                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + RaidStaticInformation.ExternalStorageAddress, ref klass);
+                    NativeWrapper.ReadProcessMemory(handle, gameAssembly.BaseAddress + (int)StaticDataHandler.Instance.GetValue("ExternalStorageAddress"), ref klass);
 
                     var artifactStorageResolver = klass;
                     NativeWrapper.ReadProcessMemory(handle, artifactStorageResolver + 0xB8, ref artifactStorageResolver); // ArtifactStorageResolver-StaticFields
@@ -199,8 +204,8 @@ namespace RaidExtractor.Core
 #region Hero Extraction
 
                 var heroesDataPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.HeroesWrapperHeroData, ref heroesDataPointer); // HeroesWrapperReadOnly.HeroData
-                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.UserHeroDataHeroById, ref heroesDataPointer); // UserHeroData.HeroById
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + (int)StaticDataHandler.Instance.GetValue("HeroesWrapperHeroData"), ref heroesDataPointer); // HeroesWrapperReadOnly.HeroData
+                NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + (int)StaticDataHandler.Instance.GetValue("UserHeroDataHeroById"), ref heroesDataPointer); // UserHeroData.HeroById
 
                 var count = 0;
                 NativeWrapper.ReadProcessMemory(handle, heroesDataPointer + RaidStaticInformation.DictionaryCount, ref count); // Dictionary<int, Hero>.Count
@@ -311,8 +316,8 @@ namespace RaidExtractor.Core
 #region Hero Artifact Extraction
 
                 var artifactsByHeroIdPtr = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.HeroesWrapperArtifactData, ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
-                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.UserArtifactArtifactDataByHeroId, ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + (int)StaticDataHandler.Instance.GetValue("HeroesWrapperArtifactData"), ref artifactsByHeroIdPtr); // HeroesWrapperReadOnly.ArtifactData
+                NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + (int)StaticDataHandler.Instance.GetValue("UserArtifactArtifactDataByHeroId"), ref artifactsByHeroIdPtr); // UserArtifactData.ArtifactDataByHeroId
 
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + RaidStaticInformation.DictionaryCount, ref count);
                 NativeWrapper.ReadProcessMemory(handle, artifactsByHeroIdPtr + 0x18, ref artifactsByHeroIdPtr);
@@ -346,21 +351,21 @@ namespace RaidExtractor.Core
 #region Arena League Extraction
 
                 var arenaPtr = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.UserWrapperArena, ref arenaPtr);
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + (int)StaticDataHandler.Instance.GetValue("UserWrapperArena"), ref arenaPtr);
 
                 ArenaLeagueId arenaLeague = 0;
-                NativeWrapper.ReadProcessMemory(handle, arenaPtr + RaidStaticInformation.ArenaWrapperLeagueId, ref arenaLeague);
+                NativeWrapper.ReadProcessMemory(handle, arenaPtr + (int)StaticDataHandler.Instance.GetValue("ArenaWrapperLeagueId"), ref arenaLeague);
 
 #endregion
 
 #region Great Hall Extraction
 
                 var villageDataPointer = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, userWrapper + RaidStaticInformation.UserWrapperCapitol, ref villageDataPointer); // UserWrapper.Capitol
-                NativeWrapper.ReadProcessMemory(handle, villageDataPointer + RaidStaticInformation.CapitolWrapperVillageData, ref villageDataPointer); // Capitol.VillageData
+                NativeWrapper.ReadProcessMemory(handle, userWrapper + (int)StaticDataHandler.Instance.GetValue("UserWrapperCapitol"), ref villageDataPointer); // UserWrapper.Capitol
+                NativeWrapper.ReadProcessMemory(handle, villageDataPointer + (int)StaticDataHandler.Instance.GetValue("CapitolWrapperVillageData"), ref villageDataPointer); // Capitol.VillageData
 
                 var bonusLevelPointer = IntPtr.Zero;
-                NativeWrapper.ReadProcessMemory(handle, villageDataPointer + RaidStaticInformation.UserVillageDataCapitolBonusLevelByStatByElement, ref bonusLevelPointer); // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement
+                NativeWrapper.ReadProcessMemory(handle, villageDataPointer + (int)StaticDataHandler.Instance.GetValue("UserVillageDataCapitolBonusLevelByStatByElement"), ref bonusLevelPointer); // UserVillageData.UserVillageDataCapitolBonusLevelByStatByElement
 
                 count = 0;
                 NativeWrapper.ReadProcessMemory(handle, bonusLevelPointer + RaidStaticInformation.DictionaryCount, ref count); // Dictionary<Element, Dictionary<StatKindId, int>>.Count
@@ -404,19 +409,19 @@ namespace RaidExtractor.Core
                 var shards = new Dictionary<string, ShardInfo>();
 
                 var shardsDataPointer = userWrapper;
-                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.UserWrapperShards, ref shardsDataPointer); // UserWrapper.ShardWrapperReadOnly
-                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ShardWrapperData, ref shardsDataPointer); // ShardWrapperReadOnly.UserShardData
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + (int)StaticDataHandler.Instance.GetValue("UserWrapperShards"), ref shardsDataPointer); // UserWrapper.ShardWrapperReadOnly
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + (int)StaticDataHandler.Instance.GetValue("ShardWrapperData"), ref shardsDataPointer); // ShardWrapperReadOnly.UserShardData
 
                 var shardSummonDataPointer = shardsDataPointer;
-                NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + RaidStaticInformation.ShardSummonData, ref shardSummonDataPointer); // UserShardData.SummonResults
+                NativeWrapper.ReadProcessMemory(handle, shardSummonDataPointer + (int)StaticDataHandler.Instance.GetValue("ShardSummonData"), ref shardSummonDataPointer); // UserShardData.SummonResults
 
                 // Read the shard count data
-                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ShardData, ref shardsDataPointer); 
+                NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + (int)StaticDataHandler.Instance.GetValue("ShardData"), ref shardsDataPointer); 
 
                 var shardCount = 0;
                 NativeWrapper.ReadProcessMemory(handle, shardsDataPointer + RaidStaticInformation.ListCount, ref shardCount);
 
-                List<IntPtr> shardPointers = new List<IntPtr>();
+                List <IntPtr> shardPointers = new List<IntPtr>();
                 if (shardCount > 0)
                 {
                     var arrayPointer = shardsDataPointer;
@@ -487,8 +492,8 @@ namespace RaidExtractor.Core
 #region BattlePresets extraction
 
                 var presetsPointer = heroesWrapper;
-                NativeWrapper.ReadProcessMemory(handle, presetsPointer + RaidStaticInformation.HeroesWrapperHeroData, ref presetsPointer); // HeroesWrapperReadOnly.HeroData
-                NativeWrapper.ReadProcessMemory(handle, presetsPointer + RaidStaticInformation.UserHeroDataBattlePresets, ref presetsPointer); // UserHeroData.BattlePresets
+                NativeWrapper.ReadProcessMemory(handle, presetsPointer + (int)StaticDataHandler.Instance.GetValue("HeroesWrapperHeroData"), ref presetsPointer); // HeroesWrapperReadOnly.HeroData
+                NativeWrapper.ReadProcessMemory(handle, presetsPointer + (int)StaticDataHandler.Instance.GetValue("UserHeroDataBattlePresets"), ref presetsPointer); // UserHeroData.BattlePresets
 
                 var battlePresetsCount = 0;
                 var presetsDataPointer = IntPtr.Zero;
@@ -552,9 +557,9 @@ namespace RaidExtractor.Core
 
         private bool CheckRaidVersion(Process process)
         {
-            if (!process.MainModule.FileName.Contains(RaidStaticInformation.ExpectedRaidVersion))
+            if (!process.MainModule.FileName.Contains((string)StaticDataHandler.Instance.GetValue("ExpectedRaidVersion")))
             {
-                throw new Exception("Raid has been updated and needs a newer version of RaidExtractor");
+                StaticDataHandler.Instance.UpdateValuesFromGame(process.MainModule.FileName);
             }
 
             return true;
