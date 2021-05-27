@@ -26,27 +26,34 @@ namespace RaidExtractor
             if (result == null) return;
             if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
 
-            File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Program.SerializerSettings));
-
-            if (SaveZipFile.Checked)
+            try
             {
-                File.Delete(Path.ChangeExtension(SaveJSONDialog.FileName, ".ZIP"));
+                File.WriteAllText(SaveJSONDialog.FileName, JsonConvert.SerializeObject(result, Program.SerializerSettings));
 
-                using (var memoryStream = new MemoryStream())
+                if (SaveZipFile.Checked)
                 {
-                    using (ZipArchive archive = ZipFile.Open(Path.ChangeExtension(SaveJSONDialog.FileName, ".ZIP"), ZipArchiveMode.Create))
-                    {
-                        var artifactFile = archive.CreateEntry("artifacts.json");
+                    File.Delete(Path.ChangeExtension(SaveJSONDialog.FileName, ".ZIP"));
 
-                        using (var entryStream = artifactFile.Open())
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        using (ZipArchive archive = ZipFile.Open(Path.ChangeExtension(SaveJSONDialog.FileName, ".ZIP"), ZipArchiveMode.Create))
                         {
-                            using (var streamWriter = new StreamWriter(entryStream))
+                            var artifactFile = archive.CreateEntry("artifacts.json");
+
+                            using (var entryStream = artifactFile.Open())
                             {
-                                streamWriter.Write(JsonConvert.SerializeObject(result, Formatting.Indented, Program.SerializerSettings));
+                                using (var streamWriter = new StreamWriter(entryStream))
+                                {
+                                    streamWriter.Write(JsonConvert.SerializeObject(result, Formatting.Indented, Program.SerializerSettings));
+                                }
                             }
                         }
                     }
                 }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
