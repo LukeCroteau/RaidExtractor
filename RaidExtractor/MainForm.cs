@@ -17,6 +17,7 @@ namespace RaidExtractor
         public MainForm()
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.AppIcon;
             raidExtractor = new Extractor();
         }
 
