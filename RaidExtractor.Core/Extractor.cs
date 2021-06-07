@@ -34,6 +34,14 @@ namespace RaidExtractor.Core
             }
         }
 
+        public string FindRunningVersion(Process process)
+        {
+            string filename = process.MainModule.FileName;
+            string[] parts = filename.Split('\\');
+
+            return "\\" + parts[parts.Count() - 2] + "\\";
+        }
+
         public AccountDump GetDump()
         {
             var process = IsRaidRunning();
@@ -42,9 +50,14 @@ namespace RaidExtractor.Core
                 return null;
             }
 
-            if (!CheckRaidVersion(process))
+            string runningVersion = FindRunningVersion(process);
+
+            if (!StaticDataHandler.Instance.FindDataForRaidVersion(runningVersion))
             {
-                return null;
+                if (!StaticDataHandler.Instance.UpdateValuesFromGame(process.MainModule.FileName))
+                {
+                    throw new Exception("Update required. Game version does not match expected version.");
+                }
             }
 
             var handle = NativeWrapper.OpenProcess(ProcessAccessFlags.Read, true, process.Id);
@@ -548,16 +561,6 @@ namespace RaidExtractor.Core
             }
 
             return process;
-        }
-
-        private bool CheckRaidVersion(Process process)
-        {
-            if (!process.MainModule.FileName.Contains((string)StaticDataHandler.Instance.GetValue("ExpectedRaidVersion")))
-            {
-                StaticDataHandler.Instance.UpdateValuesFromGame(process.MainModule.FileName);
-            }
-
-            return true;
         }
 
         private ProcessModule GetRaidAssembly(Process process)
