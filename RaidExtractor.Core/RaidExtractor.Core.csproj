@@ -47,4 +47,7 @@
       </ItemGroup>
     </When>
   </Choose>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="if EXIST %25APPDATA%25\\RaidExtractor\\datavalues.json copy /Y %25APPDATA%25\\RaidExtractor\\datavalues.json $(ProjectDir)datavalues.json" />
+  </Target>
 </Project>

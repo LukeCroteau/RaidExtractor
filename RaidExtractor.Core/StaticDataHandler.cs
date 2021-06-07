@@ -100,21 +100,37 @@ namespace RaidExtractor.Core
             public System.Collections.Generic.ICollection<DataValue> Values { get; set; }
         };
 
-        private readonly DataValues CurrentData;
+        private DataValues CurrentData;
 
         private Dictionary<string, object> CurrentValues = new Dictionary<string, object>();
 
         private static readonly StaticDataHandler instance = new StaticDataHandler();
 
+        private JsonSerializer serializer;
+        private System.Reflection.Assembly assembly;
+
         public StaticDataHandler()
+        {
+            serializer = new JsonSerializer();
+            assembly = typeof(Extractor).Assembly;
+        }
+
+        public static StaticDataHandler Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+
+        private bool LoadDataFromStream(Stream stream)
         {
             try
             {
-                // Load existing data values from embedded resource.
                 var serializer = new JsonSerializer();
                 var assembly = typeof(Extractor).Assembly;
 
-                using (var stream = assembly.GetManifestResourceStream("RaidExtractor.Core.datavalues.json"))
+                CurrentData = null;
                 using (var sr = new StreamReader(stream))
                 using (var textReader = new JsonTextReader(sr))
                 {
@@ -126,22 +142,70 @@ namespace RaidExtractor.Core
                 {
                     SetVariable(v.Name, v.Value);
                 }
+
+                stream.Dispose();
+
+                return true;
             }
             catch
             {
-#if !DEV_BUILD
-                // Don't throw exception for dev build as we can generate new values.
-                throw new Exception("Unable to load static data values.");
-#endif
+                stream.Dispose();
+
+                return false;
             }
         }
 
-        public static StaticDataHandler Instance
+        private bool LoadDataFromResources()
         {
-            get
+            try
             {
-                return instance;
+                var stream = assembly.GetManifestResourceStream("RaidExtractor.Core.datavalues.json");
+                if (stream == null)
+                    return false;
+
+                return LoadDataFromStream(stream);
             }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool LoadDataFromAppData()
+        {
+            try
+            {
+                var stream = new FileStream(GetDataValuesPath(), FileMode.Open);
+                if (stream == null)
+                    return false;
+
+                return LoadDataFromStream(stream);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool FindDataForRaidVersion(string version)
+        {
+            if (LoadDataFromResources())
+            {
+                if (CurrentData.Version == version)
+                {
+                    return true;
+                }
+            }
+
+            if (LoadDataFromAppData())
+            {
+                if (CurrentData.Version == version)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public static JsonSerializerSettings SerializerSettings = new JsonSerializerSettings
@@ -157,7 +221,7 @@ namespace RaidExtractor.Core
             },
         };
 
-        public void UpdateValuesFromGame(string exePath)
+        public bool UpdateValuesFromGame(string exePath)
         {
 #if DEV_BUILD
             Il2Cpp il2Cpp;
@@ -205,14 +269,27 @@ namespace RaidExtractor.Core
                 newValues.Values.Add(v);
             }
 
-            string filename = Path.GetTempPath() + "\\datavalues.json";
+            string filename = GetDataValuesPath();
             File.WriteAllText(filename, JsonConvert.SerializeObject(newValues, SerializerSettings));
             Console.WriteLine("Written class data to " + filename + ". Copy to porject directory before rebuilding.");
+
+            return true;
 #else
-            throw new Exception("Update required. Game version does not match expected version.");
+            return false;
 #endif
         }
 
+        public string GetDataValuesPath()
+        {
+            string roamingPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RaidExtractor");
+
+            if (!Directory.Exists(roamingPath))
+            {
+                Directory.CreateDirectory(roamingPath);
+            }
+
+            return Path.Combine(roamingPath, "datavalues.json");
+        }
 
         public object GetValue(string name)
         {
