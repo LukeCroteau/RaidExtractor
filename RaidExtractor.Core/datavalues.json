@@ -1,13 +1,13 @@
 {
-  "version": "\\240\\",
+  "version": "\\241\\",
   "values": [
     {
       "name": "MemoryLocation",
-      "value": 57020984
+      "value": 57761344
     },
     {
       "name": "ExternalStorageAddress",
-      "value": 57155120
+      "value": 57856976
     },
     {
       "name": "AppModelUserWrapper",
@@ -31,11 +31,11 @@
     },
     {
       "name": "HeroesWrapperArtifactData",
-      "value": 96
+      "value": 104
     },
     {
       "name": "HeroesWrapperHeroData",
-      "value": 80
+      "value": 88
     },
     {
       "name": "ArenaWrapperLeagueId",
