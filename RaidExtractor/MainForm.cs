@@ -25,6 +25,7 @@ namespace RaidExtractor
         {
             var result = GetDump();
             if (result == null) return;
+            result.FileVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(2);
             if (SaveJSONDialog.ShowDialog() != DialogResult.OK) return;
 
             try

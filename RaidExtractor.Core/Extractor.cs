@@ -543,7 +543,7 @@ namespace RaidExtractor.Core
                     ArenaLeague = arenaLeague.ToString(),
                     GreatHall = greatHall,
                     Shards = shards,
-                    StagePresets = stagePresets,  
+                    StagePresets = stagePresets,
                 };
             }
             finally
