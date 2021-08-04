@@ -1,17 +1,17 @@
 {
-  "version": "\\244\\",
+  "version": "\\245\\",
   "values": [
     {
       "name": "MemoryLocation",
-      "value": 57823464
+      "value": 58339376
     },
     {
       "name": "ExternalStorageAddress",
-      "value": 57907576
+      "value": 58400688
     },
     {
       "name": "AppModelUserWrapper",
-      "value": 360
+      "value": 368
     },
     {
       "name": "UserWrapperHeroes",
