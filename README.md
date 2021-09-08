@@ -25,7 +25,7 @@ Several other projects already exist that like to use the data this project extr
 * [Brago ](https://laughing-engelbart-62bcb5.netlify.app/) - Basic Raid Gear Observer. Recommends artifacts to sell and enchant.
 * Raid Tools - https://raidtools.club/ - This tool lets you import your data in an attempt to give you a better look at what you have, and what you need!
 * Raidtool Calculator - https://github.com/Jekoh497/RaidShadowLegend - This Excel Spreadsheet helps use your artifacts and attempts to generate Clan Boss timings for you.
-* RaidChamps - https://raidchamps.com/ - This tool gives you an interactive sort and filter on your champion statuses, information about their skills, etc. Also with Shard Mercy Support!
+* RaidChamps - https://raidchamps.com/ - This tool gives you an interactive sort and filter on your champion statuses, information about their skills, etc. Also a page for sharing your teams including all their total stats, artifacts, completed sets, masteries and leader's aura!
 
 ## Feedback
 Please use the Github Issues page for this project, located at https://github.com/LukeCroteau/RaidExtractor/issues for any currently known issues, or to report any bugs!
