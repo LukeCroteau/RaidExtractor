@@ -420,15 +420,55 @@ namespace RaidExtractor.Core
 
         private int GetMethodAddress(Il2Cpp il2Cpp, Metadata metadata, Il2CppExecutor executor, string methodType, string methodName)
         {
-            foreach (var i in metadata.metadataUsageDic[Il2CppMetadataUsage.kIl2CppMetadataUsageMethodRef])
+
+            if (il2Cpp.Version >= 27)
             {
-                var methodSpec = il2Cpp.methodSpecs[i.Value];
-
-                (var methodSpecTypeName, var methodSpecMethodName) = executor.GetMethodSpecName(methodSpec, true);
-
-                if (methodSpecTypeName == methodType && methodSpecMethodName == methodName)
+                var sectionHelper = executor.GetSectionHelper();
+                foreach (var sec in sectionHelper.data)
                 {
-                    return (int)il2Cpp.GetRVA(il2Cpp.metadataUsages[i.Key]);
+                    il2Cpp.Position = sec.offset;
+                    while (il2Cpp.Position < sec.offsetEnd - il2Cpp.PointerSize)
+                    {
+                        var addr = il2Cpp.Position;
+                        var metadataValue = il2Cpp.ReadUIntPtr();
+                        var position = il2Cpp.Position;
+                        if (metadataValue < uint.MaxValue)
+                        {
+                            var encodedToken = (uint)metadataValue;
+                            var usage = metadata.GetEncodedIndexType(encodedToken);
+                            if (usage > 0 && usage <= 6)
+                            {
+                                var decodedIndex = metadata.GetDecodedMethodIndex(encodedToken);
+                                if (metadataValue == ((usage << 29) | (decodedIndex << 1)) + 1)
+                                {
+                                    var va = il2Cpp.MapRTVA(addr);
+                                    if (va > 0)
+                                    {
+                                        switch ((Il2CppMetadataUsage)usage)
+                                        {
+                                            case Il2CppMetadataUsage.kIl2CppMetadataUsageMethodRef:
+                                                if (decodedIndex < il2Cpp.methodSpecs.Length)
+                                                {
+
+                                                    var methodSpec = il2Cpp.methodSpecs[decodedIndex];
+                                                    (var methodSpecTypeName, var methodSpecMethodName) = executor.GetMethodSpecName(methodSpec, true);
+
+                                                    if (methodSpecTypeName == methodType && methodSpecMethodName == methodName)
+                                                    {
+                                                        return (int)il2Cpp.GetRVA(va);
+                                                    };
+                                                }
+                                                break;
+                                        }
+                                        if (il2Cpp.Position != position)
+                                        {
+                                            il2Cpp.Position = position;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -437,14 +477,54 @@ namespace RaidExtractor.Core
 
         private int GetTypeInfoAddress(Il2Cpp il2Cpp, Metadata metadata, Il2CppExecutor executor, string typeToFind)
         {
-            foreach (var i in metadata.metadataUsageDic[Il2CppMetadataUsage.kIl2CppMetadataUsageTypeInfo])
+            if (il2Cpp.Version >= 27)
             {
-                var type = il2Cpp.types[i.Value];
-                var typeName = executor.GetTypeName(type, true, false);
-
-                if (typeName.Contains(typeToFind))
+                var sectionHelper = executor.GetSectionHelper();
+                foreach (var sec in sectionHelper.data)
                 {
-                    return (int)il2Cpp.GetRVA(il2Cpp.metadataUsages[i.Key]);
+                    il2Cpp.Position = sec.offset;
+                    while (il2Cpp.Position < sec.offsetEnd - il2Cpp.PointerSize)
+                    {
+                        var addr = il2Cpp.Position;
+                        var metadataValue = il2Cpp.ReadUIntPtr();
+                        var position = il2Cpp.Position;
+                        if (metadataValue < uint.MaxValue)
+                        {
+                            var encodedToken = (uint)metadataValue;
+                            var usage = metadata.GetEncodedIndexType(encodedToken);
+                            if (usage > 0 && usage <= 6)
+                            {
+                                var decodedIndex = metadata.GetDecodedMethodIndex(encodedToken);
+                                if (metadataValue == ((usage << 29) | (decodedIndex << 1)) + 1)
+                                {
+                                    var va = il2Cpp.MapRTVA(addr);
+                                    if (va > 0)
+                                    {
+                                        switch ((Il2CppMetadataUsage)usage)
+                                        {
+                                            case Il2CppMetadataUsage.kIl2CppMetadataUsageTypeInfo:
+                                                if (decodedIndex < il2Cpp.types.Length)
+                                                {
+
+                                                    var type = il2Cpp.types[decodedIndex];
+                                                    var typeName = executor.GetTypeName(type, true, false);
+
+                                                    if (typeName.Contains(typeToFind))
+                                                    {
+                                                        return (int)il2Cpp.GetRVA(va);
+                                                    }
+                                                }
+                                                break;
+                                        }
+                                        if (il2Cpp.Position != position)
+                                        {
+                                            il2Cpp.Position = position;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
