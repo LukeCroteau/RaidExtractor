@@ -1,6 +1,15 @@
 # RaidExtractor
 A tool made to extract information from the windows version of "Raid: Shadow Legends". Currently it supports v.253 (as seen in Plarium Play launcher).
 
+# RAIDEXTRACTOR IS BEING DEPRECATED... FOR A NEW VERSION
+We've worked really hard to integrate RaidExtractor into the Raid Toolkit family of software and tools.
+
+Please check out the new [Raid Extractor](https://github.com/raid-toolkit/extractor) here.
+
+This repository will soon go dormant!
+
+## Current Version instructions.
+
 This application has 2 Modes:
 * A Windows GUI application. The functionality is slim, but it works!
 * A Non-GUI mode, which simply outputs the files as required.
